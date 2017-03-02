@@ -6,7 +6,7 @@ public class SetManager : MonoBehaviour
 {
 
     public static SetManager Inst { get { return m_Inst; } }
-    static SetManager m_Inst;
+    static SetManager m_Inst = new SetManager();
 
     List<Set> Sets = new List<Set>();
     Set currentSet;
@@ -32,7 +32,7 @@ public class SetManager : MonoBehaviour
         if (Inst.currentSet != null) { Inst.currentSet.gameObject.SetActive(true); }
 
         // Create the new set and mark active
-        GameObject setGO = ResourceManager.Create(setName);
+        GameObject setGO = ResourceManager.Create("UI/Sets/" + setName);
         if (setGO != null)
         {
             T castedSet = setGO.GetComponent<T>();

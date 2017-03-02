@@ -26,13 +26,14 @@ public class Game : MonoBehaviour {
         App.Inst.IsRunning = false;
     }
 
-    public void StartGame()
+    public void Start()
     {
         App.Inst.IsRunning = true;
 
-        StartGame();
-
         // Load levels from data loader
         Levels = DataLoader.LoadData();
+
+        // Load main menu set
+        SetManager.OpenSet<MainMenuSet>();
     }
 }
