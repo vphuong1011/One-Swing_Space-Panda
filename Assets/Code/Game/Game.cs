@@ -65,7 +65,7 @@ public class Game : MonoBehaviour {
                 break;
             case GameState.GAME_LOADING:
                 // TODO: Load the level
-                Levels.LoadLevel(()=> WantsToBeInRunningState = true);
+                Levels.LoadLevel("SamuraiLevel", ()=> WantsToBeInRunningState = true);
 
                 // If we want to be in the running state, do the state transition
                 if (WantsToBeInRunningState)
@@ -99,7 +99,4 @@ public class Game : MonoBehaviour {
         WantsToBeInLoadingState = false;
         WantsToBeInRunningState = false;
     }
-
-    // Use this to start the game
-
 }

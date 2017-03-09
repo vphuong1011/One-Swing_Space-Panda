@@ -8,7 +8,6 @@ public class App : MonoBehaviour
     public static App Inst { get { return m_Inst; } }
     static App m_Inst;
 
-    [SerializeField] public SetManager SetManager;
     [NonSerialized] public bool IsRunning = true;
 
     public App()

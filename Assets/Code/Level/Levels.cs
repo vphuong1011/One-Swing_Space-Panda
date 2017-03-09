@@ -8,12 +8,12 @@ public class Levels {
     [NonSerialized] public static Level CurrentLevel;
     [NonSerialized] public static int CurrentLevelNumber = 1;
 
-    public static void LoadLevel(Action onComplete = null)
+    public static void LoadLevel(string levelName, Action onComplete = null)
     {
         if (CurrentLevelNumber >= 1)
         {
             // Try to create the game object from the prefab in the resources folder (NOTE: the full path will be "Resources/Levels/Level1", etc.)
-            GameObject levelGO = ResourceManager.Create("Levels/Level" + CurrentLevelNumber);
+            GameObject levelGO = ResourceManager.Create("Levels/" + levelName);
 
             // Check if we successfully loaded the game object
             if (levelGO)
@@ -41,18 +41,21 @@ public class Levels {
 
     }
 
+    // Spawn a player and enemy after the level finishes loading
     private static void OnLevelLoadComplete()
     {
         if(CurrentLevel)
         {
             CurrentLevel.SpawnPlayer();
-            CurrentLevel.SpawnEnemy();
+            CurrentLevel.SpawnEnemyAtRandom();
         }
     }
 
+    // Close the current level
     public static void CloseLevel()
     {
+        // Close the current level
         if (CurrentLevel)
-            GameObject.Destroy(CurrentLevel.gameObject);
+            CurrentLevel.Close();
     }
 }

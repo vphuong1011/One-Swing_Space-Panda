@@ -1,30 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum PlayerState
+{
+    PLAYER_SPAWNING,
+    PLAYER_IDLE,
+    PLAYER_MOVING,
+    PLAYER_ATTACKING,
+    PLAYER_HIT,
+    PLAYER_DYING,
+    PLAYER_DEAD
+}
+
 public class Player : MonoBehaviour {
 
-    public Animator anim;
-    public GameObject sword;
-	// Use this for initialization
-	void Start () {
-        anim.enabled = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	if(Input.GetMouseButtonDown(0))
+    // The player's current state
+    PlayerState CurrentState = PlayerState.PLAYER_IDLE;
+
+    // Update is called once per frame
+    void Update() {
+        // Player STATE MACHINE
+        switch (CurrentState)
         {
+            case PlayerState.PLAYER_IDLE:
+                break;
 
         }
-	}
-
-    void OnCollisionEnter(Collision col)
-    {
-        if(col.gameObject.name == "Bullet")
-        {
-            Debug.Log("Hit");
-        }
-
-        
     }
 }
