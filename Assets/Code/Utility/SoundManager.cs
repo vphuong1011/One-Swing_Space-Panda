@@ -3,13 +3,16 @@ using System.Collections;
 
 public class SoundManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	public static void Update () {
-	
-	}
+    [SerializeField] private AudioSource SFXAudioSource;
+    [SerializeField] private AudioSource MusicAudioSource;
+
+	public void PlaySFX()
+    {
+        //TODO: Play a sound effect
+    }
+
+    public void PlayMusic()
+    {
+        //TODO: Play the game music
+    }
 }

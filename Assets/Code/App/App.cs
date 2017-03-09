@@ -8,8 +8,8 @@ public class App : MonoBehaviour
     public static App Inst { get { return m_Inst; } }
     static App m_Inst;
 
-    [NonSerialized]
-    public bool IsRunning = false;
+    [SerializeField] public SetManager SetManager;
+    [NonSerialized] public bool IsRunning = true;
 
     public App()
     {
@@ -18,11 +18,11 @@ public class App : MonoBehaviour
     }
 
     // Game entry point (this is the first thing done when the game boots)
-    void Start()
+    public void Start()
     {
-       // TODO: Load all of your data
+        // TODO: Load all of your data
 
-       // TODO: Initialize the application       
+        // TODO: Initialize the application    
     }
 
     private void Init()
@@ -33,7 +33,6 @@ public class App : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SoundManager.Update();
 
 #if UNITY_EDITOR
         // ------------------------

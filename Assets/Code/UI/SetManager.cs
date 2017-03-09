@@ -1,30 +1,26 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SetManager : MonoBehaviour
-{
-
-    public static SetManager Inst { get { return m_Inst; } }
-    static SetManager m_Inst = new SetManager();
+public class SetManager
+{    
+    protected static SetManager m_Inst;
 
     List<Set> Sets = new List<Set>();
     Set currentSet;
 
-    void OnEnable()
+    public static SetManager Inst
     {
-        if (!m_Inst)
+        get
         {
-            m_Inst = this;
-            DontDestroyOnLoad(this);
-        }
-        else if (m_Inst != this)
-        {
-            Destroy(gameObject);
+            if (m_Inst == null)
+                m_Inst = new SetManager();
+            return m_Inst as SetManager;
         }
     }
 
-    public static T OpenSet<T>() where T : Set
+    public static T OpenSet<T>(Action<T> onInit = null) where T : Set
     {
         string setName = typeof(T).Name;
 
@@ -51,6 +47,10 @@ public class SetManager : MonoBehaviour
                 Inst.currentSet.gameObject.SetActive(true);
             }
 
+            // Perform the Init after set has been opened
+            if(onInit != null)
+                onInit.Invoke(castedSet);
+
             return castedSet;
         }
 
@@ -75,7 +75,7 @@ public class SetManager : MonoBehaviour
 
         if (set)
         {
-            Destroy(set.gameObject);
+            UnityEngine.Object.Destroy(set.gameObject);
         }
     }
 }

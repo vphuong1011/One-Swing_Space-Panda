@@ -2,26 +2,35 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ResourceManager : MonoBehaviour{
+public class ResourceManager {
 
-    public static ResourceManager Inst { get { return m_Inst; } }
-    static ResourceManager m_Inst;
+    protected static ResourceManager m_Inst;
 
     Dictionary<string, UnityEngine.Object> cachedObjects = new Dictionary<string, UnityEngine.Object>();
 
-    public ResourceManager()
+    public static ResourceManager Inst
     {
-        if (m_Inst == null)
-            m_Inst = this;
+        get
+        {
+            if (m_Inst == null)
+                m_Inst = new ResourceManager();
+            return m_Inst as ResourceManager;
+        }
     }
 
-    public static GameObject Create(string prefabName)
+    public static GameObject Create(string prefabPath)
     {
-        if (!Inst.cachedObjects.ContainsKey(prefabName))
+        if (!Inst.cachedObjects.ContainsKey(prefabPath))
         {
-            Inst.cachedObjects[prefabName] = Resources.Load(prefabName);
+             Inst.cachedObjects[prefabPath] = Resources.Load(prefabPath);
         }
 
-        return UnityEngine.Object.Instantiate(Inst.cachedObjects[prefabName]) as GameObject;
+        if(Inst.cachedObjects[prefabPath] == null)
+        {
+            Debug.Assert(false, "Could not load prefab with name: " + prefabPath);
+            return null;
+        }
+
+        return UnityEngine.Object.Instantiate(Inst.cachedObjects[prefabPath]) as GameObject;
     }
 }
