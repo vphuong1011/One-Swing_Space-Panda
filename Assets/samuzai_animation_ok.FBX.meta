@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e156495aa9aa3424d85dac51d5fdbd21
-timeCreated: 1488932862
+timeCreated: 1489402362
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -995,9 +995,64 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: Cylinder001
       parentName: Bip001 R Hand
-      position: {x: -0.10393944, y: 0.009456901, z: 0.35646528}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 0.99999994, y: 1, z: 1.0000001}
+      position: {x: -0.132, y: 0.013, z: -0.267}
+      rotation: {x: -0.6850895, y: 0.71651846, z: 0.08984996, w: 0.09581617}
+      scale: {x: 0.08062345, y: 0.07562411, z: 0.08062345}
+    - name: katana
+      parentName: Cylinder001
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Null_1
+      parentName: katana
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: Cap_2
+      parentName: Null_1
+      position: {x: 0.688246, y: 75.3359, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cap_2_2
+      parentName: Null_1
+      position: {x: 0.688246, y: 78.1825, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cylinder
+      parentName: Null_1
+      position: {x: 0.688246, y: -12.154, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Disc
+      parentName: Null_1
+      position: {x: 0.688246, y: -216.7, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Extrude_1
+      parentName: Null_1
+      position: {x: -2.75298, y: 75.3359, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: LightPreset
+      parentName: Cylinder001
+      position: {x: -0.06685737, y: 5.79896, z: 0.0008750152}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: BackLight
+      parentName: LightPreset
+      position: {x: 95.92596, y: 68.20424, z: -110.00683}
+      rotation: {x: -0.09426166, y: 0.5286204, z: -0.5286204, w: 0.65744627}
+      scale: {x: 1, y: 1, z: 1}
+    - name: FillLight
+      parentName: LightPreset
+      position: {x: -240.14488, y: 195.31343, z: 0}
+      rotation: {x: 0.1845133, y: -0.38790223, z: 0.38790223, w: 0.8154867}
+      scale: {x: 1, y: 1, z: 1}
+    - name: KeyLight
+      parentName: LightPreset
+      position: {x: 85.037056, y: 107.20312, z: 85.037056}
+      rotation: {x: 0.34885696, y: 0.21351519, z: -0.2135152, w: 0.8871986}
+      scale: {x: 1, y: 1, z: 1}
     - name: Bone043
       parentName: Bip001 Spine
       position: {x: -0.11801758, y: 0.12809592, z: -0.029749602}

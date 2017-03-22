@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 4427b48325e52584e8e296ee7732c52e
+timeCreated: 1489527361
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Ground_Pla
+    100002: Japan_Spir
+    100004: Japan_Spir_Part_1
+    100006: Japan_Spir_Part_10
+    100008: Japan_Spir_Part_11
+    100010: Japan_Spir_Part_12
+    100012: Japan_Spir_Part_13
+    100014: Japan_Spir_Part_14
+    100016: Japan_Spir_Part_15
+    100018: Japan_Spir_Part_16
+    100020: Japan_Spir_Part_17
+    100022: Japan_Spir_Part_18
+    100024: Japan_Spir_Part_19
+    100026: Japan_Spir_Part_2
+    100028: Japan_Spir_Part_20
+    100030: Japan_Spir_Part_21
+    100032: Japan_Spir_Part_22
+    100034: Japan_Spir_Part_23
+    100036: Japan_Spir_Part_24
+    100038: Japan_Spir_Part_25
+    100040: Japan_Spir_Part_3
+    100042: Japan_Spir_Part_4
+    100044: Japan_Spir_Part_5
+    100046: Japan_Spir_Part_6
+    100048: Japan_Spir_Part_7
+    100050: Japan_Spir_Part_8
+    100052: Japan_Spir_Part_9
+    100054: //RootNode
+    100056: Omni01
+    400000: Ground_Pla
+    400002: Japan_Spir
+    400004: Japan_Spir_Part_1
+    400006: Japan_Spir_Part_10
+    400008: Japan_Spir_Part_11
+    400010: Japan_Spir_Part_12
+    400012: Japan_Spir_Part_13
+    400014: Japan_Spir_Part_14
+    400016: Japan_Spir_Part_15
+    400018: Japan_Spir_Part_16
+    400020: Japan_Spir_Part_17
+    400022: Japan_Spir_Part_18
+    400024: Japan_Spir_Part_19
+    400026: Japan_Spir_Part_2
+    400028: Japan_Spir_Part_20
+    400030: Japan_Spir_Part_21
+    400032: Japan_Spir_Part_22
+    400034: Japan_Spir_Part_23
+    400036: Japan_Spir_Part_24
+    400038: Japan_Spir_Part_25
+    400040: Japan_Spir_Part_3
+    400042: Japan_Spir_Part_4
+    400044: Japan_Spir_Part_5
+    400046: Japan_Spir_Part_6
+    400048: Japan_Spir_Part_7
+    400050: Japan_Spir_Part_8
+    400052: Japan_Spir_Part_9
+    400054: //RootNode
+    400056: Omni01
+    2300000: Ground_Pla
+    2300002: Japan_Spir
+    2300004: Japan_Spir_Part_1
+    2300006: Japan_Spir_Part_10
+    2300008: Japan_Spir_Part_11
+    2300010: Japan_Spir_Part_12
+    2300012: Japan_Spir_Part_13
+    2300014: Japan_Spir_Part_14
+    2300016: Japan_Spir_Part_15
+    2300018: Japan_Spir_Part_16
+    2300020: Japan_Spir_Part_17
+    2300022: Japan_Spir_Part_18
+    2300024: Japan_Spir_Part_19
+    2300026: Japan_Spir_Part_20
+    2300028: Japan_Spir_Part_21
+    2300030: Japan_Spir_Part_22
+    2300032: Japan_Spir_Part_23
+    2300034: Japan_Spir_Part_24
+    2300036: Japan_Spir_Part_25
+    2300038: Japan_Spir_Part_3
+    2300040: Japan_Spir_Part_4
+    2300042: Japan_Spir_Part_5
+    2300044: Japan_Spir_Part_6
+    2300046: Japan_Spir_Part_7
+    2300048: Japan_Spir_Part_8
+    2300050: Japan_Spir_Part_9
+    3300000: Ground_Pla
+    3300002: Japan_Spir
+    3300004: Japan_Spir_Part_1
+    3300006: Japan_Spir_Part_10
+    3300008: Japan_Spir_Part_11
+    3300010: Japan_Spir_Part_12
+    3300012: Japan_Spir_Part_13
+    3300014: Japan_Spir_Part_14
+    3300016: Japan_Spir_Part_15
+    3300018: Japan_Spir_Part_16
+    3300020: Japan_Spir_Part_17
+    3300022: Japan_Spir_Part_18
+    3300024: Japan_Spir_Part_19
+    3300026: Japan_Spir_Part_20
+    3300028: Japan_Spir_Part_21
+    3300030: Japan_Spir_Part_22
+    3300032: Japan_Spir_Part_23
+    3300034: Japan_Spir_Part_24
+    3300036: Japan_Spir_Part_25
+    3300038: Japan_Spir_Part_3
+    3300040: Japan_Spir_Part_4
+    3300042: Japan_Spir_Part_5
+    3300044: Japan_Spir_Part_6
+    3300046: Japan_Spir_Part_7
+    3300048: Japan_Spir_Part_8
+    3300050: Japan_Spir_Part_9
+    4300000: Ground_Pla
+    4300002: Japan_Spir
+    4300004: Japan_Spir_Part_1
+    4300006: Japan_Spir_Part_3
+    4300008: Japan_Spir_Part_4
+    4300010: Japan_Spir_Part_5
+    4300012: Japan_Spir_Part_6
+    4300014: Japan_Spir_Part_7
+    4300016: Japan_Spir_Part_8
+    4300018: Japan_Spir_Part_9
+    4300020: Japan_Spir_Part_10
+    4300022: Japan_Spir_Part_11
+    4300024: Japan_Spir_Part_12
+    4300026: Japan_Spir_Part_13
+    4300028: Japan_Spir_Part_14
+    4300030: Japan_Spir_Part_15
+    4300032: Japan_Spir_Part_16
+    4300034: Japan_Spir_Part_17
+    4300036: Japan_Spir_Part_18
+    4300038: Japan_Spir_Part_19
+    4300040: Japan_Spir_Part_20
+    4300042: Japan_Spir_Part_21
+    4300044: Japan_Spir_Part_22
+    4300046: Japan_Spir_Part_23
+    4300048: Japan_Spir_Part_24
+    4300050: Japan_Spir_Part_25
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
