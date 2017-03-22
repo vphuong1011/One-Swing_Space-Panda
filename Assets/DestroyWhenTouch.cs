@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyWhenTouch : MonoBehaviour {
-   public Rigidbody rb;
-
+    public GameObject[] barrelFrags;
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();
-	}
+        barrelFrags = GameObject.FindGameObjectsWithTag("Barrel");
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
-    private void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider other)
     {
-        if(col.gameObject.name == "Bullet")
+        if(other.gameObject.name == "Bullet")
         {
-            EnableRagdoll();
+                EnableDestroy();
         }
     }
-    void EnableRagdoll()
-    {
-        rb.isKinematic = false;
-        rb.detectCollisions = true;
-    }
 
-    void DisableRagdoll()
+    void EnableDestroy()
     {
-        rb.isKinematic = true;
-        rb.detectCollisions = false;
+        foreach (GameObject barrelfrag in barrelFrags)
+        {
+           barrelfrag.GetComponent<Rigidbody>().isKinematic = false;
+           barrelfrag.GetComponent<Rigidbody>().useGravity = true;
+
+        }
     }
 }

@@ -4,53 +4,31 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 	private float speed = 10;
-
-    Collider col;
     public void Awake()
     {
     }
 	// Use this for initialization
 	void Start () {
-        col = GetComponent<BoxCollider>();
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		transform.Translate (Vector3.right * Time.deltaTime * speed);
+		transform.Translate (-Vector3.forward * Time.deltaTime * speed);
 	}
-	void OnCollisionEnter (Collision col)
+	void OnTriggerEnter (Collider other)
 	{
-        if(col.gameObject.name == "Player")
+        if(other.gameObject.name == "Player")
         {    
-                Vector3 reflectDir = Vector3.Reflect(col.gameObject.transform.position, -Vector3.forward);
-                float rot = -180 - Mathf.Atan2(reflectDir.x, reflectDir.z) * Mathf.Rad2Deg;
-                transform.eulerAngles = new Vector3(0, 0, rot);               
+                Vector3 reflectDir = Vector3.Reflect(other.gameObject.transform.position, Vector3.forward);
+                float rot = 212 + Mathf.Atan2(reflectDir.x, reflectDir.y) * Mathf.Rad2Deg;
+                transform.eulerAngles = new Vector3(0, rot, 0);
+            // this bullet will turn to blood     
         }
 
-        if(col.gameObject.tag == "Prop")
+        if(other.gameObject.tag == "PlayerRagdoll")
         {
-            GoThrough();
-            Debug.Log("Go");
+            GameObject.Find("Player").SendMessage("KillRagdoll");
         }
-    }
-
-    private void OnCollisionExit(Collision col)
-    {
-        if(col.gameObject.tag == "Prop")
-        {
-            StopGoingThrough();
-            Debug.Log("Stop");
-        }
-    }
-
-    void GoThrough()
-    {
-        col.isTrigger = true;
-    }
-
-    void StopGoingThrough()
-    {
-        col.isTrigger = false;
     }
 }
