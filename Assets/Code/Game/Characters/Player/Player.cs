@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public enum PlayerState
+
+public enum PlayerState 
 {
     PLAYER_SPAWNING,
     PLAYER_IDLE,
