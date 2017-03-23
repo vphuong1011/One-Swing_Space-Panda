@@ -18,7 +18,11 @@ public class Level : MonoBehaviour {
     public void SpawnPlayer()
     {
         // Create the player using the ResourceManager
-        GameObject playerGameObject = ResourceManager.Create("Characters/Player1");
+        //HEAD
+        GameObject playerGameObject = ResourceManager.Create("Characters/Player");
+
+        //GameObject playerGameObject = ResourceManager.Create("Characters/Player");
+        // 9be13d305e3b199da2340eb948ba519f7dfc787b
 
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(playerGameObject);
