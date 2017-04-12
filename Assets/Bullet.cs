@@ -3,7 +3,9 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-	private float speed = 10;
+	public float speed = 1000;
+	public int enemyDamage = 1;
+	
     public void Awake()
     {
     }
@@ -16,7 +18,7 @@ public class Bullet : MonoBehaviour {
 	void Update () {
 		transform.Translate (-Vector3.forward * Time.deltaTime * speed);
 	}
-	void OnTriggerEnter (Collider other)
+	void OnCollisionEnter (Collision other)
 	{
         if(other.gameObject.name == "Player")
         {    
@@ -26,9 +28,10 @@ public class Bullet : MonoBehaviour {
             // this bullet will turn to blood     
         }
 
-        if(other.gameObject.tag == "PlayerRagdoll")
+        if(other.gameObject.tag == "Bandit")
         {
-            GameObject.Find("Player").SendMessage("KillRagdoll");
+			Destroy(gameObject);
+			Debug.Log("damage");
         }
     }
 }

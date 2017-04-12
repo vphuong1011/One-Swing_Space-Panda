@@ -22,9 +22,10 @@ public class Player1 : MonoBehaviour {
 
     private void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.name == "Bullet")
+        if(col.gameObject.name == "EnenmyBulletGo(Clone)")
         {
-         //   Destroy(gameObject);
+           KillRagdoll();
+		   Destroy(gameObject, 5);
         }
     }
 
@@ -37,4 +38,5 @@ public class Player1 : MonoBehaviour {
 
         GetComponent<Animator>().enabled = false;
     }
+
 }
