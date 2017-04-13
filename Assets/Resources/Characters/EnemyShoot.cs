@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour {
+public class EnemyShoot : Enemy {
  
     public Transform player;
     public float range = 50.0f;
@@ -14,15 +14,15 @@ public class EnemyShoot : MonoBehaviour {
     private bool onRange= false;
 	public float fireRate;
 	public float nextFire;
-	Animator anim; 
- 
+	Animator anim;
+    public GameObject BulletSpawn;
     public Rigidbody projectile;
  
     void Start(){
         //float rand = Random.Range (minTime, maxTime);
         Invoke("Shoot", spawnTime);
 		anim = GetComponent<Animator>();
-		GetComponent<Musket_Anim>();
+	
     }
 	
 	void Awake (){
@@ -32,33 +32,36 @@ public class EnemyShoot : MonoBehaviour {
 
 
     public void Shoot(){
- 
+       
         if (onRange){
 			//time = 1;
-			
+            GameObject bullet1 = (GameObject)Instantiate(BulletSpawn);
             Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
             bullet.AddForce(transform.forward*bulletImpulse, ForceMode.Impulse);
-			anim.SetTrigger("Fire");
-			nextFire = Time.time + fireRate;
+			//nextFire = Time.time + fireRate;
+            
+            
             //Destroy (gameObject, 2);
         }
- 
- 
+        anim.SetTrigger("banditShoot");
+        Debug.Log("shooting");
+
+
     }
- 
+
     void Update() {
  
         onRange = Vector3.Distance(transform.position, player.position)<range;
  
         if (onRange)
             transform.LookAt(player);
-			
+
     }
 	void FixedUpdate(){
 		time += Time.deltaTime;
 		if (time >= spawnTime){
-			anim.SetTrigger("banditShoot");
-			//anim.SetTrigger("Fire");
+
+	
 			Shoot();
 			SetRandomTime();
 			

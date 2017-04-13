@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour {
     bool isReady;
 	int time; 
 	public int enemyDamage = 1;
+    public GameObject BulletSpawn;
 
 
     void Awake() {

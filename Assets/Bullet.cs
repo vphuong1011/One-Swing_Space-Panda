@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour {
 	void Update () {
 		transform.Translate (-Vector3.forward * Time.deltaTime * speed);
 	}
-	void OnCollisionEnter (Collision other)
+	void OnTriggerEnter (Collider other)
 	{
         if(other.gameObject.name == "Player")
         {    
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour {
 
         if(other.gameObject.tag == "Bandit")
         {
-			Destroy(gameObject);
+			//Destroy(gameObject);
 			Debug.Log("damage");
         }
     }
