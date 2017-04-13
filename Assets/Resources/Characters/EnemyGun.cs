@@ -39,18 +39,18 @@ public class EnemyGun : MonoBehaviour {
 	}
     public void FireEnemyBullet ()
     {
-        
-		time = 1;
+        StartCoroutine(Wait(5.0f));
+        time = 1;
 		GameObject player = GameObject.Find ("Player(Clone)");
 		
         if(player != null)
         {
-			StartCoroutine (Wait(5.0f));
+			
 			GameObject bullet = (GameObject)Instantiate(BulletSpawn);
             bullet.transform.position = transform.position;
             Vector2 direction = player.transform.position - bullet.transform.position;
             bullet.GetComponent<EnemyBullet>().SetDirection(direction);
-			//anim.setTrigger("shoot");
+            anim.SetTrigger("banditShoot");
         }
 		
     }
