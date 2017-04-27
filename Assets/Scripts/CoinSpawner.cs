@@ -16,9 +16,51 @@ public class CoinSpawner : MonoBehaviour
     public int timer = 5;
     public Rigidbody coinRB; //drag the coin prefab on inspector again, assuming it already has a rigidbody in it.
     public float coinSpeed = 3; //adjust the speed in which the coin will fly off the spawner.
+
+    public DestroyWhenTouch destroywhentouchScript;
+    public bool coinSpawned;
     
+    void Start()
+    {
+        destroywhentouchScript = GameObject.Find("Bullet").GetComponent<DestroyWhenTouch>();
+    }
+
     void Update()
     {
+        if(destroywhentouchScript.brokenBarrelSpawned == true && coinSpawned == false)
+        {
+            SpawnCoin();
+            coinSpawned = true;
+        }
+
+        if (destroywhentouchScript.brokenBucketSpawned == true && coinSpawned == false)
+        {
+            SpawnCoin();
+            coinSpawned = true;
+        }
+
+        if (destroywhentouchScript.brokenStreetLampSpawned == true && coinSpawned == false)
+        {
+            SpawnCoin();
+            coinSpawned = true;
+        }
+
+        if (destroywhentouchScript.brokenPotSpawned == true && coinSpawned == false)
+        {
+            SpawnCoin();
+            coinSpawned = true;
+        }
+
+        if (destroywhentouchScript.brokenSpiritHousetSpawned == true && coinSpawned == false)
+        {
+            SpawnCoin();
+            coinSpawned = true;
+        }
+
+        if(coinSpawned == true)
+        {
+            Destroy(transform.parent.gameObject, 3f);
+        }
         keyboardTest();//use this to test the coin spawner by pressing the spacebar. Remove it if it onTriggerEnter is used instead. 
     }
 

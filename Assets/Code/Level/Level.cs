@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 // This is the base class for all levels
 public class Level : MonoBehaviour {
@@ -15,7 +16,7 @@ public class Level : MonoBehaviour {
     private List<GameObject> SpawnedCharacters = new List<GameObject>();
 
     // Create reference to the player
-    public GameObject PlayerGameObject;
+    [NonSerialized] public GameObject PlayerGameObject;
 
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
@@ -65,7 +66,7 @@ public class Level : MonoBehaviour {
         SpawnedCharacters.Add(enemyGameObject);
 
         // Get a random valid index
-        int randomSpawnIndex = Random.Range(0, EnemySpawnTransforms.Count);
+        int randomSpawnIndex = UnityEngine.Random.Range(0, EnemySpawnTransforms.Count);
 
         // Set the enemy to the spawn transform index position
         enemyGameObject.transform.position = EnemySpawnTransforms[randomSpawnIndex].position;
