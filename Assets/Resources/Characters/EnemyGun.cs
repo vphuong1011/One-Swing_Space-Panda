@@ -49,7 +49,7 @@ public class EnemyGun : MonoBehaviour {
 			GameObject bullet = (GameObject)Instantiate(BulletSpawn);
             bullet.transform.position = transform.position;
             Vector2 direction = player.transform.position - bullet.transform.position;
-            bullet.GetComponent<EnemyBullet>().SetDirection(direction);
+          //  bullet.GetComponent<EnemyBullet>().SetDirection(direction);
             anim.SetTrigger("banditShoot");
         }
 		
