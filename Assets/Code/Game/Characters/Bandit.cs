@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public enum EnemyState
 {
@@ -8,7 +9,7 @@ public enum EnemyState
     Bandit_ATTACKING,
     Bandit_HIT,
     Bandit_DYING,
-    PLAYER_DEAD
+    Bandit_DEAD
 }
 
 public class Bandit : MonoBehaviour
@@ -29,6 +30,7 @@ public class Bandit : MonoBehaviour
 
 
 
+
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -37,38 +39,41 @@ public class Bandit : MonoBehaviour
     {
         onRange = Vector3.Distance(transform.position, player.position) < range;
 
-        if (onRange)
+			if (onRange)
             transform.LookAt(player);
+			//Debug.Log("Looking");
 
-        // Player STATE MACHINE
-        switch (CurrentState)
+        //Player STATE MACHINE
+       switch (CurrentState)
         {
-            case EnemyState.Bandit_IDLE:
-                break;
+			case EnemyState.Bandit_IDLE:
+	
+               break;
 
         }
-        {
+        
             switch(CurrentState)
             {
                 case EnemyState.Bandit_ATTACKING:
-                    Shoot();
+                    anim.SetTrigger("banditShoot");
+					//Shoot();
+					Debug.Log("SWITCH");
                     break;
                     }
-        }
+        
     }
 
 
     void Start()
     {
-        //float rand = Random.Range (minTime, maxTime);
-        Invoke("Shoot", spawnTime);
+
         anim = GetComponent<Animator>();
 
     }
 
     void Awake()
     {
-        nextFire = Time.time + fireRate;
+
     }
 
 
@@ -78,37 +83,44 @@ public class Bandit : MonoBehaviour
 
         if (onRange)
         {
-            //time = 1;
+            //anim.SetTrigger("banditShoot");
+			Wait(5);
+			anim.SetTrigger("banditShoot");
             GameObject bullet1 = (GameObject)Instantiate(BulletSpawn);
             Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
             bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
             //nextFire = Time.time + fireRate;
 
-
+			
             //Destroy (gameObject, 2);
         }
-        anim.SetTrigger("banditShoot");
-        Debug.Log("shooting");
+		  Debug.Log("shooting");
+      
 
 
     }
 
     void FixedUpdate()
     {
-        time += Time.deltaTime;
-        if (time >= spawnTime)
-        {
-
-
-            Shoot();
-            SetRandomTime();
-
-        }
+       
     }
 
     void SetRandomTime()
     {
-        spawnTime = Random.Range(minTime, maxTime);
+        
     }
+	
+	IEnumerator Wait(float seconds){
+		yield return new WaitForSeconds(seconds);
+	}
+	
+//	public void Fire()
+//	{
+//			GameObject bullet1 = (GameObject)Instantiate(BulletSpawn);
+ //           Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
+ //           bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
+//			Debug.Log("shoot");
+	//}
+	
 
 }

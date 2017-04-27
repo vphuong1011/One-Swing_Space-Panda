@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : Enemy {
+public class EnemyShoot : Bandit {
  
     public Transform player;
     public float range = 50.0f;
