@@ -39,11 +39,7 @@ public class Bandit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        onRange = Vector3.Distance(transform.position, player.position) < range;
 
-			if (onRange)
-            transform.LookAt(player);
-			Debug.Log("Looking");
 
         //Player STATE MACHINE
        switch (CurrentState)
