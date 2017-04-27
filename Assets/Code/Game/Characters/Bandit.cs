@@ -32,6 +32,8 @@ public class Bandit : MonoBehaviour
     private float attackTimer = 0;
     private float attackDelay;
 
+    public Component[] boneRig;
+
 
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
@@ -52,13 +54,13 @@ public class Bandit : MonoBehaviour
                     attackTimer = 0;
                 }
 
-                Debug.Log("EnemyState.Bandit_IDLE");
+                //Debug.Log("EnemyState.Bandit_IDLE");
                 break;
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot");
                 
-                Debug.Log("EnemyState.Bandit_ATTACKING");
+                //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
                 CurrentState = EnemyState.Bandit_IDLE;
@@ -76,6 +78,8 @@ public class Bandit : MonoBehaviour
         anim = GetComponent<Animator>();
 
         attackDelay = Random.Range(minTime, maxTime);
+
+        boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
 
     }
 
@@ -120,14 +124,24 @@ public class Bandit : MonoBehaviour
 	IEnumerator Wait(float seconds){
 		yield return new WaitForSeconds(seconds);
 	}
-	
-//	public void Fire()
-//	{
-//			GameObject bullet1 = (GameObject)Instantiate(BulletSpawn);
- //           Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
- //           bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
-//			Debug.Log("shoot");
-	//}
-	
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Bullet")
+        {
+            KillRagdoll();
+            GetComponent<Animator>().enabled = false;
+            Destroy(gameObject, 5);
+            Debug.Log("disable");
+        }
+    }
+
+    void KillRagdoll()
+    {
+        foreach (Rigidbody ragdoll in boneRig)
+        {
+            ragdoll.isKinematic = false;
+        }
+
+    }
 }
