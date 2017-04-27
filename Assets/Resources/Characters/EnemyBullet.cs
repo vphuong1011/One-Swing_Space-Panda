@@ -6,16 +6,20 @@ public class EnemyBullet : MonoBehaviour {
     float speed;
     Vector2 _direction;
     bool isReady;
+	int time; 
+	public int enemyDamage = 1;
+    public GameObject BulletSpawn;
 
 
     void Awake() {
         speed = 1000f;
         isReady = false;
+		time = 5;
     }
 
 	// Use this for initialization
 	void Start () {
-		
+		Destroy(gameObject, 2);
 	}
 	public void SetDirection(Vector2 direction)
     {
@@ -40,11 +44,14 @@ public class EnemyBullet : MonoBehaviour {
         }
 	}
 
-    public void OnCollisionEnter(Collision collision)
-    {
-        if ( collision.gameObject.name == "PlayerClone")
+     void OnCollisionEnter (Collision bullet)
+   {
+		if	(bullet.gameObject.name == "Player(Clone)")
         {
-            Destroy(collision.gameObject);
+          // GetComponent<BanditHealth>().RemoveHealth(enemyDamage);
+		 //  Destroy(bullet.gameObject);
+			Debug.Log("Destroyed");
+			
         }
     }
 }
