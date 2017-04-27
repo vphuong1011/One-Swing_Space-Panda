@@ -14,22 +14,25 @@ public class Level : MonoBehaviour {
     // Spawned characters
     private List<GameObject> SpawnedCharacters = new List<GameObject>();
 
+    // Create reference to the player
+    public GameObject PlayerGameObject;
+
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
     {
         // Create the player using the ResourceManager
         //HEAD
-        GameObject playerGameObject = ResourceManager.Create("Characters/Player");
+        PlayerGameObject = ResourceManager.Create("Characters/Player");
 
         //GameObject playerGameObject = ResourceManager.Create("Characters/Player");
         // 9be13d305e3b199da2340eb948ba519f7dfc787b
 
         // Add to spawned characters list so we can clean up later
-        SpawnedCharacters.Add(playerGameObject);
+        SpawnedCharacters.Add(PlayerGameObject);
 
         // Set the player to the start position 
         if (PlayerStartTransform)
-            playerGameObject.transform.position = PlayerStartTransform.position;
+            PlayerGameObject.transform.position = PlayerStartTransform.position;
     }
 
     // Spawn the enemy and set their location to a specific spawn point

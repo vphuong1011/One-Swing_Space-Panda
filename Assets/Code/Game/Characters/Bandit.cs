@@ -25,10 +25,12 @@ public class Bandit : MonoBehaviour
     public float fireRate;
     public float nextFire;
     Animator anim;
-    public GameObject BulletSpawn;
     public Rigidbody projectile;
 
+    [SerializeField] private Transform GunTip; // This is where the bullet spawns
 
+    private float attackTimer = 0;
+    private float attackDelay;
 
 
     // The player's current state
@@ -41,26 +43,34 @@ public class Bandit : MonoBehaviour
 
 			if (onRange)
             transform.LookAt(player);
-			//Debug.Log("Looking");
+			Debug.Log("Looking");
 
         //Player STATE MACHINE
        switch (CurrentState)
         {
 			case EnemyState.Bandit_IDLE:
-	
-               break;
+                attackTimer += Time.deltaTime;
+                if(attackTimer > attackDelay)
+                {
+                    CurrentState = EnemyState.Bandit_ATTACKING;
+                    attackTimer = 0;
+                }
+
+                Debug.Log("EnemyState.Bandit_IDLE");
+                break;
+
+            case EnemyState.Bandit_ATTACKING:
+                anim.SetTrigger("banditShoot");
+                
+                Debug.Log("EnemyState.Bandit_ATTACKING");
+
+                // Reset the attack delay
+                CurrentState = EnemyState.Bandit_IDLE;
+                attackDelay = Random.Range(minTime, maxTime);
+
+                break;
 
         }
-        
-            switch(CurrentState)
-            {
-                case EnemyState.Bandit_ATTACKING:
-                    anim.SetTrigger("banditShoot");
-					Shoot();
-					Debug.Log("SWITCH");
-                    break;
-                    }
-        
     }
 
 
@@ -68,6 +78,8 @@ public class Bandit : MonoBehaviour
     {
 
         anim = GetComponent<Animator>();
+
+        attackDelay = Random.Range(minTime, maxTime);
 
     }
 
@@ -78,25 +90,24 @@ public class Bandit : MonoBehaviour
 
 
 
-    public void Shoot()
+    public void ShootAnimEvent()
     {
 
-        if (onRange)
+        GameObject bulletGO = ResourceManager.Create("Projectiles/Bullet");
+        if(bulletGO && GunTip)
         {
-            //anim.SetTrigger("banditShoot");
-			Wait(5);
-			anim.SetTrigger("banditShoot");
-            GameObject bullet1 = (GameObject)Instantiate(BulletSpawn);
-            Rigidbody bullet = (Rigidbody)Instantiate(projectile, transform.position + transform.forward, transform.rotation);
-            bullet.AddForce(transform.forward * bulletImpulse, ForceMode.Impulse);
-            //nextFire = Time.time + fireRate;
+            bulletGO.transform.position = GunTip.position;
 
-			
-            //Destroy (gameObject, 2);
+            Bullet bullet = bulletGO.gameObject.GetComponent<Bullet>();
+
+            if (bullet)
+            {
+                Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
+                bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
+            }
+
         }
-		  Debug.Log("shooting");
-      
-
+		Debug.Log("shooting");
 
     }
 
