@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 347f7ff21025ad74c8cbef8ca8ada591
+timeCreated: 1491343133
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Osaka-Sans Serif
+  fontNames:
+  - Osaka-Sans Serif
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

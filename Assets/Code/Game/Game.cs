@@ -9,6 +9,7 @@ public enum GameState
     GAME_WAITING,
     GAME_LOADING,
     GAME_RUNNING,
+    
 }
 
 public class Game : MonoBehaviour {
@@ -25,8 +26,14 @@ public class Game : MonoBehaviour {
     [NonSerialized] public bool WantsToBeInLoadingState = false;
     [NonSerialized] public bool WantsToBeInRunningState = false;
 
+    //For random levels
+    public GameObject[] newLevels = new GameObject[3];
+    private int currentIndex = 0;
+    public bool canCycle = false;
+
     void Awake()
     {
+        
         // Set the instance for the singleton
         if (m_Inst == null)
             m_Inst = this;
@@ -60,25 +67,33 @@ public class Game : MonoBehaviour {
 
                 // If we want to be in the loading state, do the state transition
                 if (WantsToBeInLoadingState)
+
                     DoStateTransition(GameState.GAME_LOADING);
 
                 break;
             case GameState.GAME_LOADING:
                 // TODO: Load the level
-                Levels.LoadLevel("SamuraiLevel", ()=> WantsToBeInRunningState = true);
+
+                WantsToBeInRunningState = true;
+
+
 
                 // If we want to be in the running state, do the state transition
                 if (WantsToBeInRunningState)
+                    randomizeLevels();
                     DoStateTransition(GameState.GAME_RUNNING);
+               
 
                 break;
+
             case GameState.GAME_RUNNING:
                 // TODO: This is wher ethe majority of the game logic will happen and there might even be sub-states within this main game state
 
                 // If we want to pause the game, go into the pause game state
                 if (WantsToBeInWaitState)
-                    DoStateTransition(GameState.GAME_WAITING);
 
+                        DoStateTransition(GameState.GAME_WAITING);
+                    
                 break;
             default:
                 Debug.Assert(false, "Invalid CurrentState for GameState in Game.cs");
@@ -88,6 +103,26 @@ public class Game : MonoBehaviour {
         }
     }
 
+    void randomizeLevels()
+    {
+        int newIndex = UnityEngine.Random.Range(0, newLevels.Length);
+
+        currentIndex = newIndex;
+
+        if (currentIndex == 0)
+        {
+            Levels.LoadLevel("Level1", () => WantsToBeInRunningState = true);
+        }
+        else if (currentIndex == 1)
+        {
+            Levels.LoadLevel("Level2", () => WantsToBeInRunningState = true);
+        }
+        else if (currentIndex == 2)
+        {
+            Levels.LoadLevel("Level3", () => WantsToBeInRunningState = true);
+        }
+
+    }
     // Use this to do state transitions in case we later need to keep track of the previous state
     private void DoStateTransition(GameState newState)
     {

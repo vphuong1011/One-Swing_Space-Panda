@@ -23,4 +23,24 @@ public class MainMenuSet : Set {
         CloseSet();
         SetManager.OpenSet<GameSet>();        
     }
+
+    // DEBUG: These are just for testing menu flow
+    public void OnSettingsClicked()
+    {
+        Game.Inst.WantsToBeInWaitState = true;
+       // Levels.CloseLevel();
+
+        CloseSet();
+        SetManager.OpenSet<SettingsSet>();
+    }
+
+    // DEBUG: These are just for testing menu flow
+    public void OnHelpClicked()
+    {
+        Game.Inst.WantsToBeInWaitState = true;
+      //  Levels.CloseLevel();
+
+         CloseSet();
+         SetManager.OpenSet<HelpSet>();
+    }
 }
