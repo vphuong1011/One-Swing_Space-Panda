@@ -32,9 +32,6 @@ public class Bandit : MonoBehaviour
     private float attackTimer = 0;
     private float attackDelay;
 
-    public Component[] boneRig;
-
-
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -78,9 +75,6 @@ public class Bandit : MonoBehaviour
         anim = GetComponent<Animator>();
 
         attackDelay = Random.Range(minTime, maxTime);
-
-        boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
-
     }
 
     void Awake()
@@ -124,24 +118,4 @@ public class Bandit : MonoBehaviour
 	IEnumerator Wait(float seconds){
 		yield return new WaitForSeconds(seconds);
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "Bullet")
-        {
-            KillRagdoll();
-            GetComponent<Animator>().enabled = false;
-            Destroy(gameObject, 5);
-            Debug.Log("disable");
-        }
-    }
-
-    void KillRagdoll()
-    {
-        foreach (Rigidbody ragdoll in boneRig)
-        {
-            ragdoll.isKinematic = false;
-        }
-
-    }
 }

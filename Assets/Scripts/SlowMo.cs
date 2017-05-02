@@ -17,7 +17,7 @@ public class SlowMo : MonoBehaviour {
         {
             if(Time.timeScale == 1f)
             {
-                Time.timeScale = 0.3f;
+                Time.timeScale = 0.5f;
                 Debug.Log("Slow");
             }
         }

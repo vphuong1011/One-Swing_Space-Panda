@@ -9,7 +9,7 @@ public class Player1 : MonoBehaviour {
     public GameObject enemyTrigger;
     public GameObject propsTrigger;
 
-    public float playerCurrrentAttackSpeed = 0.5f;
+    public float currrentAttackSpeed = 0.5f;
 
     public GameObject[] targetPositions;
     public GameObject currentTarget;
@@ -31,7 +31,7 @@ public class Player1 : MonoBehaviour {
         {
             if(swing == false)
             {
-                GetComponent<Animator>().speed = playerCurrrentAttackSpeed;
+                GetComponent<Animator>().speed = currrentAttackSpeed;
                 GetComponent<Animator>().SetBool("MouseClicked", true);
                 swing = true;
             }
@@ -78,12 +78,6 @@ public class Player1 : MonoBehaviour {
     {
         propsTrigger.SetActive(false);
     }
-
-    public void FireABullet()
-    {
-
-    }
-
 
     public void AttackFinished()
     {

@@ -43,7 +43,7 @@ public class Level : MonoBehaviour {
         if (transformIndex < EnemySpawnTransforms.Count)
         {
             // Spawn in the an enemy using the ResourceManager
-            GameObject enemyGameObject = ResourceManager.Create("Characters/Bandit");
+            GameObject enemyGameObject = ResourceManager.Create("Characters/Enemy");
 
             // Add to spawned characters list so we can clean up later
             SpawnedCharacters.Add(enemyGameObject);
@@ -60,7 +60,7 @@ public class Level : MonoBehaviour {
     public void SpawnEnemyAtRandom()
     {
         // Spawn in the an enemy using the ResourceManager
-        GameObject enemyGameObject = ResourceManager.Create("Characters/Bandit");
+        GameObject enemyGameObject = ResourceManager.Create("Characters/Enemy");
 
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(enemyGameObject);
