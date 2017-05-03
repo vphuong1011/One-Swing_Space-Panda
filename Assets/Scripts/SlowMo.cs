@@ -6,6 +6,8 @@ public class SlowMo : MonoBehaviour {
 
     public float currentSlowMo = 0;
     public float slowTimeAllowed = 2f;
+
+    public Player1 playerScript;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +15,7 @@ public class SlowMo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(0) && playerScript.swing == false)
         {
             if(Time.timeScale == 1f)
             {
@@ -28,7 +30,7 @@ public class SlowMo : MonoBehaviour {
        //     Time.fixedDeltaTime = 0.02f * Time.timeScale;
        // }
 
-        if(Time.timeScale == 0.3f)
+        if(Time.timeScale == 0.5f)
         {
             currentSlowMo += Time.deltaTime;
         }

@@ -18,6 +18,8 @@ public class Player1 : MonoBehaviour {
 
     public bool swing;
 
+    public DestroyWhenTouch propsScript;
+
     // Use this for initialization
     void Start () {
         boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
@@ -27,7 +29,7 @@ public class Player1 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw"))
+        if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
         {
             if(swing == false)
             {
@@ -36,6 +38,13 @@ public class Player1 : MonoBehaviour {
                 swing = true;
             }
         }
+
+        if(propsScript.brokenBarrelSpawned == true || propsScript.brokenBucketSpawned == true || propsScript.brokenPotSpawned == true || propsScript.brokenSpiritHousetSpawned == true || propsScript.brokenStreetLampSpawned == true)
+        {
+            swing = false;
+        }
+
+       // IncreaseSwingSpeed();
     }
 
     public void TurnOnEnemyCollision()
@@ -43,17 +52,7 @@ public class Player1 : MonoBehaviour {
         enemyTrigger.SetActive(true);
     }
 
-    public void TurnOnEnemyCollision1()
-    {
-        enemyTrigger.SetActive(true);
-    }
-
     public void TurnOffEnemyCollision()
-    {
-        enemyTrigger.SetActive(false);
-    }
-
-    public void TurnOffEnemyCollision1()
     {
         enemyTrigger.SetActive(false);
     }
@@ -66,7 +65,6 @@ public class Player1 : MonoBehaviour {
     public void TurnOnPropsCollision1()
     {
         propsTrigger.SetActive(true);
-        Debug.Log("it's on");
     }
 
     public void TurnOffPropsCollision()
@@ -92,5 +90,13 @@ public class Player1 : MonoBehaviour {
         }
 
         GetComponent<Animator>().enabled = false;
+    }
+
+    void IncreaseSwingSpeed()
+    {
+        if(Input.GetKeyUp(KeyCode.S))
+        {
+            currrentAttackSpeed += 1;
+        }
     }
 }

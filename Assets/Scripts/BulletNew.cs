@@ -62,6 +62,11 @@ public class BulletNew : MonoBehaviour {
             Debug.Log("DeflectToProps");
         }
 
+        if(other.gameObject.name == "TimeToHitTrigger")
+        {
+
+        }
+
         // If the bullet hit the ragdoll, ragdoll starts
         if (other.gameObject.tag == "PlayerRagdoll")
         {

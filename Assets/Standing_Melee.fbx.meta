@@ -489,7 +489,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Withdraw
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 15
       lastFrame: 109
       wrapMode: 0
       orientationOffsetY: 0
@@ -510,56 +510,42 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4600939
+      - time: 0.36210793
         functionName: TurnOnPropsCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.47104847
-        functionName: TurnOnEnemyCollision
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.47236642
-        functionName: TurnOffEnemyCollision
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.48356807
+      - time: 0.37336323
         functionName: TurnOffPropsCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49295774
-        functionName: TurnOnEnemyCollision1
+      - time: 0.37626624
+        functionName: TurnOnEnemyCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5422535
-        functionName: TurnOffEnemyCollision1
+      - time: 0.400298
+        functionName: TurnOffEnemyCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5516432
+      - time: 0.4038294
         functionName: TurnOnPropsCollision1
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5633803
+      - time: 0.41326147
         functionName: TurnOffPropsCollision1
         data: 
         objectReferenceParameter: {instanceID: 0}

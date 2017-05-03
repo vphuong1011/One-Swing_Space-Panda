@@ -92,13 +92,13 @@ public class Bandit : MonoBehaviour
         {
             bulletGO.transform.position = GunTip.position;
 
-            Bullet bullet = bulletGO.gameObject.GetComponent<Bullet>();
+           // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
-            if (bullet)
-            {
-                Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
-                bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
-            }
+         //   if (bullet)
+         //   {
+          //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
+          //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
+         //   }
 
         }
 		Debug.Log("shooting");

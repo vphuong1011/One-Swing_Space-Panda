@@ -15,6 +15,7 @@ public class DestroyWhenTouch : MonoBehaviour {
     public bool brokenStreetLampSpawned;
     public bool brokenPotSpawned;
     public bool brokenSpiritHousetSpawned;
+
     // Use this for initialization
     void Start () {
     }
