@@ -22,13 +22,17 @@ public class Player1 : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        // Find Rigidbody on the player ragdolls
         boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
 
+        // Player haven't swing
         swing = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        // If Left Mouse pressed & "Withdraw", "Withdraw1" animations are not playing & player haven't swing yet -> Get the animation speed, activate the MouseClicked trigger in the animator
         if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
         {
             if(swing == false)
@@ -39,6 +43,7 @@ public class Player1 : MonoBehaviour {
             }
         }
 
+        // If any props get destroyed -> swing boolean back to false, player haven't swing
         if(propsScript.brokenBarrelSpawned == true || propsScript.brokenBucketSpawned == true || propsScript.brokenPotSpawned == true || propsScript.brokenSpiritHousetSpawned == true || propsScript.brokenStreetLampSpawned == true)
         {
             swing = false;
@@ -47,6 +52,7 @@ public class Player1 : MonoBehaviour {
        // IncreaseSwingSpeed();
     }
 
+    // Events in the animations to turn on/off the triggers [If the bullet hit a trigger, it will deflect]
     public void TurnOnEnemyCollision()
     {
         enemyTrigger.SetActive(true);
@@ -82,6 +88,7 @@ public class Player1 : MonoBehaviour {
         GetComponent<Animator>().speed = 1;
     }
 
+    //Turn on the ragdoll
     void KillRagdoll()
     {
         foreach(Rigidbody ragdoll in boneRig)
@@ -92,6 +99,7 @@ public class Player1 : MonoBehaviour {
         GetComponent<Animator>().enabled = false;
     }
 
+    // Increase attack speed
     void IncreaseSwingSpeed()
     {
         if(Input.GetKeyUp(KeyCode.S))
