@@ -134,6 +134,9 @@ public class GameSet : Set
     {
         Game.Inst.WantsToBeInLoadingState = true;
         Levels.CloseLevel();
+
+        ShopIsShowing = !ShopIsShowing;
+        ShopPopUp.SetActive(ShopIsShowing);
     }
 
     public void OnSettingsClicked()
