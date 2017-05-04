@@ -29,7 +29,7 @@ public class DestroyWhenTouch : MonoBehaviour {
     {
         if(other.gameObject.name == "Barrel")
         {
-                BarrelDestroyed();
+            BarrelDestroyed();
         }
 
         if(other.gameObject.name == "Bucket")

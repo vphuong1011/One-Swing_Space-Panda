@@ -5,6 +5,7 @@ public enum EnemyState
 {
     Bandit_SPAWNING,
     Bandit_IDLE,
+    Bandit_WAITING,
     Bandit_MOVING,
     Bandit_ATTACKING,
     Bandit_HIT,
@@ -14,16 +15,12 @@ public enum EnemyState
 
 public class Bandit : MonoBehaviour
 {
-    public Transform player;
+
     public float range = 50.0f;
-    public float bulletImpulse = 20.0f;
     public float maxTime = 15;
     public float minTime = 5;
     private float time;
-    public float spawnTime;
-    private bool onRange = false;
-    public float fireRate;
-    public float nextFire;
+
     Animator anim;
     public Rigidbody projectile;
     public int health = 3;
@@ -49,7 +46,7 @@ public class Bandit : MonoBehaviour
                 attackTimer += Time.deltaTime;
                 if(attackTimer > attackDelay)
                 {
-                    CurrentState = EnemyState.Bandit_ATTACKING;
+                    CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
                     attackTimer = 0;
                 }
 
@@ -57,14 +54,17 @@ public class Bandit : MonoBehaviour
                 break;
 
             case EnemyState.Bandit_ATTACKING:
-                anim.SetTrigger("banditShoot");
+                anim.SetTrigger("banditShoot"); // change bandit animation
                 
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
-                CurrentState = EnemyState.Bandit_IDLE;
-                attackDelay = Random.Range(minTime, maxTime);
+                
+                CurrentState = EnemyState.Bandit_WAITING; //change bandit state to idle
+                attackDelay = Random.Range(minTime, maxTime);          // attack Delay
 
+                break;
+            case EnemyState.Bandit_WAITING:
                 break;
 
         }
@@ -76,7 +76,7 @@ public class Bandit : MonoBehaviour
 
         anim = GetComponent<Animator>();
 
-        attackDelay = Random.Range(minTime, maxTime);
+        attackDelay = Random.Range(minTime, maxTime); //random attack delay
     }
 
     void Awake()
@@ -84,9 +84,13 @@ public class Bandit : MonoBehaviour
 
     }
 
+    public void OnObjectHit()
+    {
+        // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
+        CurrentState = EnemyState.Bandit_IDLE;
+    }
 
-
-    public void ShootAnimEvent()
+    public void ShootAnimEvent()   // spawn the bullet
     {
 
         GameObject bulletGO = ResourceManager.Create("Projectiles/Bullet");
@@ -107,21 +111,13 @@ public class Bandit : MonoBehaviour
 
     }
 
-    void FixedUpdate()
-    {
-       
-    }
 
-    void SetRandomTime()
-    {
-        
-    }
 	
 	IEnumerator Wait(float seconds){
 		yield return new WaitForSeconds(seconds);
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //Killing the bandit 
     {
         gameObject.SendMessage("KillRagdoll");
         Debug.Log("KILLED");

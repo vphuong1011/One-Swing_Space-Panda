@@ -32,10 +32,10 @@ public class BulletNew : MonoBehaviour {
         indexE = Random.Range(0, enemyScript.targetPositions.Length);
         enemyScript.currentTarget = enemyScript.targetPositions[indexE];
 
-      //  propsMNG = GameObject.Find("Props Manager").GetComponent<PropsManager>();
-    //    propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
-     //   indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
-    //    propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
+       // propsMNG = GameObject.Find("Props Manager").GetComponent<PropsManager>();
+      //  propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
+       // indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
+       // propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
 
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
@@ -82,6 +82,11 @@ public class BulletNew : MonoBehaviour {
             
 
             Debug.Log("Hit");
+        }
+
+        if (other.gameObject.tag =="Barrel")
+        {
+            Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
         }
     }
 }
