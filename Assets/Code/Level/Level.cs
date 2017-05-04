@@ -18,6 +18,9 @@ public class Level : MonoBehaviour {
     // Create reference to the player
     [NonSerialized] public GameObject PlayerGameObject;
 
+    // The enemy in the level
+    [NonSerialized] public GameObject CurrentEnemy;
+
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
     {
@@ -43,13 +46,13 @@ public class Level : MonoBehaviour {
         if (transformIndex < EnemySpawnTransforms.Count)
         {
             // Spawn in the an enemy using the ResourceManager
-            GameObject enemyGameObject = ResourceManager.Create("Characters/Enemy");
+            CurrentEnemy = ResourceManager.Create("Characters/Enemy");
 
             // Add to spawned characters list so we can clean up later
-            SpawnedCharacters.Add(enemyGameObject);
+            SpawnedCharacters.Add(CurrentEnemy);
 
             // Set the enemy to the spawn transform index position
-            enemyGameObject.transform.position = EnemySpawnTransforms[transformIndex].position;
+            CurrentEnemy.transform.position = EnemySpawnTransforms[transformIndex].position;
         }
         else
             Debug.LogWarning("Enemy spawn index outside of valid range.");
@@ -60,16 +63,16 @@ public class Level : MonoBehaviour {
     public void SpawnEnemyAtRandom()
     {
         // Spawn in the an enemy using the ResourceManager
-        GameObject enemyGameObject = ResourceManager.Create("Characters/Enemy");
+        CurrentEnemy = ResourceManager.Create("Characters/Enemy");
 
         // Add to spawned characters list so we can clean up later
-        SpawnedCharacters.Add(enemyGameObject);
+        SpawnedCharacters.Add(CurrentEnemy);
 
         // Get a random valid index
         int randomSpawnIndex = UnityEngine.Random.Range(0, EnemySpawnTransforms.Count);
 
         // Set the enemy to the spawn transform index position
-        enemyGameObject.transform.position = EnemySpawnTransforms[randomSpawnIndex].position;
+        CurrentEnemy.transform.position = EnemySpawnTransforms[randomSpawnIndex].position;
     }
 
     // Clean up all of the spawned in characters

@@ -26,6 +26,8 @@ public class Bandit : MonoBehaviour
     public float nextFire;
     Animator anim;
     public Rigidbody projectile;
+    public int health = 3;
+    public Collider boxCollider;
 
     [SerializeField] private Transform GunTip; // This is where the bullet spawns
 
@@ -118,4 +120,21 @@ public class Bandit : MonoBehaviour
 	IEnumerator Wait(float seconds){
 		yield return new WaitForSeconds(seconds);
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        gameObject.SendMessage("KillRagdoll");
+        Debug.Log("KILLED");
+        GameObject blood = ResourceManager.Create("Prefabs/Blood");
+        blood.transform.position = gameObject.transform.position;
+        Destroy(gameObject, 5);
+        Destroy(blood, 1);
+
+        Bandit bandit = gameObject.GetComponent<Bandit>();
+
+        if (bandit)
+        {
+            bandit.health = 0;
+        }
+    }
 }
