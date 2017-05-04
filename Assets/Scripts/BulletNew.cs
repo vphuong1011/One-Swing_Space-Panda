@@ -20,6 +20,7 @@ public class BulletNew : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        // Find the player script on the Player, find the player targetPostions, choose Random target from the targetPositions
         playerScript = GameObject.Find("Player(Clone)").GetComponent<Player1>();
         playerScript.targetPositions = GameObject.FindGameObjectsWithTag("PlayerRagdoll");
         indexP = Random.Range(0, playerScript.targetPositions.Length);

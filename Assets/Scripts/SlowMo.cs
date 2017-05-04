@@ -15,6 +15,8 @@ public class SlowMo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        // If Left Mouse pressed & player haven't swing -> Slow down time
 		if(Input.GetMouseButtonDown(0) && playerScript.swing == false)
         {
             if(Time.timeScale == 1f)
@@ -24,18 +26,14 @@ public class SlowMo : MonoBehaviour {
             }
         }
 
-       // else
-       // {
-       //     Time.timeScale = 1f;
-       //     Time.fixedDeltaTime = 0.02f * Time.timeScale;
-       // }
-
+        // If time is slowing, currentSlowMo increase over time
         if(Time.timeScale == 0.5f)
         {
             currentSlowMo += Time.deltaTime;
         }
 
-        if(currentSlowMo > slowTimeAllowed)
+        //If currentslowMo >= slowtimeAllowed, time back to normal
+        if(currentSlowMo >= slowTimeAllowed)
         {
             currentSlowMo = 0f;
             Time.timeScale = 1.0f;
