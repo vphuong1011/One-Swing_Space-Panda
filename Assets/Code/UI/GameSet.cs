@@ -12,16 +12,15 @@ public class GameSet : Set
     [SerializeField] private bool MenuIsShowing = false;
     [SerializeField] private bool ShopIsShowing = false;
     public static bool loadLevelNow = false;
-    
-    //Health Values
-    public int enemyHealth = 3;
 
     //Counters
     public Text coinsValue;
     public Text scoreValue;
     public static int newMoney = 0;
     public static int newScore = 0;
-    public bool updateScoreNow = false;
+
+    // Private member variables
+    bool updateScoreNow = true;
 
 
     void Awake()
@@ -32,7 +31,6 @@ public class GameSet : Set
     // Use this for initialization
     void Start()
     {
-        enemyHealth = 3;
         newMoney = 0;
         newScore = 0;
     }
@@ -41,22 +39,21 @@ public class GameSet : Set
 
     void Update()
     {
-        if (updateScoreNow == false)
-        {
-            if (enemyHealth <= 0)
-            {
-                updateScoreNow = true;
-            }
 
-            if (updateScoreNow == true)
+        if(Levels.CurrentLevel.CurrentEnemy)
+        {
+            Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
+
+            if (bandit && bandit.health <= 0 && updateScoreNow == true)
             {
                 newScore = newScore + 1;
                 scoreValue.text = "Score " + newScore;
-                StartCoroutine(stopUpdateScore());
                 loadLevelNow = true;
-            }
+                updateScoreNow = false;
+                Shop();
+            }   
+
         }
-        
     }
 
     /// <summary>
@@ -75,8 +72,13 @@ public class GameSet : Set
     //Kill Enemy Button
     public void KillEnemy()
     {
-       enemyHealth = enemyHealth - 1;
-       Debug.Log("Enemy health is " + enemyHealth);
+        Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
+
+        if(bandit)
+        {
+            bandit.health = 0;
+            Debug.Log("Enemy health is " + bandit.health);
+        }
     }
 
     //Kill Player Button
@@ -87,15 +89,6 @@ public class GameSet : Set
         CloseSet();
         SetManager.OpenSet<LoseSet>();
 
-    }
-
-    IEnumerator stopUpdateScore()
-    {
-        yield return new WaitForSeconds(1f);
-        updateScoreNow = false;
-        enemyHealth = 3;
-        PauseGame();
-        Shop();
     }
 
     /// <summary>
@@ -141,9 +134,6 @@ public class GameSet : Set
     {
         Game.Inst.WantsToBeInLoadingState = true;
         Levels.CloseLevel();
-
-        CloseSet();
-        SetManager.OpenSet<GameSet>();
     }
 
     public void OnSettingsClicked()

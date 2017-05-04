@@ -56,7 +56,7 @@ public class BulletNew : MonoBehaviour {
             // cut the bullet into 2 pieces!?
         }
 
-        if (other.gameObject.name == "Props Hit Trigger")
+        if (other.gameObject.name == "Props Hit Trigger" && propsMNG)
         {
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
@@ -82,16 +82,6 @@ public class BulletNew : MonoBehaviour {
             
 
             Debug.Log("Hit");
-        }
-
-        if(other.gameObject.tag == "BanditRagdoll")
-        {
-            GameObject.Find("Enemy(Clone)").SendMessage("KillRagdoll");
-            Debug.Log("KILLED");
-            GameObject blood = ResourceManager.Create("Prefabs/Blood");
-            blood.transform.position = gameObject.transform.position;
-            Destroy(gameObject, 5);
-            Destroy(blood, 1);
         }
     }
 }
