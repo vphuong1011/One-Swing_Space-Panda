@@ -48,6 +48,8 @@ public class Levels {
         {
             CurrentLevel.SpawnPlayer();
             CurrentLevel.SpawnEnemyAtRandom();
+            CurrentLevel.SpawnPropsAtRandom();
+            CurrentLevel.SpawnPropsManager();
         }
     }
 

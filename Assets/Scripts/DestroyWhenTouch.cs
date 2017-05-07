@@ -27,27 +27,27 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Barrel")
+        if(other.gameObject.name == "SimpleBarrel(Clone)")
         {
             BarrelDestroyed();
         }
 
-        if(other.gameObject.name == "Bucket")
+        if(other.gameObject.name == "SimpleBucket(Clone)")
         {
             BucketDestroyed();
         }
 
-        if (other.gameObject.name == "Street lamp")
+        if (other.gameObject.name == "SimpleStreetLamp(Clone)")
         {
             StreetLampDestroyed();
         }
 
-        if (other.gameObject.name == "Pot")
+        if (other.gameObject.name == "SimplePot(Clone)")
         {
             PotDestroyed();
         }
 
-        if (other.gameObject.name == "Spirit house")
+        if (other.gameObject.name == "SimpleSpiritHouse(Clone)")
         {
             SpiritHouseDestroyed();
         }
@@ -55,7 +55,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     void BarrelDestroyed()
     {
-        GameObject barrel = GameObject.Find("Barrel");
+        GameObject barrel = GameObject.Find("SimpleBarrel(Clone)");
         Instantiate(brokenBarrel, barrel.transform.position, brokenBarrel.transform.rotation);
         brokenBarrelSpawned = true;
         Destroy(barrel.gameObject);
@@ -63,7 +63,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     void BucketDestroyed()
     {
-        GameObject bucket = GameObject.Find("Bucket");
+        GameObject bucket = GameObject.Find("SimpleBucket(Clone)");
         Instantiate(brokenBucket, bucket.transform.position, brokenBucket.transform.rotation);
         brokenBucketSpawned = true;
         Destroy(bucket.gameObject);
@@ -71,7 +71,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     void StreetLampDestroyed()
     {
-        GameObject streetLamp = GameObject.Find("Street lamp");
+        GameObject streetLamp = GameObject.Find("SimpleStreetLamp(Clone)");
         Instantiate(brokenStreetLamp, streetLamp.transform.position, brokenStreetLamp.transform.rotation);
         brokenStreetLampSpawned = true;
         Destroy(streetLamp.gameObject);
@@ -79,7 +79,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     void PotDestroyed()
     {
-        GameObject pot = GameObject.Find("Pot");
+        GameObject pot = GameObject.Find("SimplePot(Clone)");
         Instantiate(brokenPot, pot.transform.position, brokenPot.transform.rotation);
         brokenPotSpawned = true;
         Destroy(pot.gameObject);
@@ -87,7 +87,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 
     void SpiritHouseDestroyed()
     {
-        GameObject spiritHouse = GameObject.Find("Spirit house");
+        GameObject spiritHouse = GameObject.Find("SimpleSpiritHouse(Clone)");
         Instantiate(brokenSpiritHouse, spiritHouse.transform.position, brokenSpiritHouse.transform.rotation);
         brokenSpiritHousetSpawned = true;
         Destroy(spiritHouse.gameObject);

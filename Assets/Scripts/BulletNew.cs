@@ -5,7 +5,6 @@ public class BulletNew : MonoBehaviour {
 	public float speed = 10;
     public Vector3 shotDir;
 
-    public Transform newBullet;
     public bool hitPlayer = false;
 
     public Transform blood;
@@ -33,10 +32,10 @@ public class BulletNew : MonoBehaviour {
         indexE = Random.Range(0, enemyScript.targetPositions.Length);
         enemyScript.currentTarget = enemyScript.targetPositions[indexE];
 
-       // propsMNG = GameObject.Find("Props Manager").GetComponent<PropsManager>();
-      //  propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
-       // indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
-       // propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
+        propsMNG = GameObject.Find("PropsRandomManager(Clone)").GetComponent<PropsManager>();
+        propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
+        indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
+        propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
 
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
@@ -57,15 +56,10 @@ public class BulletNew : MonoBehaviour {
             // cut the bullet into 2 pieces!?
         }
 
-        if (other.gameObject.name == "Props Hit Trigger" && propsMNG)
+        if (other.gameObject.name == "Props Hit Trigger")
         {
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
-        }
-
-        if(other.gameObject.name == "TimeToHitTrigger")
-        {
-
         }
 
         // If the bullet hit the ragdoll, ragdoll starts

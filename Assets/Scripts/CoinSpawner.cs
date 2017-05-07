@@ -22,7 +22,7 @@ public class CoinSpawner : MonoBehaviour
     
     void Start()
     {
-        destroywhentouchScript = GameObject.Find("Bullet").GetComponent<DestroyWhenTouch>();
+        destroywhentouchScript = GameObject.Find("Bullet(Clone)").GetComponent<DestroyWhenTouch>();
     }
 
     void Update()

@@ -12,6 +12,12 @@ public class Level : MonoBehaviour {
     // The enemy spawn points
     [SerializeField] private List<Transform> EnemySpawnTransforms;
 
+    // The object spawn point1
+    [SerializeField] private List<Transform> ObjectSpawnPoint1;
+
+    // The object spawn point2
+    [SerializeField] private List<Transform> ObjectSpawnPoint2;
+
     // Spawned characters
     private List<GameObject> SpawnedCharacters = new List<GameObject>();
 
@@ -20,6 +26,12 @@ public class Level : MonoBehaviour {
 
     // The enemy in the level
     [NonSerialized] public GameObject CurrentEnemy;
+
+    // The object1 in the level
+    [NonSerialized] public GameObject CurrentProp;
+
+    // The object1 in the level
+    [NonSerialized]  public GameObject CurrentPropManager;
 
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
@@ -37,6 +49,15 @@ public class Level : MonoBehaviour {
         // Set the player to the start position 
         if (PlayerStartTransform)
             PlayerGameObject.transform.position = PlayerStartTransform.position;
+    }
+
+    public void SpawnPropsManager()
+    {
+        // Create manager using the ResourceManager
+        PlayerGameObject = ResourceManager.Create("Prefabs/PropsRandomManager");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentPropManager);
     }
 
     // Spawn the enemy and set their location to a specific spawn point
@@ -73,6 +94,22 @@ public class Level : MonoBehaviour {
 
         // Set the enemy to the spawn transform index position
         CurrentEnemy.transform.position = EnemySpawnTransforms[randomSpawnIndex].position;
+    }
+
+    // Spawn a prop and set the location to an random spawn point
+    public void SpawnPropsAtRandom()
+    {
+        // Spawn in the a prop using the ResourceManager
+        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleBarrel");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentProp);
+
+        // Get a random valid index
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint1.Count);
+
+        // Set the enemy to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint1[randomSpawnIndex].position;
     }
 
     // Clean up all of the spawned in characters
