@@ -48,7 +48,11 @@ public class Levels {
         {
             CurrentLevel.SpawnPlayer();
             CurrentLevel.SpawnEnemyAtRandom();
-            CurrentLevel.SpawnPropsAtRandom();
+            CurrentLevel.SpawnBarrelAtRandom();
+            CurrentLevel.SpawnBucketAtRandom();
+            CurrentLevel.SpawnPotAtRandom();
+            CurrentLevel.SpawnSpiritHouseAtRandom();
+            CurrentLevel.SpawnStreetLampAtRandom();
             CurrentLevel.SpawnPropsManager();
         }
     }

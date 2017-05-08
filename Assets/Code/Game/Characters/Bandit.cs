@@ -79,11 +79,6 @@ public class Bandit : MonoBehaviour
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
     }
 
-    void Awake()
-    {
-
-    }
-
     public void OnObjectHit()
     {
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();

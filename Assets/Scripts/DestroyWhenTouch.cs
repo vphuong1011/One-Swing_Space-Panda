@@ -25,7 +25,7 @@ public class DestroyWhenTouch : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // If bullet touch these props, it will destroy the "Simple" version and spawn the "broken" version
     {
         if(other.gameObject.name == "SimpleBarrel(Clone)")
         {

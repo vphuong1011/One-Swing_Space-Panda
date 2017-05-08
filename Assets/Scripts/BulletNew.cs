@@ -6,6 +6,7 @@ public class BulletNew : MonoBehaviour {
     public Vector3 shotDir;
 
     public bool hitPlayer = false;
+    public bool deflected = false;
 
     public Transform blood;
 
@@ -25,13 +26,13 @@ public class BulletNew : MonoBehaviour {
         indexP = Random.Range(0, playerScript.targetPositions.Length);
         playerScript.currentTarget = playerScript.targetPositions[indexP];
 
-      //  playerScript.bodyPartsTriggers = GameObject.FindGameObjectsWithTag("PlayerRagdoll");
-
+        // Find the enemy script on the Enemy, find the enemy targetPostions, choose Random target from the targetPositions
         enemyScript = GameObject.Find("Enemy(Clone)").GetComponent<BanditHealth>();
         enemyScript.targetPositions = GameObject.FindGameObjectsWithTag("BanditRagdoll");
         indexE = Random.Range(0, enemyScript.targetPositions.Length);
         enemyScript.currentTarget = enemyScript.targetPositions[indexE];
 
+        // Find the prop script on the Props Random Manager, find the props targetPostions, choose Random target from the targetPositions
         propsMNG = GameObject.Find("PropsRandomManager(Clone)").GetComponent<PropsManager>();
         propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
         indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
@@ -49,20 +50,24 @@ public class BulletNew : MonoBehaviour {
     }
 	void OnTriggerEnter (Collider other)
 	{
+        // If the bullet hit the player triggers named "Enemy Hit Trigger" -> bullet deflect back to enemy
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
+            deflected = true;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
             // cut the bullet into 2 pieces!?
         }
 
+        // If the bullet hit the player triggers named "Props Hit Trigger" -> bullet deflect back to props
         if (other.gameObject.name == "Props Hit Trigger")
         {
+            deflected = true;
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
         }
 
-        // If the bullet hit the ragdoll, ragdoll starts
+        // If the bullet hit the player ragdoll, ragdoll drops
         if (other.gameObject.tag == "PlayerRagdoll")
         {
             foreach(GameObject obj in playerScript.bodyPartsTriggers)
@@ -79,9 +84,10 @@ public class BulletNew : MonoBehaviour {
             Debug.Log("Hit");
         }
 
+        // This will change the state of the bandit back to idle so it will fire again.
         if (other.gameObject.tag =="Barrel")
         {
-            Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
+            Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); 
         }
     }
 }
