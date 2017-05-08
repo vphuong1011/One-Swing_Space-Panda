@@ -7,7 +7,7 @@ public class SlowMo : MonoBehaviour {
     public float currentSlowMo = 0;
     public float slowTimeAllowed = 2f;
 
-    public Player1 playerScript;
+    public BulletNew bulletScript;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,18 +16,18 @@ public class SlowMo : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // If Left Mouse pressed & player haven't swing -> Slow down time
-		if(Input.GetMouseButtonDown(0) && playerScript.swing == false)
+        // If bullet successfully deflected -> Slow down time
+		if(bulletScript.deflected == true)
         {
             if(Time.timeScale == 1f)
             {
-                Time.timeScale = 0.5f;
+                Time.timeScale = 0.1f;
                 Debug.Log("Slow");
             }
         }
 
         // If time is slowing, currentSlowMo increase over time
-        if(Time.timeScale == 0.5f)
+        if(Time.timeScale == 0.1f)
         {
             currentSlowMo += Time.deltaTime;
         }
@@ -37,6 +37,7 @@ public class SlowMo : MonoBehaviour {
         {
             currentSlowMo = 0f;
             Time.timeScale = 1.0f;
+            bulletScript.deflected = false;
         }
 	}
 }

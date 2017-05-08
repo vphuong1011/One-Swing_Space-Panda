@@ -12,11 +12,8 @@ public class Level : MonoBehaviour {
     // The enemy spawn points
     [SerializeField] private List<Transform> EnemySpawnTransforms;
 
-    // The object spawn point1
-    [SerializeField] private List<Transform> ObjectSpawnPoint1;
-
-    // The object spawn point2
-    [SerializeField] private List<Transform> ObjectSpawnPoint2;
+    // The object spawn point
+    [SerializeField] private List<Transform> ObjectSpawnPoint;
 
     // Spawned characters
     private List<GameObject> SpawnedCharacters = new List<GameObject>();
@@ -97,19 +94,79 @@ public class Level : MonoBehaviour {
     }
 
     // Spawn a prop and set the location to an random spawn point
-    public void SpawnPropsAtRandom()
+    public void SpawnBarrelAtRandom()
     {
-        // Spawn in the a prop using the ResourceManager
+        // Spawn in the barrel using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleBarrel");
 
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
         // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint1.Count);
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
 
-        // Set the enemy to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint1[randomSpawnIndex].position;
+        // Set the barrel to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+    }
+
+    public void SpawnBucketAtRandom()
+    {
+        // Spawn in the bucket using the ResourceManager
+        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleBucket");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentProp);
+
+        // Get a random valid index
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
+
+        // Set the bucket to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+    }
+
+    public void SpawnPotAtRandom()
+    {
+        // Spawn in the pot using the ResourceManager
+        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimplePot");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentProp);
+
+        // Get a random valid index
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
+
+        // Set the pot to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+    }
+
+    public void SpawnSpiritHouseAtRandom()
+    {
+        // Spawn in the spirit house using the ResourceManager
+        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleSpiritHouse");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentProp);
+
+        // Get a random valid index
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
+
+        // Set the spirit house to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+    }
+
+    public void SpawnStreetLampAtRandom()
+    {
+        // Spawn in the lamp using the ResourceManager
+        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleStreetLamp");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentProp);
+
+        // Get a random valid index
+        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
+
+        // Set the lamp to the spawn transform index position
+        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
     }
 
     // Clean up all of the spawned in characters
