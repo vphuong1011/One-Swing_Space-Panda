@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿//using System;
 using System.Collections;
+//using System.Collections.Generic;
+using UnityEngine;
+
+
 
 public class BulletNew : MonoBehaviour {
 	public float speed = 10;
@@ -15,6 +19,12 @@ public class BulletNew : MonoBehaviour {
     int indexP;
     int indexE;
     int indexPROPS;
+
+    public float bulletMin = 1.2f;
+    public float bulletMax = 1.3f;
+    public float newSpeed;
+    public Levels levelInstance;
+   // public levelNumber levelsScript;
 
     // Use this for initialization
     void Start ()
@@ -39,13 +49,18 @@ public class BulletNew : MonoBehaviour {
 
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
+
+
     }
         
 
 	// Update is called once per frame
-	void Update ()
+	void Update  ()
     {
-            transform.Translate(shotDir * Time.deltaTime * speed);
+            levelInstance = GetComponent<Levels>();
+
+            
+          
     }
 	void OnTriggerEnter (Collider other)
 	{
@@ -84,4 +99,22 @@ public class BulletNew : MonoBehaviour {
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
         }
     }
+
+  public void NewBulletSpeed()
+    {
+        if (Levels.CurrentLevelNumber >= 1)
+        {
+                    newSpeed = Random.Range(50, 100);
+                    speed = newSpeed;
+                    transform.Translate(shotDir * Time.deltaTime * speed);
+                    print(newSpeed);
+                    Debug.Log("newspeed");
+                }
+            }
+    
+    void FixedUpdate (){
+        NewBulletSpeed();
+    }
+
+
 }
