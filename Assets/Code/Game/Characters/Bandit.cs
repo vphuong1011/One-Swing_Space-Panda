@@ -31,8 +31,6 @@ public class Bandit : MonoBehaviour
     private float attackTimer = 0;
     private float attackDelay;
 
-    public BulletNew bulletInstance;
-
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -57,7 +55,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
-
+                
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
@@ -79,11 +77,12 @@ public class Bandit : MonoBehaviour
         anim = GetComponent<Animator>();
 
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
-
-
     }
 
+    void Awake()
+    {
 
+    }
 
     public void OnObjectHit()
     {
