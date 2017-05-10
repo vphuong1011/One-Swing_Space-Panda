@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Levels {
+public class Levels : MonoBehaviour{
     
     [NonSerialized] public static Level CurrentLevel;
     [NonSerialized] public static int CurrentLevelNumber = 1;
