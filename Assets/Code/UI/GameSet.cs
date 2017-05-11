@@ -12,12 +12,14 @@ public class GameSet : Set
     [SerializeField] private bool MenuIsShowing = false;
     [SerializeField] private bool ShopIsShowing = false;
     public static bool loadLevelNow = false;
-
+    public bool addCoinsNow = false;
     //Counters
     public Text coinsValue;
     public Text scoreValue;
+    public Text dayValue;
     public static int newMoney = 0;
     public static int newScore = 0;
+    public static int newDay = 1;
 
     // Private member variables
     bool updateScoreNow = true;
@@ -33,14 +35,36 @@ public class GameSet : Set
     {
         newMoney = 0;
         newScore = 0;
+      
     }
 
     // Update is called once per frame
 
     void Update()
     {
+        GameObject bulletGO = GameObject.Find("Bullet(Clone)");
+        if (bulletGO)
+        {
+            BulletNew bulletNew = bulletGO.GetComponent<BulletNew>();
+            if (bulletNew && bulletNew.hitPlayer)
+            {
+                KillPlayer();
+            }
 
-        if(Levels.CurrentLevel.CurrentEnemy)
+        }
+        GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
+        if (coinSpawnerGO)
+        {
+            CoinSpawner coinSpawner = coinSpawnerGO.GetComponent<CoinSpawner>();
+        
+            if (coinSpawner && coinSpawner.coinSpawned)
+            {
+                CollectCoins();
+                addCoinsNow = true;
+            }
+        }
+
+        if (Levels.CurrentLevel.CurrentEnemy)
         {
             Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
 
@@ -56,18 +80,30 @@ public class GameSet : Set
         }
     }
 
+    IEnumerator AddCoinsAndStop()
+    {
+       
+        yield return new WaitForSeconds(.1f);
+        addCoinsNow = false;
+    }
     /// <summary>
     ///Test Buttons goes here
     /// </summary>
     /// 
 
     //Collect Coins Button
-    public void CollectCoins()
+    void CollectCoins()
     {
-        newMoney = newMoney + 1;
-        Debug.Log("You got " + newMoney + " coins!");
-        coinsValue.text = "Coins " + newMoney;
+        if (addCoinsNow == true)
+        {
+            newMoney = newMoney + 1;
+            Debug.Log("You got " + newMoney + " coins!");
+            coinsValue.text = "Coins " + newMoney;
+            StartCoroutine(AddCoinsAndStop());
+        }
     }
+           
+   
 
     //Kill Enemy Button
     public void KillEnemy()
@@ -82,13 +118,21 @@ public class GameSet : Set
     }
 
     //Kill Player Button
-    public void KillPlayer()
+     void KillPlayer()
     {
-        Game.Inst.WantsToBeInWaitState = true;
-        Levels.CloseLevel();
+        //Game.Inst.WantsToBeInLoadingState = true;
+        StartCoroutine(CloseLevelAndFade());
+    }
+
+    IEnumerator CloseLevelAndFade()
+    {
+       
+        yield return new WaitForSeconds(3f);
+       // Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
         SetManager.OpenSet<LoseSet>();
-
+        yield return new WaitForSeconds(3f);
+        Levels.CloseLevel();
     }
 
     /// <summary>
@@ -132,9 +176,10 @@ public class GameSet : Set
 
     public void OnContinueClicked()
     {
-        Game.Inst.WantsToBeInLoadingState = true;
+        newDay = newDay + 1;
+        dayValue.text = "Day " + newDay;
         Levels.CloseLevel();
-
+        Game.Inst.WantsToBeInLoadingState = true;
         ShopIsShowing = !ShopIsShowing;
         ShopPopUp.SetActive(ShopIsShowing);
     }
@@ -145,8 +190,18 @@ public class GameSet : Set
         // Levels.CloseLevel();
 
         CloseSet();
-        SetManager.OpenSet<SettingsSet>();
+        SetManager.OpenSet<MainMenuSet>();
     }
+
+    public void OnExitGame()
+    {
+        Game.Inst.WantsToBeInWaitState = true;
+        // Levels.CloseLevel();
+
+        CloseSet();
+        SetManager.OpenSet<MainMenuSet>();
+    }
+
 
     void PauseGame()
     {
