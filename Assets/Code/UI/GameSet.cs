@@ -182,6 +182,7 @@ public class GameSet : Set
         Game.Inst.WantsToBeInLoadingState = true;
         ShopIsShowing = !ShopIsShowing;
         ShopPopUp.SetActive(ShopIsShowing);
+        updateScoreNow = true;
     }
 
     public void OnSettingsClicked()

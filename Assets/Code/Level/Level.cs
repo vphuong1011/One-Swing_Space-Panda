@@ -175,6 +175,8 @@ public class Level : MonoBehaviour {
         // Iterates through the list of spawned characters and destroy them
         foreach (GameObject character in SpawnedCharacters)
             Destroy(character);
+
+        CurrentEnemy = null;
     }
 
     // Close the current level
