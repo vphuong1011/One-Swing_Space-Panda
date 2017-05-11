@@ -76,7 +76,7 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.name == "Props Hit Trigger")
         {
-            
+            deflected = true;
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
         }
