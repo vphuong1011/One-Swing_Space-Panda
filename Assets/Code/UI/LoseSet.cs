@@ -16,7 +16,9 @@ public class LoseSet : Set {
 
     public void OnPlayAgainClicked()
     {
-        CloseSet();
+        Levels.CloseLevel();
+        // CloseSet();
         SetManager.OpenSet<MainMenuSet>();
+
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingsSet : Set {
+public class SettingsSetOnGame : Set {
 
 
     // Use this for initialization
@@ -20,11 +20,9 @@ public class SettingsSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnBackButtonClicked()
     {
-    
 
-        // Levels.CloseLevel();
-       CloseSet();
-       SetManager.OpenSet<MainMenuSet>();
+        CloseSet();
+        SetManager.OpenSet<GameSet>();
     }
 
    
