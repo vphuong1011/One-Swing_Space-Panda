@@ -60,7 +60,7 @@ public class BulletNew : MonoBehaviour {
 	void Update  ()
     {
             levelInstance = GetComponent<Levels>();  //call the levels script
-            transform.Translate(shotDir * Time.deltaTime * speed);
+            transform.Translate(shotDir * Time.deltaTime * speed );
             
 
     }
@@ -98,7 +98,7 @@ public class BulletNew : MonoBehaviour {
             Debug.Log("Hit");
         }
 
-        if (other.gameObject.tag =="Barrel")
+        if (other.gameObject.tag =="Props")
         {
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
 
