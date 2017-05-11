@@ -11,9 +11,11 @@ public class BanditHealth : MonoBehaviour {
 
     public void Start()
     {
+        // Search through all the ragdoll in the enemy
         boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
     }
 	
+    // Drops ragdoll
     void KillRagdoll()
     {
         foreach (Rigidbody ragdoll in boneRig)
