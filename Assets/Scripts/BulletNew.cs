@@ -68,6 +68,7 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
+            deflected = true;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
             // cut the bullet into 2 pieces!?
@@ -75,6 +76,7 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.name == "Props Hit Trigger")
         {
+            deflected = true;
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
         }

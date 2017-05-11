@@ -26,7 +26,7 @@ public class Levels : MonoBehaviour{
 
                     // Level was successfully loaded so call OnComplete
                     OnLevelLoadComplete();
-
+                    CurrentLevelNumber++; // increases the current level number for bullet speed
                     // Let whoever called this load know we are complete
                     if (onComplete != null)
                         onComplete.Invoke();
