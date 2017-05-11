@@ -8,6 +8,7 @@ public class BulletNew : MonoBehaviour {
     public Vector3 shotDir;
 
     public bool hitPlayer = false;
+    public bool deflected = false;
 
     public Transform blood;
 
