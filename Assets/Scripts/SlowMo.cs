@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlowMo : MonoBehaviour {
 
     public float currentSlowMo = 0;
-    public float slowTimeAllowed = 2f;
+    public float slowTimeAllowed = 0.25f;
 
     public BulletNew bulletScript;
 	// Use this for initialization
