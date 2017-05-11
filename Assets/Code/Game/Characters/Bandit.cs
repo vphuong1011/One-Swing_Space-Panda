@@ -40,7 +40,7 @@ public class Bandit : MonoBehaviour
     void Update()
     {
 
-
+        bulletInstance = GetComponent<BulletNew>();
         //Player STATE MACHINE
        switch (CurrentState)
         {
@@ -57,7 +57,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
-
+               
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay

@@ -1,12 +1,10 @@
 ﻿//using System;
 using System.Collections;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class BulletNew : MonoBehaviour {
-	public float speed = 10;
+	public float speed = 10f;
     public Vector3 shotDir;
 
     public bool hitPlayer = false;
@@ -20,10 +18,12 @@ public class BulletNew : MonoBehaviour {
     int indexE;
     int indexPROPS;
 
-    public float bulletMin = 1.2f;
-    public float bulletMax = 1.3f;
-    public float newSpeed;
+    [SerializeField] public List<float> levelBulletSpeedsMin = new List<float>();
+    [SerializeField] public List<float> levelBulletSpeedsMax = new List<float>();
+
+
     public Levels levelInstance;
+    bool spawnBullet = false;
    // public levelNumber levelsScript;
 
     // Use this for initialization
@@ -50,17 +50,18 @@ public class BulletNew : MonoBehaviour {
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
 
-
+        // set the initial bullet speed
+        speed = NewBulletSpeed();
     }
         
 
 	// Update is called once per frame
 	void Update  ()
     {
-            levelInstance = GetComponent<Levels>();
-
+            levelInstance = GetComponent<Levels>();  //call the levels script
+            transform.Translate(shotDir * Time.deltaTime * speed);
             
-          
+
     }
 	void OnTriggerEnter (Collider other)
 	{
@@ -97,24 +98,24 @@ public class BulletNew : MonoBehaviour {
         if (other.gameObject.tag =="Barrel")
         {
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
+
         }
     }
 
-  public void NewBulletSpeed()
+    public float NewBulletSpeed() // this will create a random speed based on the level the player is playing. 
     {
-        if (Levels.CurrentLevelNumber >= 1)
-        {
-                    newSpeed = Random.Range(50, 100);
-                    speed = newSpeed;
-                    transform.Translate(shotDir * Time.deltaTime * speed);
-                    print(newSpeed);
-                    Debug.Log("newspeed");
-                }
-            }
-    
-    void FixedUpdate (){
-        NewBulletSpeed();
+        float newSpeed = speed;
+
+        int currentLevel = Levels.CurrentLevelNumber - 1;
+        if (currentLevel >= levelBulletSpeedsMin.Count)
+            currentLevel = levelBulletSpeedsMin.Count;
+
+        float currentBulletSpeedMin = levelBulletSpeedsMin[currentLevel];
+        float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
+        newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);
+        print(newSpeed);
+
+
+        return newSpeed;
     }
-
-
 }
