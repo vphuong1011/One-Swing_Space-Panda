@@ -38,17 +38,14 @@ public class Bandit : MonoBehaviour
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
-<<<<<<< HEAD
     void Start()
     {
-        anim = GetComponent<Animator>();
 
+        anim = GetComponent<Animator>();
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
+        menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();
     }
 
-=======
-     
->>>>>>> 260f2424a8ff45e67d6889c29a368fa2434b17cd
     // Update is called once per frame
     void Update()
     {
@@ -89,20 +86,6 @@ public class Bandit : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
-=======
-
-    void Start()
-    {
-
-        anim = GetComponent<Animator>();
-        attackDelay = Random.Range(minTime, maxTime); //random attack delay
-        menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();
-    }
-
-
-
->>>>>>> 260f2424a8ff45e67d6889c29a368fa2434b17cd
     public void OnObjectHit()
     {
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
