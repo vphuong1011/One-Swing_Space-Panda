@@ -16,6 +16,8 @@ public class GameSet : Set
     [SerializeField] private bool ShopIsShowing = false;
     public static bool loadLevelNow = false;
     public bool addCoinsNow = false;
+    public bool upgradeCoinsNow = false;
+
     //Counters
     public Text coinsValue;
     public Text scoreValue;
@@ -179,7 +181,17 @@ public class GameSet : Set
         //SetManager.OpenSet<WinSet>();
     }
 
+    //Coin upgrade button in shop
+    public void coinUpgrade()
+    {
+        if(newMoney >= 3)
+        {
+            upgradeCoinsNow = true;
+        }
+       
+    }
 
+    //Continue button for Shop
     public void OnContinueClicked()
     {
         newDay = newDay + 1;

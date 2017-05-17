@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class MainMenuSet : Set {
 
+    //booleans
+    public bool gameRunNow = false;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        //Added this to show game screen in the main menu.
+        Game.Inst.WantsToBeInLoadingState = true;
+        SetManager.OpenSet<GameSet>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,7 +25,8 @@ public class MainMenuSet : Set {
 
         // Close this set and open the game set
         CloseSet();
-        SetManager.OpenSet<GameSet>();        
+        SetManager.OpenSet<GameSet>();
+        gameRunNow = true;      
     }
 
     // DEBUG: These are just for testing menu flow

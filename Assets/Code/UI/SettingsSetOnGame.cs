@@ -20,9 +20,9 @@ public class SettingsSetOnGame : Set {
     // DEBUG: These are just for testing menu flow
     public void OnBackButtonClicked()
     {
-
+        Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
-        SetManager.OpenSet<GameSet>();
+        //SetManager.OpenSet<GameSet>();
     }
 
    
