@@ -17,11 +17,13 @@ public class CoinSpawner : MonoBehaviour
     public Rigidbody coinRB; //drag the coin prefab on inspector again, assuming it already has a rigidbody in it.
     public float coinSpeed = 3; //adjust the speed in which the coin will fly off the spawner.
 
+    public GameSet gamesetScript;
     public DestroyWhenTouch destroywhentouchScript;
     public bool coinSpawned = false;
     
     void Start()
     {
+        gamesetScript = GameObject.Find("GameSet(Clone)").GetComponent<GameSet>();
         destroywhentouchScript = GameObject.Find("Bullet(Clone)").GetComponent<DestroyWhenTouch>();
     }
 
@@ -41,13 +43,21 @@ public class CoinSpawner : MonoBehaviour
 
         if (destroywhentouchScript.brokenStreetLampSpawned == true && coinSpawned == false)
         {
-            //Spawning 1-3 (regular spawn) coins randomly works here. 
-            IncreaseSpawnRate();
-            StartCoroutine(x3());
-            //SpawnCoin();
-            //coinSpawned = true;
+            //if (GameObject.Find("GameSet(Clone)").GetComponent <GameSet> ().upgradeCoinsNow)
+           if (gamesetScript.upgradeCoinsNow == true)
+            {
+                IncreaseSpawnRate();
+                StartCoroutine(x4());
+            }
+            else
+            {
+                //Spawning 1-3 (regular spawn) coins randomly works here. 
+                IncreaseSpawnRate();
+                StartCoroutine(x3());
+            }
+           
+            
         }
-
         if (destroywhentouchScript.brokenPotSpawned == true && coinSpawned == false)
         {
             IncreaseSpawnRate();

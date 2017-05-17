@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player1 : MonoBehaviour {
 
+    public MainMenuSet menusetScript;//Albert added this to get bool of mainmenuset.
+
     public Component[] boneRig;
 
     public GameObject enemyTrigger;
@@ -25,23 +27,30 @@ public class Player1 : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();//Albert added this to get bool of mainmenuset.
+
         // Find Rigidbody on the player ragdolls
         boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
 
         // Player haven't swing
-        swing = false;
+        swing = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        // If Left Mouse pressed & "Withdraw", "Withdraw1" animations are not playing & player haven't swing yet -> Get the animation speed, activate the MouseClicked trigger in the animator
-        if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
+        
+        if (menusetScript.gameRunNow == true) //Albert added this to get bool of mainmenuset.
         {
-            if(swing == false)
+            StartCoroutine(allowSwing());//Albert added this to delay the swing bool on main menu.
+            // If Left Mouse pressed & "Withdraw", "Withdraw1" animations are not playing & player haven't swing yet -> Get the animation speed, activate the MouseClicked trigger in the animator
+            if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
             {
-                GetComponent<Animator>().speed = currrentAttackSpeed;
-                GetComponent<Animator>().SetBool("MouseClicked", true);
-                swing = true;
+                if (swing == false)
+                {
+                    GetComponent<Animator>().speed = currrentAttackSpeed;
+                    GetComponent<Animator>().SetBool("MouseClicked", true);
+                    swing = true;
+                }
             }
         }
 
@@ -110,5 +119,11 @@ public class Player1 : MonoBehaviour {
         {
             currrentAttackSpeed += 1;
         }
+    }
+
+    IEnumerator allowSwing() //Albert added this to delay the swing bool on main menu
+    {
+        yield return new WaitForSeconds(3);
+        swing = false;
     }
 }

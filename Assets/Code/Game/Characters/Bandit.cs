@@ -16,6 +16,8 @@ public enum EnemyState
 public class Bandit : MonoBehaviour
 {
 
+    public MainMenuSet menusetScript;
+
     public float range = 50.0f;
     public float maxTime = 15;
     public float minTime = 5;
@@ -36,6 +38,7 @@ public class Bandit : MonoBehaviour
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
+<<<<<<< HEAD
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -43,42 +46,63 @@ public class Bandit : MonoBehaviour
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
     }
 
+=======
+     
+>>>>>>> 260f2424a8ff45e67d6889c29a368fa2434b17cd
     // Update is called once per frame
     void Update()
     {
 
         bulletInstance = GetComponent<BulletNew>();
         //Player STATE MACHINE
-       switch (CurrentState)
+        if (menusetScript.gameRunNow == true)
+
         {
-			case EnemyState.Bandit_IDLE:
-                attackTimer += Time.deltaTime;
-                if(attackTimer > attackDelay)
-                {
-                    CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
-                    attackTimer = 0;
-                }
+            switch (CurrentState)
+            {
+                case EnemyState.Bandit_IDLE:
+                    attackTimer += Time.deltaTime;
+                    if (attackTimer > attackDelay)
+                    {
+                        CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
+                        attackTimer = 0;
+                    }
 
-                //Debug.Log("EnemyState.Bandit_IDLE");
-                break;
+                    //Debug.Log("EnemyState.Bandit_IDLE");
+                    break;
 
-            case EnemyState.Bandit_ATTACKING:
-                anim.SetTrigger("banditShoot"); // change bandit animation
-               
-                //Debug.Log("EnemyState.Bandit_ATTACKING");
+                case EnemyState.Bandit_ATTACKING:
+                    anim.SetTrigger("banditShoot"); // change bandit animation
 
-                // Reset the attack delay
-                
-                CurrentState = EnemyState.Bandit_WAITING; //change bandit state to idle
-                attackDelay = Random.Range(minTime, maxTime);          // attack Delay
+                    //Debug.Log("EnemyState.Bandit_ATTACKING");
 
-                break;
-            case EnemyState.Bandit_WAITING:
-                break;
+                    // Reset the attack delay
 
+                    CurrentState = EnemyState.Bandit_WAITING; //change bandit state to idle
+                    attackDelay = Random.Range(minTime, maxTime);          // attack Delay
+
+                    break;
+                case EnemyState.Bandit_WAITING:
+                    break;
+
+            }
         }
     }
 
+<<<<<<< HEAD
+=======
+
+    void Start()
+    {
+
+        anim = GetComponent<Animator>();
+        attackDelay = Random.Range(minTime, maxTime); //random attack delay
+        menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();
+    }
+
+
+
+>>>>>>> 260f2424a8ff45e67d6889c29a368fa2434b17cd
     public void OnObjectHit()
     {
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
