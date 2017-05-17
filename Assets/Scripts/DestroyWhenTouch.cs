@@ -58,6 +58,7 @@ public class DestroyWhenTouch : MonoBehaviour {
         GameObject barrel = GameObject.Find("SimpleBarrel(Clone)");
         Instantiate(brokenBarrel, barrel.transform.position, brokenBarrel.transform.rotation);
         brokenBarrelSpawned = true;
+        StartCoroutine(turnboolsOff());
         Destroy(barrel.gameObject);
     }
 
@@ -66,6 +67,7 @@ public class DestroyWhenTouch : MonoBehaviour {
         GameObject bucket = GameObject.Find("SimpleBucket(Clone)");
         Instantiate(brokenBucket, bucket.transform.position, brokenBucket.transform.rotation);
         brokenBucketSpawned = true;
+        StartCoroutine(turnboolsOff());
         Destroy(bucket.gameObject);
     }
 
@@ -74,6 +76,7 @@ public class DestroyWhenTouch : MonoBehaviour {
         GameObject streetLamp = GameObject.Find("SimpleStreetLamp(Clone)");
         Instantiate(brokenStreetLamp, streetLamp.transform.position, brokenStreetLamp.transform.rotation);
         brokenStreetLampSpawned = true;
+        StartCoroutine(turnboolsOff());
         Destroy(streetLamp.gameObject);
     }
 
@@ -82,6 +85,7 @@ public class DestroyWhenTouch : MonoBehaviour {
         GameObject pot = GameObject.Find("SimplePot(Clone)");
         Instantiate(brokenPot, pot.transform.position, brokenPot.transform.rotation);
         brokenPotSpawned = true;
+        StartCoroutine(turnboolsOff());
         Destroy(pot.gameObject);
     }
 
@@ -90,6 +94,18 @@ public class DestroyWhenTouch : MonoBehaviour {
         GameObject spiritHouse = GameObject.Find("SimpleSpiritHouse(Clone)");
         Instantiate(brokenSpiritHouse, spiritHouse.transform.position, brokenSpiritHouse.transform.rotation);
         brokenSpiritHousetSpawned = true;
+        StartCoroutine(turnboolsOff());
         Destroy(spiritHouse.gameObject);
+    }
+
+    //Added a coroutine to turn off broken objects spawn bools.
+    IEnumerator turnboolsOff()
+    {
+        yield return new WaitForSeconds(1f);
+        brokenBarrelSpawned = false;
+        brokenBucketSpawned = false;
+        brokenStreetLampSpawned = false;
+        brokenPotSpawned = false;
+        brokenSpiritHousetSpawned = false;
     }
 }

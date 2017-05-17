@@ -18,7 +18,7 @@ public class CoinSpawner : MonoBehaviour
     public float coinSpeed = 3; //adjust the speed in which the coin will fly off the spawner.
 
     public DestroyWhenTouch destroywhentouchScript;
-    public bool coinSpawned;
+    public bool coinSpawned = false;
     
     void Start()
     {
@@ -29,32 +29,35 @@ public class CoinSpawner : MonoBehaviour
     {
         if(destroywhentouchScript.brokenBarrelSpawned == true && coinSpawned == false)
         {
-            SpawnCoin();
-            coinSpawned = true;
+            IncreaseSpawnRate();
+            StartCoroutine(x3());
         }
 
         if (destroywhentouchScript.brokenBucketSpawned == true && coinSpawned == false)
         {
-            SpawnCoin();
-            coinSpawned = true;
+            IncreaseSpawnRate();
+            StartCoroutine(x3());
         }
 
         if (destroywhentouchScript.brokenStreetLampSpawned == true && coinSpawned == false)
         {
-            SpawnCoin();
-            coinSpawned = true;
+            //Spawning 1-3 (regular spawn) coins randomly works here. 
+            IncreaseSpawnRate();
+            StartCoroutine(x3());
+            //SpawnCoin();
+            //coinSpawned = true;
         }
 
         if (destroywhentouchScript.brokenPotSpawned == true && coinSpawned == false)
         {
-            SpawnCoin();
-            coinSpawned = true;
+            IncreaseSpawnRate();
+            StartCoroutine(x3());
         }
 
         if (destroywhentouchScript.brokenSpiritHousetSpawned == true && coinSpawned == false)
         {
-            SpawnCoin();
-            coinSpawned = true;
+            IncreaseSpawnRate();
+            StartCoroutine(x3());
         }
 
         if(coinSpawned == true)
@@ -134,6 +137,8 @@ public class CoinSpawner : MonoBehaviour
     
     IEnumerator x3()
     {
+        coinSpawned = true;
+        StartCoroutine(boolFalse());
         float wait_time = Random.Range(0f, 1.5f);
         yield return new WaitForSeconds(wait_time);
         CancelInvoke();
@@ -150,5 +155,11 @@ public class CoinSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Destroy(spawnedCoin);
+    }
+
+    IEnumerator boolFalse()
+    {
+        yield return new WaitForSeconds(1);
+        coinSpawned = false;
     }
 }

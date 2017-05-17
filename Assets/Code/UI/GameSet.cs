@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameSet : Set
 {
+    public GameObject[] ammountCoins;
+
+
     [SerializeField] private GameObject ShopPopUp = null;
     [SerializeField] private GameObject MenuPopUp = null;
 
@@ -35,13 +38,14 @@ public class GameSet : Set
     {
         newMoney = 0;
         newScore = 0;
-      
+        
     }
 
     // Update is called once per frame
 
     void Update()
     {
+        ammountCoins = GameObject.FindGameObjectsWithTag("coin");
         GameObject bulletGO = GameObject.Find("Bullet(Clone)");
         if (bulletGO)
         {
@@ -59,8 +63,8 @@ public class GameSet : Set
         
             if (coinSpawner && coinSpawner.coinSpawned)
             {
-                CollectCoins();
-                addCoinsNow = true;
+               Invoke("CollectCoins",1);
+                //addCoinsNow = true;
             }
         }
 
@@ -94,12 +98,14 @@ public class GameSet : Set
     //Collect Coins Button
     void CollectCoins()
     {
-        if (addCoinsNow == true)
+        //Fixed: Now coins updates according to ammount of coins with tag "coin"
+        if (ammountCoins.Length > 0)
         {
-            newMoney = newMoney + 1;
+            newMoney = newMoney + ammountCoins.Length;
             Debug.Log("You got " + newMoney + " coins!");
             coinsValue.text = "Coins " + newMoney;
             StartCoroutine(AddCoinsAndStop());
+            CancelInvoke();
         }
     }
            
