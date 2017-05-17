@@ -36,6 +36,13 @@ public class Bandit : MonoBehaviour
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+
+        attackDelay = Random.Range(minTime, maxTime); //random attack delay
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,19 +79,6 @@ public class Bandit : MonoBehaviour
         }
     }
 
-
-    void Start()
-    {
-
-        anim = GetComponent<Animator>();
-
-        attackDelay = Random.Range(minTime, maxTime); //random attack delay
-
-
-    }
-
-
-
     public void OnObjectHit()
     {
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
@@ -99,20 +93,16 @@ public class Bandit : MonoBehaviour
         {
             bulletGO.transform.position = GunTip.position;
 
-           // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
+            // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
-         //   if (bullet)
-         //   {
-          //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
-          //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
-         //   }
-
+            //   if (bullet)
+            //   {
+            //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
+            //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
+            //   }
+            Debug.Log("shooting");
         }
-		Debug.Log("shooting");
-
     }
-
-
 	
 	IEnumerator Wait(float seconds){
 		yield return new WaitForSeconds(seconds);

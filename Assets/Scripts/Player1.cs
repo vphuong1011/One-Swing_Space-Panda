@@ -20,6 +20,8 @@ public class Player1 : MonoBehaviour {
 
     public DestroyWhenTouch propsScript;
 
+    public int newPlayerHP = 1;
+
     // Use this for initialization
     void Start () {
 
@@ -46,10 +48,12 @@ public class Player1 : MonoBehaviour {
         // If any props get destroyed -> swing boolean back to false, player haven't swing
         if(propsScript.brokenBarrelSpawned == true || propsScript.brokenBucketSpawned == true || propsScript.brokenPotSpawned == true || propsScript.brokenSpiritHousetSpawned == true || propsScript.brokenStreetLampSpawned == true)
         {
-            swing = false;
+            if(swing == true)
+            {
+                swing = false;
+            }
         }
 
-       // IncreaseSwingSpeed();
     }
 
     // Events in the animations to turn on/off the triggers [If the bullet hit a trigger, it will deflect]
