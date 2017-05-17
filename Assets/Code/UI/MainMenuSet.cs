@@ -5,9 +5,10 @@ using UnityEngine;
 public class MainMenuSet : Set {
 
     //booleans
-    public bool gameRunNow = false;
+    public  bool gameRunNow = false;
 	// Use this for initialization
 	void Start () {
+        gameRunNow = false;
         //Added this to show game screen in the main menu.
         Game.Inst.WantsToBeInLoadingState = true;
         SetManager.OpenSet<GameSet>();
@@ -21,11 +22,11 @@ public class MainMenuSet : Set {
     public void OnPlayClicked()
     {
         // Set the flag to signal the game to change to the loading state
-        Game.Inst.WantsToBeInLoadingState = true;
+        //Game.Inst.WantsToBeInLoadingState = true;
 
         // Close this set and open the game set
         CloseSet();
-        SetManager.OpenSet<GameSet>();
+        //SetManager.OpenSet<GameSet>();
         gameRunNow = true;      
     }
 

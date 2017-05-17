@@ -16,7 +16,7 @@ public class GameSet : Set
     [SerializeField] private bool ShopIsShowing = false;
     public static bool loadLevelNow = false;
     public bool addCoinsNow = false;
-    public bool upgradeCoinsNow = false;
+    public static bool upgradeCoinsNow = false;
 
     //Counters
     public Text coinsValue;
@@ -70,6 +70,7 @@ public class GameSet : Set
             }
         }
 
+        
         if (Levels.CurrentLevel.CurrentEnemy)
         {
             Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
@@ -81,9 +82,24 @@ public class GameSet : Set
                 loadLevelNow = true;
                 updateScoreNow = false;
                 Shop();
-            }   
-
+            }
         }
+
+        //NullChecking
+        /* GameObject banditGO = GameObject.Find("Enemy(Clone)");
+        if (banditGO)
+        {
+            Bandit bandit = banditGO.GetComponent<Bandit>();
+
+            if (bandit && bandit.health <= 0 && updateScoreNow == true)
+            {
+                newScore = newScore + 1;
+                scoreValue.text = "Score " + newScore;
+                loadLevelNow = true;
+                updateScoreNow = false;
+                Shop();
+            }
+        }*/
     }
 
     IEnumerator AddCoinsAndStop()
@@ -184,9 +200,14 @@ public class GameSet : Set
     //Coin upgrade button in shop
     public void coinUpgrade()
     {
-        if(newMoney >= 3)
+        if (newMoney >= 1)
         {
+            Debug.Log("coinUpgradeBool is activated");
             upgradeCoinsNow = true;
+        }
+        else
+        {
+            Debug.Log("You don't have enough coins!");
         }
        
     }

@@ -44,10 +44,12 @@ public class CoinSpawner : MonoBehaviour
         if (destroywhentouchScript.brokenStreetLampSpawned == true && coinSpawned == false)
         {
             //if (GameObject.Find("GameSet(Clone)").GetComponent <GameSet> ().upgradeCoinsNow)
-           if (gamesetScript.upgradeCoinsNow == true)
+            // if (gamesetScript.upgradeCoinsNow == true)
+            if (GameSet.upgradeCoinsNow)
             {
                 IncreaseSpawnRate();
                 StartCoroutine(x4());
+                Debug.Log ("Now boosting coin drops!");
             }
             else
             {
