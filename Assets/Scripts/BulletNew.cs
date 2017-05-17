@@ -68,6 +68,7 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
+            speed = 40;
             deflected = true;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
@@ -76,6 +77,7 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.name == "Props Hit Trigger")
         {
+            speed = 40;
             deflected = true;
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
@@ -87,6 +89,7 @@ public class BulletNew : MonoBehaviour {
             // If player only have 1 HP, ragdol drops -> Dead
             if(playerScript.newPlayerHP == 1)
             {
+                hitPlayer = true;
                 foreach (GameObject obj in playerScript.bodyPartsTriggers)
                 {
                     obj.SetActive(false);

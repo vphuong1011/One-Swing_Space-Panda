@@ -510,42 +510,42 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.36210793
+      - time: 0.37125427
         functionName: TurnOnPropsCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.37336323
+      - time: 0.38454208
         functionName: TurnOffPropsCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.37626624
+      - time: 0.3894776
         functionName: TurnOnEnemyCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.400298
+      - time: 0.4257045
         functionName: TurnOffEnemyCollision
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4038294
+      - time: 0.43025216
         functionName: TurnOnPropsCollision1
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.41326147
+      - time: 0.4508631
         functionName: TurnOffPropsCollision1
         data: 
         objectReferenceParameter: {instanceID: 0}
