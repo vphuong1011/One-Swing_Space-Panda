@@ -29,6 +29,8 @@ public class GameSet : Set
     bool updateScoreNow = true;
 
 
+
+
     void Awake()
     {
         loadLevelNow = false;
@@ -39,7 +41,8 @@ public class GameSet : Set
     {
         newMoney = 0;
         newScore = 0;
-        
+
+
     }
 
     // Update is called once per frame
@@ -251,6 +254,10 @@ public class GameSet : Set
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
     
+    public void BulletDecreaseItem()
+    {
+        
+    }
    
 }
 

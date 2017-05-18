@@ -24,6 +24,7 @@ public class BulletNew : MonoBehaviour {
     [SerializeField] public List<float> levelBulletSpeedsMax = new List<float>();
     [SerializeField] float AbsoluteMinSpeed = 10;
 
+    int BulletDecreaseAmount = 3;
 
     public Levels levelInstance;
     bool spawnBullet = false;
@@ -143,7 +144,7 @@ public class BulletNew : MonoBehaviour {
     {
         float newSpeed = speed;
 
-        int boughtItem = Player1.SlowdownUpgradeLevel;
+        int boughtItem = PlayerData.BulletSpeedUpgradeLevel - BulletDecreaseAmount;
         int currentLevel = Levels.CurrentLevelNumber - 1;
         if (currentLevel >= levelBulletSpeedsMin.Count)
             currentLevel = levelBulletSpeedsMin.Count;
