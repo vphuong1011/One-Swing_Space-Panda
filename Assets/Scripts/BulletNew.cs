@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletNew : MonoBehaviour {
 	public float speed = 10f;
     public Vector3 shotDir;
+    public int boughtItem = 0;
 
     public bool hitPlayer = false;
     public bool deflected = false;
@@ -21,7 +22,9 @@ public class BulletNew : MonoBehaviour {
 
     [SerializeField] public List<float> levelBulletSpeedsMin = new List<float>();
     [SerializeField] public List<float> levelBulletSpeedsMax = new List<float>();
+    [SerializeField] float AbsoluteMinSpeed = 10;
 
+    int BulletDecreaseAmount = 3;
 
     public Levels levelInstance;
     bool spawnBullet = false;
@@ -51,6 +54,12 @@ public class BulletNew : MonoBehaviour {
             propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
         }
 
+        if (propsMNG.currentTarget == null)
+        {
+            return;
+        }
+
+
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
 
@@ -63,8 +72,10 @@ public class BulletNew : MonoBehaviour {
 	void Update  ()
     {
             levelInstance = GetComponent<Levels>();  //call the levels script
-            transform.Translate(shotDir * Time.deltaTime * speed );
+            transform.Translate(shotDir * Time.deltaTime * speed  );
+            playerScript = GetComponent<Player1>();
             
+
 
     }
 	void OnTriggerEnter (Collider other)
@@ -133,6 +144,7 @@ public class BulletNew : MonoBehaviour {
     {
         float newSpeed = speed;
 
+        int boughtItem = PlayerData.BulletSpeedUpgradeLevel - BulletDecreaseAmount;
         int currentLevel = Levels.CurrentLevelNumber - 1;
         if (currentLevel >= levelBulletSpeedsMin.Count)
             currentLevel = levelBulletSpeedsMin.Count;
@@ -140,7 +152,12 @@ public class BulletNew : MonoBehaviour {
         float currentBulletSpeedMin = levelBulletSpeedsMin[currentLevel];
         float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
         newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);
+
+        newSpeed = newSpeed - boughtItem;
+        Mathf.Clamp(newSpeed, AbsoluteMinSpeed, newSpeed);
+
         print(newSpeed);
+
 
 
         return newSpeed;
