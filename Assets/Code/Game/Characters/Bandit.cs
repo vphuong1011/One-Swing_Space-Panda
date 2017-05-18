@@ -132,6 +132,10 @@ public class Bandit : MonoBehaviour
         }
 		Debug.Log("shooting");
 
+        // Allow the player to swing
+        Game.Inst.CanSwing = true;
+
+
     }
 
 

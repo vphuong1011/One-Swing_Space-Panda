@@ -31,6 +31,9 @@ public class Game : MonoBehaviour {
     private int currentIndex = 0;
     public bool canCycle = false;
 
+    // Can swing
+    public bool CanSwing = false;
+
     void Awake()
     {
         

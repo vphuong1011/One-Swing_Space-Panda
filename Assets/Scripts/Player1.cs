@@ -19,7 +19,6 @@ public class Player1 : MonoBehaviour {
 
     public GameObject[] bodyPartsTriggers;
 
-    public  bool swing = false;
     public int newPlayerHP = 1;
 
 
@@ -52,29 +51,23 @@ public class Player1 : MonoBehaviour {
         else
         {
             swingFunction();
-        }
-        
-           
-
-        // If any props get destroyed -> swing boolean back to false, player haven't swing
-        if(propsScript.brokenBarrelSpawned == true || propsScript.brokenBucketSpawned == true || propsScript.brokenPotSpawned == true || propsScript.brokenSpiritHousetSpawned == true || propsScript.brokenStreetLampSpawned == true)
-        {
-            swing = false;
-        }
+        }       
 
        // IncreaseSwingSpeed();
     }
 
     void swingFunction()
     {
+        // Only allow the player to swing if the game says he can
+
         // If Left Mouse pressed & "Withdraw", "Withdraw1" animations are not playing & player haven't swing yet -> Get the animation speed, activate the MouseClicked trigger in the animator
         if (Input.GetMouseButtonDown(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
         {
-            if (swing == false)
+            if (Game.Inst.CanSwing == true)
             {
+                Game.Inst.CanSwing = false;
                 GetComponent<Animator>().speed = currrentAttackSpeed;
                 GetComponent<Animator>().SetBool("MouseClicked", true);
-                swing = true;
 
             }
         }
