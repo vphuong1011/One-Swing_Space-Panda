@@ -21,7 +21,6 @@ public class GameSet : Set
     public Text coinsValue;
     public Text scoreValue;
     public Text dayValue;
-    public static int newMoney = 0;
     public static int newScore = 0;
     public static int newDay = 1;
 
@@ -37,7 +36,6 @@ public class GameSet : Set
     // Use this for initialization
     void Start()
     {
-        newMoney = 0;
         newScore = 0;
         
     }
@@ -118,9 +116,9 @@ public class GameSet : Set
         //Fixed: Now coins updates according to ammount of coins with tag "coin"
         if (ammountCoins.Length > 0)
         {
-            newMoney = newMoney + ammountCoins.Length;
-            Debug.Log("You got " + newMoney + " coins!");
-            coinsValue.text = "Coins " + newMoney;
+            PlayerData.Coins = PlayerData.Coins + ammountCoins.Length;
+            Debug.Log("You got " + PlayerData.Coins + " coins!");
+            coinsValue.text = "Coins " + PlayerData.Coins;
             StartCoroutine(AddCoinsAndStop());
             CancelInvoke();
         }
@@ -199,16 +197,22 @@ public class GameSet : Set
     //Coin upgrade button in shop
     public void coinUpgrade()
     {
-        if (newMoney >= 1)
+        if (PlayerData.Coins >= PlayerData.CoinUpgradeCost)
         {
             Debug.Log("coinUpgradeBool is activated");
             PlayerData.CoinUpgradeLevel++;
+            PlayerData.Coins -= PlayerData.CoinUpgradeCost;
         }
         else
         {
             Debug.Log("You don't have enough coins!");
         }
        
+    }
+
+    public void armorBuy()
+    {
+
     }
 
     //Continue button for Shop
