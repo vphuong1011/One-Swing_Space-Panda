@@ -19,7 +19,7 @@ public class Player1 : MonoBehaviour {
 
     public GameObject[] bodyPartsTriggers;
 
-    public  bool swing = true;
+    public  bool swing = false;
     public int newPlayerHP = 1;
 
 
@@ -29,12 +29,8 @@ public class Player1 : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-       // menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();//Albert added this to get bool of mainmenuset. 
         // Find Rigidbody on the player ragdolls
         boneRig = gameObject.GetComponentsInChildren<Rigidbody>();
-
-        // Player haven't swing
-        swing = true;
     }
 	
 	// Update is called once per frame
@@ -49,13 +45,9 @@ public class Player1 : MonoBehaviour {
                 if(menuNew && menuNew.gameRunNow)
                 {
                     Debug.Log("game is running now!");
-                    StartCoroutine(allowSwing());
+                    mainMenuChecked = true;
                 }
             }
-           /* if (menusetScript.gameRunNow == true) //Albert added this to get bool of mainmenuset.
-            {
-                StartCoroutine(allowSwing());
-            }*/
         }
         else
         {
@@ -76,7 +68,7 @@ public class Player1 : MonoBehaviour {
     void swingFunction()
     {
         // If Left Mouse pressed & "Withdraw", "Withdraw1" animations are not playing & player haven't swing yet -> Get the animation speed, activate the MouseClicked trigger in the animator
-        if (Input.GetMouseButtonUp(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
+        if (Input.GetMouseButtonDown(0) && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw") && !this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Withdraw1"))
         {
             if (swing == false)
             {
@@ -142,14 +134,5 @@ public class Player1 : MonoBehaviour {
         {
             currrentAttackSpeed += 1;
         }
-    }
-
-    IEnumerator allowSwing() //Albert added this to delay the swing bool on main menu
-    {
-        yield return new WaitForSeconds(1);
-        swing = false;
-        mainMenuChecked = true; 
-        
-       
     }
 }
