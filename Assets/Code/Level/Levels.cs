@@ -48,12 +48,8 @@ public class Levels : MonoBehaviour{
         {
             CurrentLevel.SpawnPlayer();
             CurrentLevel.SpawnEnemyAtRandom();
-            CurrentLevel.SpawnBarrelAtRandom();
-            CurrentLevel.SpawnBucketAtRandom();
-            CurrentLevel.SpawnPotAtRandom();
-            CurrentLevel.SpawnSpiritHouseAtRandom();
-            CurrentLevel.SpawnStreetLampAtRandom();
             CurrentLevel.SpawnPropsManager();
+            CurrentLevel.AddPropsIntoLevel();
         }
     }
 

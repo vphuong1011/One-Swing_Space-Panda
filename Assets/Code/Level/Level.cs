@@ -30,6 +30,14 @@ public class Level : MonoBehaviour {
     // The object1 in the level
     [NonSerialized]  public GameObject CurrentPropManager;
 
+    // The number of different objects we can spawn
+    const int BUCKET = 1;
+    const int POT = 2;
+    const int HOUSE = 3;
+    const int LAMP = 4;
+    const int BARREL = 5;
+    const int MAX_OBJECTS = 6;
+
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
     {
@@ -93,8 +101,9 @@ public class Level : MonoBehaviour {
         CurrentEnemy.transform.position = EnemySpawnTransforms[randomSpawnIndex].position;
     }
 
+
     // Spawn a prop and set the location to an random spawn point
-    public void SpawnBarrelAtRandom()
+    public void SpawnBarrelAtRandom(int spawnIndex)
     {
         // Spawn in the barrel using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleBarrel");
@@ -102,14 +111,11 @@ public class Level : MonoBehaviour {
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
-        // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
-
         // Set the barrel to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
     }
 
-    public void SpawnBucketAtRandom()
+    public void SpawnBucketAtRandom(int spawnIndex)
     {
         // Spawn in the bucket using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleBucket");
@@ -117,14 +123,11 @@ public class Level : MonoBehaviour {
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
-        // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
-
         // Set the bucket to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
     }
 
-    public void SpawnPotAtRandom()
+    public void SpawnPotAtRandom(int spawnIndex)
     {
         // Spawn in the pot using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimplePot");
@@ -132,14 +135,11 @@ public class Level : MonoBehaviour {
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
-        // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
-
         // Set the pot to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
     }
 
-    public void SpawnSpiritHouseAtRandom()
+    public void SpawnSpiritHouseAtRandom(int spawnIndex)
     {
         // Spawn in the spirit house using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleSpiritHouse");
@@ -147,14 +147,11 @@ public class Level : MonoBehaviour {
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
-        // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
-
         // Set the spirit house to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
     }
 
-    public void SpawnStreetLampAtRandom()
+    public void SpawnStreetLampAtRandom(int spawnIndex)
     {
         // Spawn in the lamp using the ResourceManager
         CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimpleStreetLamp");
@@ -162,11 +159,74 @@ public class Level : MonoBehaviour {
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentProp);
 
-        // Get a random valid index
-        int randomSpawnIndex = UnityEngine.Random.Range(0, ObjectSpawnPoint.Count);
-
         // Set the lamp to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[randomSpawnIndex].position;
+        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
+    }
+
+    public void AddPropsIntoLevel()
+    {
+        bool bucketSpawned = false;
+        bool potSpawned = false;
+        bool houseSpawned = false;
+        bool lampSpawned = false;
+        bool barrelSpawned = false;
+
+        for (int spawnIndex = 0; spawnIndex < ObjectSpawnPoint.Count; ++spawnIndex)
+        {
+            switch(UnityEngine.Random.Range(1, MAX_OBJECTS))
+            {
+                case BUCKET:
+                    if (bucketSpawned == false)
+                    {
+                        SpawnBucketAtRandom(spawnIndex);
+                        bucketSpawned = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                    break;
+                case POT:
+                    if (potSpawned == false)
+                    {
+                        SpawnPotAtRandom(spawnIndex);
+                        potSpawned = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                        break;
+                case HOUSE:
+                    if (houseSpawned == false)
+                    {
+                        SpawnSpiritHouseAtRandom(spawnIndex);
+                        houseSpawned = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                    break;
+                case LAMP:
+                    if (lampSpawned == false)
+                    {
+                        SpawnStreetLampAtRandom(spawnIndex);
+                        lampSpawned = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                    break;
+                case BARREL:
+                    if (barrelSpawned == false)
+                    {
+                        SpawnBarrelAtRandom(spawnIndex);
+                        barrelSpawned = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                    break;
+            }
+        }
     }
 
     // Clean up all of the spawned in characters
