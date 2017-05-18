@@ -68,6 +68,7 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
+            speed = 40;
             deflected = true;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
@@ -76,30 +77,43 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.name == "Props Hit Trigger")
         {
+            speed = 40;
             deflected = true;
             shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToProps");
         }
 
-        // If the bullet hit the ragdoll, ragdoll starts
+        // If the bullet hit the ragdoll
         if (other.gameObject.tag == "PlayerRagdoll")
         {
-            foreach(GameObject obj in playerScript.bodyPartsTriggers)
+            // If player only have 1 HP, ragdol drops -> Dead
+            if(playerScript.newPlayerHP == 1)
             {
-                obj.SetActive(false);
-            }
-            GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
-            GameObject blood = ResourceManager.Create("Prefabs/Blood");
-            blood.transform.position = gameObject.transform.position;
-            Destroy(gameObject,5);
-            Destroy(blood, 1);
-            
+                hitPlayer = true;
+                foreach (GameObject obj in playerScript.bodyPartsTriggers)
+                {
+                    obj.SetActive(false);
+                }
+                GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
+                GameObject blood = ResourceManager.Create("Prefabs/Blood");
+                blood.transform.position = gameObject.transform.position;
+                Destroy(gameObject, 5);
+                Destroy(blood, 1);
 
-            Debug.Log("Hit");
+                Debug.Log("Hit");
+            }
+
+            // If player have >= 2 HP, player still alive, but -HP
+            if(playerScript.newPlayerHP >= 2)
+            {
+                playerScript.newPlayerHP -= 1;
+            }
+            
         }
 
         if (other.gameObject.tag =="Props")
         {
+            Destroy(gameObject, 2);
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
 
         }
