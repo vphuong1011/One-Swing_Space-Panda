@@ -47,7 +47,10 @@ public class BulletNew : MonoBehaviour {
         propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
         indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
         propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
-
+        if(propsMNG.currentTarget == null)
+        {
+            return;
+        }
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
 
@@ -61,8 +64,6 @@ public class BulletNew : MonoBehaviour {
     {
             levelInstance = GetComponent<Levels>();  //call the levels script
             transform.Translate(shotDir * Time.deltaTime * speed );
-            
-
     }
 	void OnTriggerEnter (Collider other)
 	{
@@ -113,7 +114,7 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.tag =="Props")
         {
-            Destroy(gameObject, 2);
+            Destroy(gameObject, 10);
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.
 
         }
