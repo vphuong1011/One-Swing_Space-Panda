@@ -11,112 +11,20 @@ public class CoinSpawner : MonoBehaviour
     /// Then create a prefab.
     /// </summary>
     
-    public bool spawnNow = false;
     public GameObject spawnedCoin; //drag the coin prefab on inspector.
-    public int timer = 5;
     public Rigidbody coinRB; //drag the coin prefab on inspector again, assuming it already has a rigidbody in it.
     public float coinSpeed = 3; //adjust the speed in which the coin will fly off the spawner.
 
-    public GameSet gamesetScript;
-    public DestroyWhenTouch destroywhentouchScript;
-    public bool coinSpawned = false;
-    
+
     void Start()
     {
-        gamesetScript = GameObject.Find("GameSet(Clone)").GetComponent<GameSet>();
-        destroywhentouchScript = GameObject.Find("Bullet(Clone)").GetComponent<DestroyWhenTouch>();
+        int numCoins = Random.Range(1, 4) + PlayerData.CoinUpgradeLevel;
+        for (int i = 0; i < numCoins; ++i)
+            SpawnCoin();
+
+        Destroy(transform.parent.gameObject, 3f);
     }
-
-    void Update()
-    {
-        if(destroywhentouchScript.brokenBarrelSpawned == true && coinSpawned == false)
-        {
-            IncreaseSpawnRate();
-            StartCoroutine(x3());
-        }
-
-        if (destroywhentouchScript.brokenBucketSpawned == true && coinSpawned == false)
-        {
-            IncreaseSpawnRate();
-            StartCoroutine(x3());
-        }
-
-        if (destroywhentouchScript.brokenStreetLampSpawned == true && coinSpawned == false)
-        {
-            //if (GameObject.Find("GameSet(Clone)").GetComponent <GameSet> ().upgradeCoinsNow)
-            // if (gamesetScript.upgradeCoinsNow == true)
-            if (GameSet.upgradeCoinsNow)
-            {
-                IncreaseSpawnRate();
-                StartCoroutine(x4());
-                Debug.Log ("Now boosting coin drops!");
-            }
-            else
-            {
-                //Spawning 1-3 (regular spawn) coins randomly works here. 
-                IncreaseSpawnRate();
-                StartCoroutine(x3());
-            }
-           
-            
-        }
-        if (destroywhentouchScript.brokenPotSpawned == true && coinSpawned == false)
-        {
-            IncreaseSpawnRate();
-            StartCoroutine(x3());
-        }
-
-        if (destroywhentouchScript.brokenSpiritHousetSpawned == true && coinSpawned == false)
-        {
-            IncreaseSpawnRate();
-            StartCoroutine(x3());
-        }
-
-        if(coinSpawned == true)
-        {
-            Destroy(transform.parent.gameObject, 3f);
-        }
-        keyboardTest();//use this to test the coin spawner by pressing the spacebar. Remove it if it onTriggerEnter is used instead. 
-    }
-
-    /// <summary>
-    /// Core functions are written below.
-    /// OnTriggerEnter is disabled. In order to use it, just remove the " /* and the */ " in the beginning and the end of the function.
-    /// No need to type "OnTriggerEnter();" on "void Update()".
-    /// Don't forget to enable "trigger" on the collider of the object that triggers this function.
-    /// </summary>
-
-
-    /*void OnTriggerEnter(Collider other)
-  {
-      //check if the tag that collided is called "bullet"
-      if (other.tag == "bullet")
-      {
-        SpawnCoin(); //or replace this with what you see below.
-      }
-  }*/
-
-    void keyboardTest() // Function to use keypress to call "SpawnCoin()"
-    {
-        if (Input.GetKeyDown("space"))  //To test coin spawner on keypress. One time only.
-        {
-            SpawnCoin();                //calls the function that spawns coins.
-        }
-
-        if (Input.GetKeyDown("x"))
-        {
-            IncreaseSpawnRate();        //calls the function to increase instatiation rate using InvokeRepeating.
-            StartCoroutine("x3");       //Coroutine to stop instantiation.
-        }
-
-        if (Input.GetKeyDown("c"))
-        {
-            IncreaseSpawnRate();        //calls the function to increase instatiation rate using InvokeRepeating.
-            StartCoroutine("x4");       //Coroutine to stop instantiation.
-        }
-
-
-    }
+  
 
     /// <summary>
     /// Function to spawn coins.
@@ -129,49 +37,5 @@ public class CoinSpawner : MonoBehaviour
         //StartCoroutine("coinFade");                                                                                                         //Makes coin dissappear
         GameObject.Destroy(spawnedCoin.gameObject,2);
     }
-
-    /// <summary>
-    /// Increase Instantiation rate.
-    /// </summary>
     
-    void IncreaseSpawnRate()
-    {
-        InvokeRepeating("SpawnCoin", 0f, .5f);
-        
-    }
-
-    
-    /// <summary>
-    /// Couroutines to stop InvokeRepeating.
-    /// Related to the increased drop rate of coins.
-    /// </summary>
-    /// <returns></returns>
-    
-    IEnumerator x3()
-    {
-        coinSpawned = true;
-        StartCoroutine(boolFalse());
-        float wait_time = Random.Range(0f, 1.5f);
-        yield return new WaitForSeconds(wait_time);
-        CancelInvoke();
-    }
-
-    IEnumerator x4()
-    {
-        float wait_time = Random.Range(0f, 2f);
-        yield return new WaitForSeconds(wait_time);
-        CancelInvoke();
-    }
-
-    IEnumerator coinFade()
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(spawnedCoin);
-    }
-
-    IEnumerator boolFalse()
-    {
-        yield return new WaitForSeconds(1);
-        coinSpawned = false;
-    }
 }

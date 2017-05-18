@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -104,6 +105,10 @@ public class Game : MonoBehaviour {
 
 
         }
+
+        // Reload the game
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene("Boot");
     }
 
     void randomizeLevels()

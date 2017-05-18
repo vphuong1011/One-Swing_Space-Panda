@@ -47,8 +47,11 @@ public class BulletNew : MonoBehaviour {
 
         propsMNG = GameObject.Find("PropsRandomManager(Clone)").GetComponent<PropsManager>();
         propsMNG.targetPositions = GameObject.FindGameObjectsWithTag("Props");
-        indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
-        propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
+        if(propsMNG.targetPositions.Length > 0)
+        {
+            indexPROPS = Random.Range(0, propsMNG.targetPositions.Length);
+            propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
+        }
 
         if (propsMNG.currentTarget == null)
         {
@@ -89,7 +92,14 @@ public class BulletNew : MonoBehaviour {
         {
             speed = 40;
             deflected = true;
-            shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
+
+            // If there are no more props, fire back at the enemy
+            if(propsMNG.currentTarget != null)
+                shotDir = (propsMNG.currentTarget.transform.position - gameObject.transform.position).normalized;
+            else
+                shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
+
+
             Debug.Log("DeflectToProps");
         }
 
