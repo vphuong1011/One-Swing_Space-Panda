@@ -71,7 +71,7 @@ public class GameSet : Set
         }
 
         
-        if (Levels.CurrentLevel.CurrentEnemy)
+        if (Levels.CurrentLevel && Levels.CurrentLevel.CurrentEnemy)
         {
             Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
 

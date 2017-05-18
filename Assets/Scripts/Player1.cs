@@ -20,6 +20,8 @@ public class Player1 : MonoBehaviour {
     public GameObject[] bodyPartsTriggers;
 
     public  bool swing = true;
+    public int newPlayerHP = 1;
+
 
     public DestroyWhenTouch propsScript;
 
