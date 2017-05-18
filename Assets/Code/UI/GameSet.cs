@@ -16,7 +16,6 @@ public class GameSet : Set
     [SerializeField] private bool ShopIsShowing = false;
     public static bool loadLevelNow = false;
     public bool addCoinsNow = false;
-    public static bool upgradeCoinsNow = false;
 
     //Counters
     public Text coinsValue;
@@ -63,7 +62,7 @@ public class GameSet : Set
         {
             CoinSpawner coinSpawner = coinSpawnerGO.GetComponent<CoinSpawner>();
         
-            if (coinSpawner && coinSpawner.coinSpawned)
+            if (coinSpawner)
             {
                Invoke("CollectCoins",1);
                 //addCoinsNow = true;
@@ -203,7 +202,7 @@ public class GameSet : Set
         if (newMoney >= 1)
         {
             Debug.Log("coinUpgradeBool is activated");
-            upgradeCoinsNow = true;
+            PlayerData.CoinUpgradeLevel++;
         }
         else
         {
