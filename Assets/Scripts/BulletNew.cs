@@ -76,6 +76,7 @@ public class BulletNew : MonoBehaviour {
             levelInstance = GetComponent<Levels>();  //call the levels script
             transform.Translate(shotDir * Time.deltaTime * speed  );
             playerScript = GetComponent<Player1>();
+            Destroy(gameObject, 20);
             
 
 
