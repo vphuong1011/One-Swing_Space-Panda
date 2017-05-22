@@ -129,6 +129,7 @@ public class BulletNew : MonoBehaviour {
             {
                 // Player has been  hit but he has armor
                 playerScript.newPlayerHP--;
+                //PlayerData.ArmorUpgradeLevel--;
             }
 
             GameObject blood = ResourceManager.Create("Prefabs/Blood");

@@ -10,10 +10,12 @@ public class GameSet : Set
 
     [SerializeField] private GameObject ShopPopUp = null;
     [SerializeField] private GameObject MenuPopUp = null;
+    [SerializeField] private GameObject ArmorUpgradeIcon = null;
 
     //Booleans
     [SerializeField] private bool MenuIsShowing = false;
     [SerializeField] private bool ShopIsShowing = false;
+    [SerializeField] private bool ArmorIconShowing = false;
     public static bool loadLevelNow = false;
     public bool addCoinsNow = false;
 
@@ -39,7 +41,7 @@ public class GameSet : Set
     void Start()
     {
         newScore = 0;
-
+        armorBuy();
 
     }
 
@@ -215,7 +217,12 @@ public class GameSet : Set
 
     public void armorBuy()
     {
-
+        if (PlayerData.ArmorUpgradeLevel >= 1)
+        {
+            Game.Inst.WantsToBeInWaitState = true;
+            ArmorIconShowing = !ArmorIconShowing;
+            ArmorUpgradeIcon.SetActive(ArmorIconShowing);
+        }
     }
 
     //Continue button for Shop
