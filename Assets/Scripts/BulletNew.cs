@@ -26,6 +26,8 @@ public class BulletNew : MonoBehaviour {
 
     int BulletDecreaseAmount = 3;
 
+    bool bulletHit = false;
+
     public Levels levelInstance;
     bool spawnBullet = false;
    // public levelNumber levelsScript;
@@ -107,29 +109,36 @@ public class BulletNew : MonoBehaviour {
         // If the bullet hit the ragdoll
         if (other.gameObject.tag == "PlayerRagdoll")
         {
+            // Make sure we have the component
+            playerScript = GameObject.Find("Player(Clone)").GetComponent<Player1>();
+
             // If player only have 1 HP, ragdol drops -> Dead
-            if(playerScript.newPlayerHP == 1)
+            if (playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 1 && bulletHit == false)
             {
                 hitPlayer = true;
                 foreach (GameObject obj in playerScript.bodyPartsTriggers)
-                {
                     obj.SetActive(false);
-                }
+
                 GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
-                GameObject blood = ResourceManager.Create("Prefabs/Blood");
-                blood.transform.position = gameObject.transform.position;
                 Destroy(gameObject, 5);
-                Destroy(blood, 1);
 
                 Debug.Log("Hit");
             }
-
-            // If player have >= 2 HP, player still alive, but -HP
-            if(playerScript.newPlayerHP >= 2)
+            else
             {
-                playerScript.newPlayerHP -= 1;
+                // Player has been  hit but he has armor
+                playerScript.newPlayerHP--;
             }
-            
+
+            GameObject blood = ResourceManager.Create("Prefabs/Blood");
+            blood.transform.position = gameObject.transform.position;
+
+            Destroy(blood, 1);
+            bulletHit = true;
+
+            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 1)
+                Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
+
         }
 
         if (other.gameObject.tag =="Props")
@@ -144,7 +153,7 @@ public class BulletNew : MonoBehaviour {
     {
         float newSpeed = speed;
 
-        int boughtItem = PlayerData.BulletSpeedUpgradeLevel - BulletDecreaseAmount;
+        int boughtItem = PlayerData.BulletSpeedDecreaseLevel /*+ BulletDecreaseAmount*/;
         int currentLevel = Levels.CurrentLevelNumber - 1;
         if (currentLevel >= levelBulletSpeedsMin.Count)
             currentLevel = levelBulletSpeedsMin.Count;
@@ -153,7 +162,7 @@ public class BulletNew : MonoBehaviour {
         float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
         newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);
 
-        newSpeed = newSpeed - boughtItem;
+        newSpeed = newSpeed * (1 - (0.05f * boughtItem));
         Mathf.Clamp(newSpeed, AbsoluteMinSpeed, newSpeed);
 
         print(newSpeed);
