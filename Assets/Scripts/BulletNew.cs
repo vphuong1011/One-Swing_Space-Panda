@@ -164,7 +164,7 @@ public class BulletNew : MonoBehaviour {
         float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
         newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);
 
-        newSpeed = newSpeed * (1 - (0.05f * boughtItem));
+        newSpeed = newSpeed * (1 - (0.05f * boughtItem)); // if the decrease bullet item is bought reduce speed by 5%
         Mathf.Clamp(newSpeed, AbsoluteMinSpeed, newSpeed);
 
         print(newSpeed);

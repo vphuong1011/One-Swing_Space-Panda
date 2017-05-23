@@ -243,15 +243,22 @@ public class GameSet : Set
 
     public void armorBuy()
     {
+<<<<<<< HEAD
+        if (PlayerData.Coins >= 0)
+        {
+            PlayerData.Coins -= 1;
+            PlayerData.ArmorUpgradeLevel++;
+=======
         if (PlayerData.ArmorUpgradeLevel >= 1)
         {
             Game.Inst.WantsToBeInWaitState = true;
             ArmorIconShowing = !ArmorIconShowing;
             ArmorUpgradeIcon.SetActive(ArmorIconShowing);
         }
-        else
+        else if (PlayerData.ArmorUpgradeLevel == 0)
         {
             ArmorUpgradeIcon.SetActive(false);
+>>>>>>> 69bdbd15f555a922056f1646f5fc2a1d9f1a8809
         }
     }
 
@@ -297,7 +304,11 @@ public class GameSet : Set
     
     public void BulletDecreaseItem()
     {
-        
+        if (PlayerData.Coins >= 0)
+        {
+            PlayerData.Coins -= 1;
+            PlayerData.BulletSpeedDecreaseLevel++;
+        } 
     }
    
 }
