@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameSet : Set
 {
     public GameObject[] ammountCoins;
-
+    public GameObject[] Counters = null;
+    
 
     [SerializeField] private GameObject ShopPopUp = null;
     [SerializeField] private GameObject MenuPopUp = null;
@@ -35,6 +36,11 @@ public class GameSet : Set
     void Awake()
     {
         loadLevelNow = false;
+        foreach (GameObject _obj in Counters)
+        {
+
+            _obj.SetActive(false);
+        }
     }
 
     // Use this for initialization
@@ -49,6 +55,19 @@ public class GameSet : Set
 
     void Update()
     {
+        GameObject menuGO = GameObject.Find("MainMenuSet(Clone)");
+        if (menuGO)
+        {
+            MainMenuSet menuNew = menuGO.GetComponent<MainMenuSet>();
+            if (menuNew && menuNew.gameRunNow)
+            {
+                foreach (GameObject _obj in Counters)
+                {
+
+                    _obj.SetActive(true);
+                }
+            }
+        }
         ammountCoins = GameObject.FindGameObjectsWithTag("coin");
         GameObject bulletGO = GameObject.Find("Bullet(Clone)");
         if (bulletGO)
@@ -57,6 +76,7 @@ public class GameSet : Set
             if (bulletNew && bulletNew.hitPlayer)
             {
                 KillPlayer();
+                Debug.Log("KillPlayer Activated");
             }
 
         }
