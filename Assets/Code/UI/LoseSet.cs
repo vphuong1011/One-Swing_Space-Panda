@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoseSet : Set {
 
@@ -16,9 +17,9 @@ public class LoseSet : Set {
 
     public void OnPlayAgainClicked()
     {
-        Levels.CloseLevel();
-        // CloseSet();
-        SetManager.OpenSet<MainMenuSet>();
-
+        //Levels.CloseLevel();
+        //CloseSet();
+        //SetManager.OpenSet<MainMenuSet>();
+        SceneManager.LoadScene("Boot");
     }
 }

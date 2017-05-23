@@ -18,6 +18,7 @@ public class GameSet : Set
     [SerializeField] private bool ShopIsShowing = false;
     [SerializeField] private bool ArmorIconShowing = false;
     public static bool loadLevelNow = false;
+    public  bool playerIsDead = false;
     public bool addCoinsNow = false;
 
     //Counters
@@ -75,12 +76,22 @@ public class GameSet : Set
             BulletNew bulletNew = bulletGO.GetComponent<BulletNew>();
             if (bulletNew && bulletNew.hitPlayer)
             {
-                KillPlayer();
+                StartCoroutine(CloseLevelAndFade());
                 Debug.Log("KillPlayer Activated");
             }
-
         }
-        GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
+            /*if (Levels.CurrentLevel && Levels.CurrentLevel.PlayerGameObject)
+           {
+               Player1 player = Levels.CurrentLevel.PlayerGameObject.GetComponent<Player1>();
+
+               if (player && player.playerHealth == 0)
+               {
+                   StartCoroutine(CloseLevelAndFade());
+                   Debug.Log("KillPlayer Activated");
+               }
+
+           }*/
+            GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
         if (coinSpawnerGO)
         {
             CoinSpawner coinSpawner = coinSpawnerGO.GetComponent<CoinSpawner>();
@@ -163,12 +174,6 @@ public class GameSet : Set
         }
     }
 
-    //Kill Player Button
-     void KillPlayer()
-    {
-        //Game.Inst.WantsToBeInLoadingState = true;
-        StartCoroutine(CloseLevelAndFade());
-    }
 
     IEnumerator CloseLevelAndFade()
     {
@@ -177,6 +182,7 @@ public class GameSet : Set
        // Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
         SetManager.OpenSet<LoseSet>();
+        playerIsDead = true;
         yield return new WaitForSeconds(3f);
         Levels.CloseLevel();
     }
