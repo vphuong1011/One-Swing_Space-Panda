@@ -5,7 +5,7 @@ using System;
 
 // This is the base class for all levels
 public class Level : MonoBehaviour {
-    
+
     // The starting location for the player
     [SerializeField] private Transform PlayerStartTransform;
 
@@ -14,6 +14,9 @@ public class Level : MonoBehaviour {
 
     // The object spawn point
     [SerializeField] private List<Transform> ObjectSpawnPoint;
+
+    // The weather spawn point
+    [SerializeField] private List<Transform> WeatherSpawnPoint;
 
     // Spawned characters
     private List<GameObject> SpawnedCharacters = new List<GameObject>();
@@ -24,10 +27,10 @@ public class Level : MonoBehaviour {
     // The enemy in the level
     [NonSerialized] public GameObject CurrentEnemy;
 
-    // The object1 in the level
+    // The prop in the level
     [NonSerialized] public GameObject CurrentProp;
 
-    // The object1 in the level
+    // The propManager in the level
     [NonSerialized]  public GameObject CurrentPropManager;
 
     // The number of different objects we can spawn
@@ -173,7 +176,7 @@ public class Level : MonoBehaviour {
 
         for (int spawnIndex = 0; spawnIndex < ObjectSpawnPoint.Count; ++spawnIndex)
         {
-            switch(UnityEngine.Random.Range(1, MAX_OBJECTS))
+            switch (UnityEngine.Random.Range(1, MAX_OBJECTS))
             {
                 case BUCKET:
                     if (bucketSpawned == false)
@@ -194,7 +197,7 @@ public class Level : MonoBehaviour {
                     else
                         spawnIndex--;
 
-                        break;
+                    break;
                 case HOUSE:
                     if (houseSpawned == false)
                     {
@@ -228,6 +231,37 @@ public class Level : MonoBehaviour {
             }
         }
     }
+
+    // public void AddWeatherIntoLevel()
+    //{
+    //    bool snow = false;
+    //    bool rain = false;
+   
+    //    for (int spawnIndex = 0; spawnIndex < ObjectSpawnPoint.Count; ++spawnIndex)
+    //    {
+    //        switch (UnityEngine.Random.Range(1, MAX_OBJECTS))
+    //        {
+    //            case snow:
+    //                if (bucketSpawned == false)
+    //                {
+    //                    SpawnBucketAtRandom(spawnIndex);
+    //                    bucketSpawned = true;
+    //                }
+    //                else
+    //                    spawnIndex--;
+
+    //                break;
+    //            case rain:
+    //                if (potSpawned == false)
+    //                {
+    //                    SpawnPotAtRandom(spawnIndex);
+    //                    potSpawned = true;
+    //                }
+    //                else
+    //                    spawnIndex--;
+
+    //                break;
+    //        }
 
     // Clean up all of the spawned in characters
     public void CleanUpCharacters()

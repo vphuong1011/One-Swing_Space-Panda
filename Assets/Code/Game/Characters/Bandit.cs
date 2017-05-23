@@ -52,7 +52,7 @@ public class Bandit : MonoBehaviour
             if (menuGO)
             {
                 MainMenuSet menuNew = menuGO.GetComponent<MainMenuSet>();
-                if (menuNew && menuNew.gameRunNow)
+                if (menuNew && menuNew.gameRunNow == true)
                 {
                     //if (menusetScript.gameRunNow == true)
                     mainMenuChecked = true;  
@@ -64,6 +64,7 @@ public class Bandit : MonoBehaviour
             banditShootFunction();
         }
     }
+    
 
 
     void Start()
@@ -103,6 +104,7 @@ public class Bandit : MonoBehaviour
 
                 break;
             case EnemyState.Bandit_WAITING:
+
                 break;
         }
     }
@@ -150,7 +152,7 @@ public class Bandit : MonoBehaviour
         Debug.Log("KILLED");
         GameObject blood = ResourceManager.Create("Prefabs/Blood");
         blood.transform.position = gameObject.transform.position;
-        Destroy(gameObject, 5);
+      //  Destroy(gameObject, 5);
         Destroy(blood, 1);
 
         Bandit bandit = gameObject.GetComponent<Bandit>();

@@ -20,7 +20,7 @@ public class Player1 : MonoBehaviour {
     public GameObject[] bodyPartsTriggers;
 
     public int newPlayerHP = 1;
-
+    public int playerHealth = 1;
 
     public DestroyWhenTouch propsScript;
 
@@ -128,4 +128,17 @@ public class Player1 : MonoBehaviour {
             currrentAttackSpeed += 1;
         }
     }
+
+/*
+    private void OnTriggerEnter(Collider other) //Killing the bandit 
+    {
+       
+        Player1 player = gameObject.GetComponent<Player1>();
+
+        if (player)
+        {
+            player.playerHealth = 0;
+            Debug.Log("Health" + playerHealth);
+        }
+    }*/
 }
