@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoseSet : Set {
-
-	// Use this for initialization
-	void Start () {
+    public bool reactivateGameSet = false;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -16,9 +17,10 @@ public class LoseSet : Set {
 
     public void OnPlayAgainClicked()
     {
-        Levels.CloseLevel();
-        // CloseSet();
-        SetManager.OpenSet<MainMenuSet>();
-
+        //Levels.CloseLevel();
+       // CloseSet();
+        //SetManager.OpenSet<MainMenuSet>();
+        //reactivateGameSet = true;
+        SceneManager.LoadScene("Boot");
     }
 }
