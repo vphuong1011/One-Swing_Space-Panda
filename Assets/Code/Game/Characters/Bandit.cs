@@ -20,8 +20,8 @@ public class Bandit : MonoBehaviour
     public static bool mainMenuChecked = false;
 
     public float range = 50.0f;
-    public float maxTime = 15;
-    public float minTime = 5;
+    public float maxTime = 10;
+    public float minTime = 7;
     private float time;
 
     Animator anim;

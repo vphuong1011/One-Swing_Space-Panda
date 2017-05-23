@@ -243,7 +243,7 @@ public class GameSet : Set
             ArmorIconShowing = !ArmorIconShowing;
             ArmorUpgradeIcon.SetActive(ArmorIconShowing);
         }
-        else
+        else if (PlayerData.ArmorUpgradeLevel == 0)
         {
             ArmorUpgradeIcon.SetActive(false);
         }
