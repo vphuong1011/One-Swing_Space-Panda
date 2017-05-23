@@ -76,6 +76,7 @@ public class BulletNew : MonoBehaviour {
             levelInstance = GetComponent<Levels>();  //call the levels script
             transform.Translate(shotDir * Time.deltaTime * speed  );
             playerScript = GetComponent<Player1>();
+            Destroy(gameObject, 20);
             
 
 
@@ -128,6 +129,7 @@ public class BulletNew : MonoBehaviour {
             {
                 // Player has been  hit but he has armor
                 playerScript.newPlayerHP--;
+                //PlayerData.ArmorUpgradeLevel--;
             }
 
             GameObject blood = ResourceManager.Create("Prefabs/Blood");
