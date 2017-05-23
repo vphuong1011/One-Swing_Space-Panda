@@ -150,7 +150,7 @@ public class Bandit : MonoBehaviour
         Debug.Log("KILLED");
         GameObject blood = ResourceManager.Create("Prefabs/Blood");
         blood.transform.position = gameObject.transform.position;
-        Destroy(gameObject, 5);
+      //  Destroy(gameObject, 5);
         Destroy(blood, 1);
 
         Bandit bandit = gameObject.GetComponent<Bandit>();

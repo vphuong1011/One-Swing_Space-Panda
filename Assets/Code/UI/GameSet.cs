@@ -243,6 +243,10 @@ public class GameSet : Set
             ArmorIconShowing = !ArmorIconShowing;
             ArmorUpgradeIcon.SetActive(ArmorIconShowing);
         }
+        else
+        {
+            ArmorUpgradeIcon.SetActive(false);
+        }
     }
 
     //Continue button for Shop
