@@ -215,7 +215,11 @@ public class GameSet : Set
 
     public void armorBuy()
     {
-
+        if (PlayerData.Coins >= 0)
+        {
+            PlayerData.Coins -= 1;
+            PlayerData.ArmorUpgradeLevel++;
+        }
     }
 
     //Continue button for Shop
@@ -260,7 +264,11 @@ public class GameSet : Set
     
     public void BulletDecreaseItem()
     {
-        
+        if (PlayerData.Coins >= 0)
+        {
+            PlayerData.Coins -= 1;
+            PlayerData.BulletSpeedDecreaseLevel++;
+        } 
     }
    
 }
