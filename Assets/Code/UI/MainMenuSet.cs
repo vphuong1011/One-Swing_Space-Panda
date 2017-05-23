@@ -36,10 +36,8 @@ public class MainMenuSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnSettingsClicked()
     {
-        Game.Inst.WantsToBeInWaitState = true;
-       // Levels.CloseLevel();
-
-        //CloseSet();
+        gameSetShown = true;
+        CloseSet();
         SetManager.OpenSet<SettingsSet>();
     }
 

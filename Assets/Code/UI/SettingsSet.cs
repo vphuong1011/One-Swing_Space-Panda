@@ -24,7 +24,7 @@ public class SettingsSet : Set {
 
         // Levels.CloseLevel();
        CloseSet();
-      // SetManager.OpenSet<MainMenuSet>();
+       SetManager.OpenSet<MainMenuSet>();
     }
 
    
