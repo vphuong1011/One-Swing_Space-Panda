@@ -52,7 +52,7 @@ public class Bandit : MonoBehaviour
             if (menuGO)
             {
                 MainMenuSet menuNew = menuGO.GetComponent<MainMenuSet>();
-                if (menuNew && menuNew.gameRunNow)
+                if (menuNew && menuNew.gameRunNow == true)
                 {
                     //if (menusetScript.gameRunNow == true)
                     mainMenuChecked = true;  
@@ -64,6 +64,7 @@ public class Bandit : MonoBehaviour
             banditShootFunction();
         }
     }
+    
 
 
     void Start()
@@ -103,6 +104,7 @@ public class Bandit : MonoBehaviour
 
                 break;
             case EnemyState.Bandit_WAITING:
+
                 break;
         }
     }

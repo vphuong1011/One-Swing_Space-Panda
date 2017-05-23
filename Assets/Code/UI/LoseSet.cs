@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoseSet : Set {
-
-	// Use this for initialization
-	void Start () {
+    public bool reactivateGameSet = false;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -18,8 +18,9 @@ public class LoseSet : Set {
     public void OnPlayAgainClicked()
     {
         //Levels.CloseLevel();
-        //CloseSet();
+       // CloseSet();
         //SetManager.OpenSet<MainMenuSet>();
+        //reactivateGameSet = true;
         SceneManager.LoadScene("Boot");
     }
 }
