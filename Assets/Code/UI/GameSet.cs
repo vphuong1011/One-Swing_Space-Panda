@@ -48,7 +48,7 @@ public class GameSet : Set
     void Start()
     {
         newScore = 0;
-        armorBuy();
+       // armorBuy();
 
     }
 
@@ -70,7 +70,8 @@ public class GameSet : Set
             }
         }
         ammountCoins = GameObject.FindGameObjectsWithTag("coin");
-        GameObject bulletGO = GameObject.Find("Bullet(Clone)");
+
+        GameObject bulletGO = GameObject.Find("Bullet(Clone)"); //Detects the hitPLayer boolean within the bullet. If true then show LoseSet.
         if (bulletGO)
         {
             BulletNew bulletNew = bulletGO.GetComponent<BulletNew>();
@@ -80,17 +81,19 @@ public class GameSet : Set
                 Debug.Log("KillPlayer Activated");
             }
         }
-            /*if (Levels.CurrentLevel && Levels.CurrentLevel.PlayerGameObject)
-           {
-               Player1 player = Levels.CurrentLevel.PlayerGameObject.GetComponent<Player1>();
 
-               if (player && player.playerHealth == 0)
-               {
-                   StartCoroutine(CloseLevelAndFade());
-                   Debug.Log("KillPlayer Activated");
-               }
+        /*if (Levels.CurrentLevel && Levels.CurrentLevel.PlayerGameObject)
+        {
+            Player1 player = Levels.CurrentLevel.PlayerGameObject.GetComponent<Player1>();
 
-           }*/
+            if (player && player.newPlayerHP <= 0)
+            {
+                StartCoroutine(CloseLevelAndFade());
+                Debug.Log("KillPlayer Activated");
+            }
+        }
+        */
+           
             GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
         if (coinSpawnerGO)
         {
@@ -230,9 +233,10 @@ public class GameSet : Set
     {
         if (PlayerData.Coins >= PlayerData.CoinUpgradeCost)
         {
-            Debug.Log("coinUpgradeBool is activated");
+            Debug.Log("Boosting coin drops!");
             PlayerData.CoinUpgradeLevel++;
             PlayerData.Coins -= PlayerData.CoinUpgradeCost;
+            coinsValue.text = "Coins " + PlayerData.Coins;
         }
         else
         {
@@ -243,22 +247,28 @@ public class GameSet : Set
 
     public void armorBuy()
     {
-<<<<<<< HEAD
-        if (PlayerData.Coins >= 0)
+        if (PlayerData.Coins >= PlayerData.ArmorUpgradeCost)
         {
-            PlayerData.Coins -= 1;
+            Debug.Log("Armor has being added!");
             PlayerData.ArmorUpgradeLevel++;
-=======
-        if (PlayerData.ArmorUpgradeLevel >= 1)
-        {
-            Game.Inst.WantsToBeInWaitState = true;
-            ArmorIconShowing = !ArmorIconShowing;
-            ArmorUpgradeIcon.SetActive(ArmorIconShowing);
+            PlayerData.Coins -= PlayerData.ArmorUpgradeCost;
+            coinsValue.text = "Coins " + PlayerData.Coins;
+
+            if (PlayerData.ArmorUpgradeLevel >= 1)
+            {
+                Game.Inst.WantsToBeInWaitState = true;
+                ArmorIconShowing = !ArmorIconShowing;
+                ArmorUpgradeIcon.SetActive(ArmorIconShowing);
+            }
+            else if (PlayerData.ArmorUpgradeLevel == 0)
+            {
+                ArmorUpgradeIcon.SetActive(false);
+
+            }
         }
-        else if (PlayerData.ArmorUpgradeLevel == 0)
+        else
         {
-            ArmorUpgradeIcon.SetActive(false);
->>>>>>> 69bdbd15f555a922056f1646f5fc2a1d9f1a8809
+            Debug.Log("You don't have enough coins to upgrade armor!");
         }
     }
 
