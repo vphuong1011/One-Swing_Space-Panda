@@ -37,6 +37,10 @@ public class Bandit : MonoBehaviour
     public BulletNew bulletInstance;
 
     public Player1 playerScript;
+
+    public AudioSource cockingSound;
+    public AudioSource gunShot;
+    public AudioSource getHit;
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -84,10 +88,12 @@ public class Bandit : MonoBehaviour
         {
             case EnemyState.Bandit_IDLE:
                 attackTimer += Time.deltaTime;
+                cockingSound.Play();
                 if (attackTimer > attackDelay)
                 {
                     CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
                     attackTimer = 0;
+                    
                 }
 
                 //Debug.Log("EnemyState.Bandit_IDLE");
@@ -116,6 +122,7 @@ public class Bandit : MonoBehaviour
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
       
         CurrentState = EnemyState.Bandit_IDLE;
+        bulletInstance.hitProps = false;
     }
 
     public void ShootAnimEvent()   // spawn the bullet
@@ -125,14 +132,14 @@ public class Bandit : MonoBehaviour
         if(bulletGO && GunTip)
         {
             bulletGO.transform.position = GunTip.position;
+            gunShot.Play();
+            // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
-           // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
-
-         //   if (bullet)
-         //   {
-          //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
-          //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
-         //   }
+            //   if (bullet)
+            //   {
+            //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
+            //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
+            //   }
 
         }
 		Debug.Log("shooting");
@@ -151,11 +158,13 @@ public class Bandit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //Killing the bandit 
     {
+        getHit.Play();
         gameObject.SendMessage("KillRagdoll");
         Debug.Log("KILLED");
         GameObject blood = ResourceManager.Create("Prefabs/Blood");
         blood.transform.position = gameObject.transform.position;
-      //  Destroy(gameObject, 5);
+        blood.transform.rotation = gameObject.transform.rotation;
+        //  Destroy(gameObject, 5);
         Destroy(blood, 1);
 
         Bandit bandit = gameObject.GetComponent<Bandit>();

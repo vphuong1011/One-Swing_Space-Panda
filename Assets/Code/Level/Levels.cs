@@ -50,7 +50,7 @@ public class Levels : MonoBehaviour{
             CurrentLevel.SpawnEnemyAtRandom();
             CurrentLevel.SpawnPropsManager();
             CurrentLevel.AddPropsIntoLevel();
-      //      CurrentLevel.AddWeatherIntoLevel();
+            CurrentLevel.AddWeatherIntoLevel();
         }
     }
 

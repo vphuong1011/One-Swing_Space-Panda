@@ -33,6 +33,9 @@ public class Level : MonoBehaviour {
     // The propManager in the level
     [NonSerialized]  public GameObject CurrentPropManager;
 
+    // The prop in the level
+    [NonSerialized]  public GameObject CurrentWeather;
+
     // The number of different objects we can spawn
     const int BUCKET = 1;
     const int POT = 2;
@@ -40,6 +43,10 @@ public class Level : MonoBehaviour {
     const int LAMP = 4;
     const int BARREL = 5;
     const int MAX_OBJECTS = 6;
+
+    const int SNOW = 1;
+    const int RAIN = 2;
+    const int MAX_Weathers = 3;
 
     // Spawn the player and set his location based on the player start
     public void SpawnPlayer()
@@ -232,36 +239,63 @@ public class Level : MonoBehaviour {
         }
     }
 
-    // public void AddWeatherIntoLevel()
-    //{
-    //    bool snow = false;
-    //    bool rain = false;
-   
-    //    for (int spawnIndex = 0; spawnIndex < ObjectSpawnPoint.Count; ++spawnIndex)
-    //    {
-    //        switch (UnityEngine.Random.Range(1, MAX_OBJECTS))
-    //        {
-    //            case snow:
-    //                if (bucketSpawned == false)
-    //                {
-    //                    SpawnBucketAtRandom(spawnIndex);
-    //                    bucketSpawned = true;
-    //                }
-    //                else
-    //                    spawnIndex--;
+    public void AddWeatherIntoLevel()
+    {
+        bool snow = false;
+        bool rain = false;
 
-    //                break;
-    //            case rain:
-    //                if (potSpawned == false)
-    //                {
-    //                    SpawnPotAtRandom(spawnIndex);
-    //                    potSpawned = true;
-    //                }
-    //                else
-    //                    spawnIndex--;
+        for (int spawnIndex = 0; spawnIndex < WeatherSpawnPoint.Count; ++spawnIndex)
+        {
+            switch (UnityEngine.Random.Range(1, MAX_Weathers))
+            {
+                case SNOW:
+                    if (snow == false)
+                    {
+                        SpawnSnowAtRandom(spawnIndex);
+                        snow = true;
+                    }
+                    else
+                        spawnIndex--;
 
-    //                break;
-    //        }
+                    break;
+                case RAIN:
+                    if (rain == false)
+                    {
+                        SpawnRainAtRandom(spawnIndex);
+                        rain = true;
+                    }
+                    else
+                        spawnIndex--;
+
+                    break;
+            }
+        }
+    }
+
+    public void SpawnRainAtRandom(int spawnIndex)
+    {
+        // Spawn in rain using the ResourceManager
+        CurrentWeather = ResourceManager.Create("Prefabs/Rain");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentWeather);
+
+        // Set the rain to the spawn transform index position
+        CurrentWeather.transform.position = WeatherSpawnPoint[spawnIndex].position;
+    }
+
+    public void SpawnSnowAtRandom(int spawnIndex)
+    {
+        // Spawn in snow using the ResourceManager
+        CurrentWeather = ResourceManager.Create("Prefabs/Snow");
+
+        // Add to spawned characters list so we can clean up later
+        SpawnedCharacters.Add(CurrentWeather);
+
+        // Set the snow to the spawn transform index position
+        CurrentWeather.transform.position = WeatherSpawnPoint[spawnIndex].position;
+    }
+
 
     // Clean up all of the spawned in characters
     public void CleanUpCharacters()
