@@ -17,7 +17,7 @@ public class MainMenuSet : Set {
             gameRunNow = false;
             //Added this to show game screen in the main menu.
             Game.Inst.WantsToBeInLoadingState = true;
-            SetManager.OpenSet<GameSet>();   
+            //SetManager.OpenSet<GameSet>();   
     }
 
     // Update is called once per frame
@@ -31,7 +31,8 @@ public class MainMenuSet : Set {
       //  clickSound.Play();
         CloseSet();     
         gameRunNow = true;
-       // gameSetShown = true;
+        SetManager.OpenSet<GameSet>();
+        // gameSetShown = true;
     }
 
     // DEBUG: These are just for testing menu flow
