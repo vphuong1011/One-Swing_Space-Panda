@@ -11,10 +11,9 @@ public class MainMenuSet : Set {
 	// Use this for initialization
 	void Start ()
     {
-            gameRunNow = false;
-            //Added this to show game screen in the main menu.
+            gameRunNow = false; 
             Game.Inst.WantsToBeInLoadingState = true;
-            SetManager.OpenSet<GameSet>();
+            //SetManager.OpenSet<GameSet>();
     }
 
     // Update is called once per frame
@@ -28,13 +27,13 @@ public class MainMenuSet : Set {
         
         CloseSet();     
         gameRunNow = true;
-       // gameSetShown = true;
+        SetManager.OpenSet<GameSet>();
+        // gameSetShown = true;
     }
 
     // DEBUG: These are just for testing menu flow
     public void OnSettingsClicked()
     {
-        //gameSetShown = true;
         CloseSet();
         SetManager.OpenSet<SettingsSet>();
     }
@@ -42,8 +41,7 @@ public class MainMenuSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnHelpClicked()
     {
-        //gameSetShown = true;
         CloseSet();
-         SetManager.OpenSet<HelpSet>();
+        SetManager.OpenSet<HelpSet>();
     }
 }

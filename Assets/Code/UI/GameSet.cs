@@ -33,9 +33,9 @@ public class GameSet : Set
     public Text armorBuffValue;
     public Text bulletDecreasedValue;
     public Text coinBoostValue;
-    public Text scoreValue;
+    //public Text scoreValue;
     public Text dayValue;
-    public static int newScore = 0;
+    //public static int newScore = 0;
     public static int newDay = 1;
 
     // Private member variables
@@ -50,28 +50,28 @@ public class GameSet : Set
         PlayerData.ArmorUpgradeLevel = PlayerData.defaultArmor;
         Debug.Log("You have: " + PlayerData.Coins + "Coins. You also have: " + PlayerData.ArmorUpgradeLevel + " Armor");
         loadLevelNow = false;
-        foreach (GameObject _obj in Counters)
+        /*foreach (GameObject _obj in Counters)
         {
 
             _obj.SetActive(false);
-        }
+        }*/
     }
 
     // Use this for initialization
     void Start()
     {
-        newScore = 0;
+        //newScore = 0;
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        GameObject menuGO = GameObject.Find("MainMenuSet(Clone)");
+       /* GameObject menuGO = GameObject.Find("MainMenuSet(Clone)");
         if (menuGO)
         {
             MainMenuSet menuNew = menuGO.GetComponent<MainMenuSet>();
-            if (menuNew && menuNew.gameRunNow)
+            if (menuNew && menuNew.gameRunNow == true)
             {
                 foreach (GameObject _obj in Counters)
                 {
@@ -79,7 +79,7 @@ public class GameSet : Set
                     _obj.SetActive(true);
                 }
             }
-        }
+        }*/
         ammountCoins = GameObject.FindGameObjectsWithTag("coin");
 
         GameObject bulletGO = GameObject.Find("Bullet(Clone)"); //Detects the hitPLayer boolean within the bullet. If true then show LoseSet.
@@ -124,7 +124,7 @@ public class GameSet : Set
 
             if (bandit && bandit.health <= 0 && updateScoreNow == true)
             {
-                newScore = newScore + 1;
+                //newScore = newScore + 1;
                 //scoreValue.text = "Score " + newScore;
                 loadLevelNow = true;
                 updateScoreNow = false;
