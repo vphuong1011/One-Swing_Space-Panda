@@ -125,11 +125,24 @@ public class GameSet : Set
             if (bandit && bandit.health <= 0 && updateScoreNow == true)
             {
                 newScore = newScore + 1;
-                scoreValue.text = "Score " + newScore;
+                //scoreValue.text = "Score " + newScore;
                 loadLevelNow = true;
                 updateScoreNow = false;
                 Shop();
             }
+        }
+
+        if (PlayerData.BulletSpeedDecreaseLevel == 0)
+        {
+            bulletDecreasedValue.text = "Bullet Speed Reduction: " + PlayerData.BulletSpeedDecreaseLevel;
+        }
+        if (PlayerData.ArmorUpgradeLevel == 0)
+        {
+            armorBuffValue.text = "Armor Buff: " + PlayerData.ArmorUpgradeLevel;
+        }
+        if (PlayerData.CoinBoostLevel == 0)
+        {
+            coinBoostValue.text = "Coins Boost: " + PlayerData.CoinBoostLevel;
         }
     }
 
