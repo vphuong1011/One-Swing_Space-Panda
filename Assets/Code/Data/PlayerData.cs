@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerData
 {
     public static int Coins = 0;
+    public static int defaultCoins = 0;
 
     public static int ArmorUpgradeLevel = 0;
+    public static int defaultAmor = 0;
     public static int ArmorUpgradeCost = 1;
 
     public static int BulletSpeedDecreaseLevel = 0;
@@ -14,4 +16,6 @@ public class PlayerData
 
     public static int CoinUpgradeLevel = 0;
     public static int CoinUpgradeCost = 1;
+
+   
 }

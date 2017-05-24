@@ -36,6 +36,9 @@ public class GameSet : Set
 
     void Awake()
     {
+        PlayerData.Coins = PlayerData.defaultCoins;
+        PlayerData.ArmorUpgradeLevel = PlayerData.defaultAmor;
+        Debug.Log("You have: " + PlayerData.Coins + "Coins. You also have: " + PlayerData.ArmorUpgradeLevel + " Armor");
         loadLevelNow = false;
         foreach (GameObject _obj in Counters)
         {
@@ -47,6 +50,9 @@ public class GameSet : Set
     // Use this for initialization
     void Start()
     {
+        
+        
+
         newScore = 0;
        // armorBuy();
 
@@ -77,7 +83,7 @@ public class GameSet : Set
             BulletNew bulletNew = bulletGO.GetComponent<BulletNew>();
             if (bulletNew && bulletNew.hitPlayer)
             {
-                StartCoroutine(CloseLevelAndFade());
+                StartCoroutine(LoseSequence());
                 Debug.Log("KillPlayer Activated");
             }
         }
@@ -162,7 +168,7 @@ public class GameSet : Set
             CancelInvoke();
         }
     }
-           
+
    
 
     //Kill Enemy Button
@@ -178,9 +184,9 @@ public class GameSet : Set
     }
 
 
-    IEnumerator CloseLevelAndFade()
+    IEnumerator LoseSequence()
     {
-       
+        
         yield return new WaitForSeconds(3f);
        // Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
