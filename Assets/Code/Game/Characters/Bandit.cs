@@ -36,19 +36,20 @@ public class Bandit : MonoBehaviour
 
     public BulletNew bulletInstance;
 
-<<<<<<< HEAD
+
     public Player1 playerScript;
 
-    public AudioSource cockingSound;
-    public AudioSource gunShot;
-    public AudioSource getHit;
-=======
-    public AudioClip gunshot;
+
+    public AudioClip cockingSound;
+    public AudioClip gunShot;
+    public AudioClip getHit;
+
     public AudioSource audio;
+   
 
 
 
->>>>>>> fb3868651a2cf1258110ae702a5d9200a78ff84e
+
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -100,7 +101,7 @@ public class Bandit : MonoBehaviour
         {
             case EnemyState.Bandit_IDLE:
                 attackTimer += Time.deltaTime;
-                cockingSound.Play();
+
                 if (attackTimer > attackDelay)
                 {
                     CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
@@ -113,6 +114,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
+                audio.clip = gunShot;
                 audio.Play();
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
@@ -130,9 +132,11 @@ public class Bandit : MonoBehaviour
 
     public void OnObjectHit()
     {
-        
+
+        audio.clip = cockingSound;
+        audio.Play();
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
-      
+
         CurrentState = EnemyState.Bandit_IDLE;
         bulletInstance.hitProps = false;
     }
@@ -144,11 +148,11 @@ public class Bandit : MonoBehaviour
         if(bulletGO && GunTip)
         {
             bulletGO.transform.position = GunTip.position;
-<<<<<<< HEAD
-            gunShot.Play();
-=======
+
+            //gunShot.Play();
+
             
->>>>>>> fb3868651a2cf1258110ae702a5d9200a78ff84e
+
             // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
             //   if (bullet)
@@ -174,7 +178,8 @@ public class Bandit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //Killing the bandit 
     {
-        getHit.Play();
+        audio.clip = getHit;
+        audio.Play();
         gameObject.SendMessage("KillRagdoll");
         Debug.Log("KILLED");
         GameObject blood = ResourceManager.Create("Prefabs/Blood");
