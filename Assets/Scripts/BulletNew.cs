@@ -9,6 +9,7 @@ public class BulletNew : MonoBehaviour {
     public int boughtItem = 0;
 
     public bool hitPlayer = false;
+    public bool hitProps = false;
     public bool deflected = false;
 
     public Transform blood;
@@ -30,7 +31,9 @@ public class BulletNew : MonoBehaviour {
 
     public Levels levelInstance;
     bool spawnBullet = false;
-   // public levelNumber levelsScript;
+
+    public AudioSource playerGetShot;
+    // public levelNumber levelsScript;
 
     // Use this for initialization
     void Start ()
@@ -96,6 +99,7 @@ public class BulletNew : MonoBehaviour {
         {
             speed = 40;
             deflected = true;
+            hitProps = true;
 
             // If there are no more props, fire back at the enemy
             if(propsMNG.currentTarget != null)
@@ -122,7 +126,7 @@ public class BulletNew : MonoBehaviour {
 
                 GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
                 Destroy(gameObject, 5);
-
+                playerGetShot.Play();
                 Debug.Log("Hit");
             }
             else
@@ -134,6 +138,7 @@ public class BulletNew : MonoBehaviour {
 
             GameObject blood = ResourceManager.Create("Prefabs/Blood");
             blood.transform.position = gameObject.transform.position;
+            blood.transform.rotation = gameObject.transform.rotation;
 
             Destroy(blood, 1);
             bulletHit = true;
@@ -143,7 +148,7 @@ public class BulletNew : MonoBehaviour {
 
         }
 
-        if (other.gameObject.tag =="Props")
+        if (other.gameObject.tag =="Props" && hitProps == true)
         {
             Destroy(gameObject, 10);
             Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit(); //this will change the state of the bandit back to idle so it will fire again.

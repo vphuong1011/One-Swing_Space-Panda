@@ -16,6 +16,10 @@ public class DestroyWhenTouch : MonoBehaviour {
     public bool brokenPotSpawned;
     public bool brokenSpiritHousetSpawned;
 
+    public AudioSource barrelBucketSound;
+    public AudioSource potSound;
+    public AudioSource houseLampSound;
+
     // Use this for initialization
     void Start () {
     }
@@ -29,26 +33,31 @@ public class DestroyWhenTouch : MonoBehaviour {
     {
         if(other.gameObject.name == "SimpleBarrel(Clone)")
         {
+            barrelBucketSound.Play();
             BarrelDestroyed();
         }
 
         if(other.gameObject.name == "SimpleBucket(Clone)")
         {
+            barrelBucketSound.Play();
             BucketDestroyed();
         }
 
         if (other.gameObject.name == "SimpleStreetLamp(Clone)")
         {
+            houseLampSound.Play();
             StreetLampDestroyed();
         }
 
         if (other.gameObject.name == "SimplePot(Clone)")
         {
+            potSound.Play();
             PotDestroyed();
         }
 
         if (other.gameObject.name == "SimpleSpiritHouse(Clone)")
         {
+            houseLampSound.Play();
             SpiritHouseDestroyed();
         }
     }
