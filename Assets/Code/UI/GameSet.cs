@@ -8,21 +8,31 @@ public class GameSet : Set
     public GameObject[] ammountCoins;
     public GameObject[] Counters = null;
     
-
+    //UI GameObjects on Inspector
     [SerializeField] private GameObject ShopPopUp = null;
     [SerializeField] private GameObject MenuPopUp = null;
+
     [SerializeField] private GameObject ArmorUpgradeIcon = null;
+    [SerializeField] private GameObject BulletUpgradeIcon = null;
+    [SerializeField] private GameObject CoinUpgradeIcon = null;
+    
 
     //Booleans
     [SerializeField] private bool MenuIsShowing = false;
     [SerializeField] private bool ShopIsShowing = false;
     [SerializeField] private bool ArmorIconShowing = false;
+    [SerializeField] private bool BulletIconShowing = false;
+    [SerializeField] private bool CoinIconShowing = false;
+
     public static bool loadLevelNow = false;
     public  bool playerIsDead = false;
     public bool addCoinsNow = false;
 
     //Counters
     public Text coinsValue;
+    public Text armorBuffValue;
+    public Text bulletDecreasedValue;
+    public Text coinBoostValue;
     public Text scoreValue;
     public Text dayValue;
     public static int newScore = 0;
@@ -153,12 +163,23 @@ public class GameSet : Set
     //Coin drop boost
     public void coinUpgrade()
     {
-        if (PlayerData.Coins >= PlayerData.CoinUpgradeCost)
+        if (PlayerData.Coins >= PlayerData.CoinBoostCost)
         {
             Debug.Log("Boosting coin drops!");
-            PlayerData.CoinUpgradeLevel++;
-            PlayerData.Coins -= PlayerData.CoinUpgradeCost;
+            PlayerData.CoinBoostLevel++;
+            PlayerData.Coins -= PlayerData.CoinBoostCost;
             coinsValue.text = "Coins " + PlayerData.Coins;
+        }
+        if (PlayerData.CoinBoostLevel >= 1)
+        {
+            Game.Inst.WantsToBeInWaitState = true;
+            coinBoostValue.text = "Coins Boost: " + PlayerData.CoinBoostLevel;
+            //CoinIconShowing = !CoinIconShowing;
+            //CoinUpgradeIcon.SetActive(CoinIconShowing);
+        }
+        else if (PlayerData.CoinBoostLevel == 0)
+        {
+            CoinUpgradeIcon.SetActive(false);
         }
         else
         {
@@ -170,11 +191,28 @@ public class GameSet : Set
     //Decrease bullet speed item
     public void BulletDecreaseItem()
     {
-        if (PlayerData.Coins >= 0)
+        if (PlayerData.Coins >= PlayerData.BulletSpeedDecreaseCost)
         {
-            PlayerData.Coins -= 1;
-            PlayerData.BulletSpeedDecreaseLevel++;
             Debug.Log("Bullet speed has being decreased!");
+            PlayerData.BulletSpeedDecreaseLevel++;
+            PlayerData.Coins -= PlayerData.BulletSpeedDecreaseCost;
+            coinsValue.text = "Coins " + PlayerData.Coins;
+        }
+        if (PlayerData.BulletSpeedDecreaseLevel >= 1)
+        {
+            Game.Inst.WantsToBeInWaitState = true;
+            bulletDecreasedValue.text = "Bullet Speed Reduction: " + PlayerData.BulletSpeedDecreaseLevel;
+            //BulletIconShowing = !BulletIconShowing;
+            //BulletUpgradeIcon.SetActive(BulletIconShowing);
+
+        }
+        else if (PlayerData.BulletSpeedDecreaseLevel == 0)
+        {
+            BulletUpgradeIcon.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("You don't have enough coins to decrease bullet speed!");
         }
     }
 
@@ -191,13 +229,13 @@ public class GameSet : Set
             if (PlayerData.ArmorUpgradeLevel >= 1)
             {
                 Game.Inst.WantsToBeInWaitState = true;
-                ArmorIconShowing = !ArmorIconShowing;
-                ArmorUpgradeIcon.SetActive(ArmorIconShowing);
+                armorBuffValue.text = "Armor Buff: " + PlayerData.ArmorUpgradeLevel;
+                //ArmorIconShowing = !ArmorIconShowing;
+                //ArmorUpgradeIcon.SetActive(ArmorIconShowing);
             }
             else if (PlayerData.ArmorUpgradeLevel == 0)
             {
                 ArmorUpgradeIcon.SetActive(false);
-
             }
         }
         else

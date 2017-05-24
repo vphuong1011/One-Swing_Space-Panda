@@ -12,10 +12,12 @@ public class PlayerData
     public static int ArmorUpgradeCost = 1;
 
     public static int BulletSpeedDecreaseLevel = 0;
-    public static int BulletSpeedUpgradeCost = 10;
+    public static int defaultBulletSpeedLevel = 0;
+    public static int BulletSpeedDecreaseCost = 1;
 
-    public static int CoinUpgradeLevel = 0;
-    public static int CoinUpgradeCost = 1;
+    public static int CoinBoostLevel = 0;
+    public static int defaultCoinBoostLevel = 0;
+    public static int CoinBoostCost = 1;
 
    
 }

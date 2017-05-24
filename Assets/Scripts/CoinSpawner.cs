@@ -18,7 +18,7 @@ public class CoinSpawner : MonoBehaviour
 
     void Start()
     {
-        int numCoins = Random.Range(1, 4) + PlayerData.CoinUpgradeLevel;
+        int numCoins = Random.Range(1, 4) + PlayerData.CoinBoostLevel;
         for (int i = 0; i < numCoins; ++i)
             SpawnCoin();
 
