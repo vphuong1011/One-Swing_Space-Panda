@@ -20,8 +20,8 @@ public class Bandit : MonoBehaviour
     public static bool mainMenuChecked = false;
 
     public float range = 50.0f;
-    public float maxTime = 10;
-    public float minTime = 7;
+    public float maxTime = 15;
+    public float minTime = 10;
     private float time;
 
     Animator anim;
@@ -36,6 +36,7 @@ public class Bandit : MonoBehaviour
 
     public BulletNew bulletInstance;
 
+    public Player1 playerScript;
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -111,7 +112,9 @@ public class Bandit : MonoBehaviour
 
     public void OnObjectHit()
     {
+        
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
+      
         CurrentState = EnemyState.Bandit_IDLE;
     }
 

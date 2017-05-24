@@ -178,7 +178,7 @@ public class GameSet : Set
     IEnumerator CloseLevelAndFade()
     {
        
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
        // Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
         SetManager.OpenSet<LoseSet>();
@@ -243,22 +243,23 @@ public class GameSet : Set
 
     public void armorBuy()
     {
-<<<<<<< HEAD
-        if (PlayerData.Coins >= 0)
+
+        if (PlayerData.Coins >= 10)
         {
-            PlayerData.Coins -= 1;
+            PlayerData.Coins -= 10;
             PlayerData.ArmorUpgradeLevel++;
-=======
-        if (PlayerData.ArmorUpgradeLevel >= 1)
-        {
-            Game.Inst.WantsToBeInWaitState = true;
-            ArmorIconShowing = !ArmorIconShowing;
-            ArmorUpgradeIcon.SetActive(ArmorIconShowing);
-        }
-        else if (PlayerData.ArmorUpgradeLevel == 0)
-        {
-            ArmorUpgradeIcon.SetActive(false);
->>>>>>> 69bdbd15f555a922056f1646f5fc2a1d9f1a8809
+
+            if (PlayerData.ArmorUpgradeLevel >= 1)
+            {
+                Game.Inst.WantsToBeInWaitState = true;
+                ArmorIconShowing = !ArmorIconShowing;
+                ArmorUpgradeIcon.SetActive(ArmorIconShowing);
+            }
+            else if (PlayerData.ArmorUpgradeLevel == 0)
+            {
+                ArmorUpgradeIcon.SetActive(false);
+
+            }
         }
     }
 
@@ -304,9 +305,9 @@ public class GameSet : Set
     
     public void BulletDecreaseItem()
     {
-        if (PlayerData.Coins >= 0)
+        if (PlayerData.Coins >= 10)
         {
-            PlayerData.Coins -= 1;
+            PlayerData.Coins -= 10;
             PlayerData.BulletSpeedDecreaseLevel++;
         } 
     }
