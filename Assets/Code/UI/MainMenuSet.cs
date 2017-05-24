@@ -8,13 +8,16 @@ public class MainMenuSet : Set {
     //booleans
     public bool reloadedGame = false;
     public  bool gameRunNow = false;
+
+    public AudioSource clickSound;
+
 	// Use this for initialization
 	void Start ()
     {
             gameRunNow = false;
             //Added this to show game screen in the main menu.
             Game.Inst.WantsToBeInLoadingState = true;
-            SetManager.OpenSet<GameSet>();
+            SetManager.OpenSet<GameSet>();   
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class MainMenuSet : Set {
 
     public void OnPlayClicked()
     {
-        
+      //  clickSound.Play();
         CloseSet();     
         gameRunNow = true;
        // gameSetShown = true;
@@ -34,6 +37,7 @@ public class MainMenuSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnSettingsClicked()
     {
+        clickSound.Play();
         //gameSetShown = true;
         CloseSet();
         SetManager.OpenSet<SettingsSet>();
@@ -42,6 +46,8 @@ public class MainMenuSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnHelpClicked()
     {
+        clickSound.Play();
+        Debug.Log("AUDIO");
         //gameSetShown = true;
         CloseSet();
          SetManager.OpenSet<HelpSet>();

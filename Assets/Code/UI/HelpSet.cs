@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HelpSet : Set {
+    public AudioSource clickSound;
 
-    
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         
     }
 	
@@ -17,6 +17,7 @@ public class HelpSet : Set {
 
     public void OnBackButtonClicked()
     {
+        clickSound.Play();
         CloseSet();
         SetManager.OpenSet<MainMenuSet>();        
     }

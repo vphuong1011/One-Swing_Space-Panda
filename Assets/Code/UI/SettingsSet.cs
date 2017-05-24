@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SettingsSet : Set {
-
+    public AudioSource clickSound;
 
     // Use this for initialization
     void Start()
@@ -20,8 +20,8 @@ public class SettingsSet : Set {
     // DEBUG: These are just for testing menu flow
     public void OnBackButtonClicked()
     {
-    
 
+        clickSound.Play();
         // Levels.CloseLevel();
        CloseSet();
        SetManager.OpenSet<MainMenuSet>();
