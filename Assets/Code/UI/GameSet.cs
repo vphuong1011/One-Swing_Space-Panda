@@ -50,12 +50,7 @@ public class GameSet : Set
     // Use this for initialization
     void Start()
     {
-        
-        
-
         newScore = 0;
-       // armorBuy();
-
     }
 
     // Update is called once per frame
@@ -126,34 +121,17 @@ public class GameSet : Set
                 Shop();
             }
         }
-
-        //NullChecking
-        /* GameObject banditGO = GameObject.Find("Enemy(Clone)");
-        if (banditGO)
-        {
-            Bandit bandit = banditGO.GetComponent<Bandit>();
-
-            if (bandit && bandit.health <= 0 && updateScoreNow == true)
-            {
-                newScore = newScore + 1;
-                scoreValue.text = "Score " + newScore;
-                loadLevelNow = true;
-                updateScoreNow = false;
-                Shop();
-            }
-        }*/
     }
 
+    /// <summary>
+    /// Coin Collection
+    /// </summary>
+    /// <returns></returns>
     IEnumerator AddCoinsAndStop()
     {
-       
         yield return new WaitForSeconds(.1f);
         addCoinsNow = false;
-    }
-    /// <summary>
-    ///Test Buttons goes here
-    /// </summary>
-    /// 
+    } 
 
     //Collect Coins Button
     void CollectCoins()
@@ -169,72 +147,10 @@ public class GameSet : Set
         }
     }
 
-   
-
-    //Kill Enemy Button
-    public void KillEnemy()
-    {
-        Bandit bandit = Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>();
-
-        if(bandit)
-        {
-            bandit.health = 0;
-            Debug.Log("Enemy health is " + bandit.health);
-        }
-    }
-
-
-    IEnumerator LoseSequence()
-    {
-        
-        yield return new WaitForSeconds(1f);
-       // Game.Inst.WantsToBeInWaitState = true;
-        CloseSet();
-        SetManager.OpenSet<LoseSet>();
-        playerIsDead = true;
-        yield return new WaitForSeconds(3f);
-        Levels.CloseLevel();
-    }
-
-    /// <summary>
-    /// Menus functions below
-    /// </summary>
-    /// 
-
-    // Pause Menu
-    public void OnPauseGameClicked()
-    {
-        Game.Inst.WantsToBeInWaitState = true;
-        //Levels.CloseLevel();
-        PauseGame();
-
-        /// Pause Menu pop up
-        MenuIsShowing = !MenuIsShowing;
-        MenuPopUp.SetActive(MenuIsShowing);
-
-        //CloseSet();
-        //SetManager.OpenSet<WinSet>();
-    }
-
-    /// <summary>
-    /// Shop Pop Up
-    /// </summary>
-
-    void Shop()
-    {
-        Game.Inst.WantsToBeInWaitState = true;
-        //Levels.CloseLevel();
-        PauseGame();
-
-        /// Pause Menu pop up
-        ShopIsShowing = !ShopIsShowing;
-        ShopPopUp.SetActive(ShopIsShowing);
-
-        //CloseSet();
-        //SetManager.OpenSet<WinSet>();
-    }
-
-    //Coin upgrade button in shop
+/// <summary>
+/// Shop Items
+/// </summary>
+    //Coin drop boost
     public void coinUpgrade()
     {
         if (PlayerData.Coins >= PlayerData.CoinUpgradeCost)
@@ -251,6 +167,18 @@ public class GameSet : Set
        
     }
 
+    //Decrease bullet speed item
+    public void BulletDecreaseItem()
+    {
+        if (PlayerData.Coins >= 0)
+        {
+            PlayerData.Coins -= 1;
+            PlayerData.BulletSpeedDecreaseLevel++;
+            Debug.Log("Bullet speed has being decreased!");
+        }
+    }
+
+    //Armor buff item
     public void armorBuy()
     {
         if (PlayerData.Coins >= PlayerData.ArmorUpgradeCost)
@@ -277,6 +205,50 @@ public class GameSet : Set
             Debug.Log("You don't have enough coins to upgrade armor!");
         }
     }
+
+
+    /// <summary>
+    /// UI Functions
+    /// </summary>
+    /// 
+
+    //Shop
+    void Shop()
+    {
+        Game.Inst.WantsToBeInWaitState = true;
+        PauseGame();  /// Pause Menu pop up
+        ShopIsShowing = !ShopIsShowing;
+        ShopPopUp.SetActive(ShopIsShowing);
+    }
+
+    // Pause Menu
+    public void OnPauseGameClicked()
+    {
+        Game.Inst.WantsToBeInWaitState = true;
+        //Levels.CloseLevel();
+        PauseGame();
+
+        /// Pause Menu pop up
+        MenuIsShowing = !MenuIsShowing;
+        MenuPopUp.SetActive(MenuIsShowing);
+
+        //CloseSet();
+        //SetManager.OpenSet<WinSet>();
+    }
+
+    //Lose Sequence when player is killed
+    IEnumerator LoseSequence()
+    {
+
+        yield return new WaitForSeconds(1f);
+        // Game.Inst.WantsToBeInWaitState = true;
+        CloseSet();
+        SetManager.OpenSet<LoseSet>();
+        playerIsDead = true;
+        yield return new WaitForSeconds(3f);
+        Levels.CloseLevel();
+    }
+
 
     //Continue button for Shop
     public void OnContinueClicked()
@@ -317,15 +289,6 @@ public class GameSet : Set
             Time.timeScale = 1.0F;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
-    
-    public void BulletDecreaseItem()
-    {
-        if (PlayerData.Coins >= 0)
-        {
-            PlayerData.Coins -= 1;
-            PlayerData.BulletSpeedDecreaseLevel++;
-        } 
-    }
-   
+     
 }
 
