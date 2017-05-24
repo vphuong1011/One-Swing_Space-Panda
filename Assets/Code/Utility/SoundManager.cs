@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour {
 
             clip[0] = SFXAudioSource.GetComponent<AudioClip>();
             PlaySFX();
-            Debug.Log("AUDIO HAHA");
+            //Debug.Log("AUDIO HAHA");
 
     }
 }

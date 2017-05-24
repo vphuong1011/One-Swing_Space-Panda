@@ -36,11 +36,19 @@ public class Bandit : MonoBehaviour
 
     public BulletNew bulletInstance;
 
+<<<<<<< HEAD
     public Player1 playerScript;
 
     public AudioSource cockingSound;
     public AudioSource gunShot;
     public AudioSource getHit;
+=======
+    public AudioClip gunshot;
+    public AudioSource audio;
+
+
+
+>>>>>>> fb3868651a2cf1258110ae702a5d9200a78ff84e
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -70,11 +78,15 @@ public class Bandit : MonoBehaviour
         }
     }
     
+    void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
 
     void Start()
     {
-
+       
         anim = GetComponent<Animator>();
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
        // menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();
@@ -101,7 +113,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
-
+                audio.Play();
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
@@ -132,7 +144,11 @@ public class Bandit : MonoBehaviour
         if(bulletGO && GunTip)
         {
             bulletGO.transform.position = GunTip.position;
+<<<<<<< HEAD
             gunShot.Play();
+=======
+            
+>>>>>>> fb3868651a2cf1258110ae702a5d9200a78ff84e
             // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
             //   if (bullet)
