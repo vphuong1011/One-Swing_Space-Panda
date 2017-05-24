@@ -157,9 +157,9 @@ public class GameSet : Set
         }
     }
 
-/// <summary>
-/// Shop Items
-/// </summary>
+    /// <summary>
+    /// Shop Items
+    /// </summary>
     //Coin drop boost
     public void coinUpgrade()
     {
@@ -169,7 +169,7 @@ public class GameSet : Set
             PlayerData.CoinBoostLevel++;
             PlayerData.Coins -= PlayerData.CoinBoostCost;
             coinsValue.text = "Coins " + PlayerData.Coins;
-        }
+        
         if (PlayerData.CoinBoostLevel >= 1)
         {
             Game.Inst.WantsToBeInWaitState = true;
@@ -179,8 +179,10 @@ public class GameSet : Set
         }
         else if (PlayerData.CoinBoostLevel == 0)
         {
-            CoinUpgradeIcon.SetActive(false);
+            coinBoostValue.text = "Coins Boost: " + PlayerData.CoinBoostLevel;
+            //CoinUpgradeIcon.SetActive(false);
         }
+    }
         else
         {
             Debug.Log("You don't have enough coins!");
@@ -191,13 +193,13 @@ public class GameSet : Set
     //Decrease bullet speed item
     public void BulletDecreaseItem()
     {
-        if (PlayerData.Coins >= PlayerData.BulletSpeedDecreaseCost)
-        {
-            Debug.Log("Bullet speed has being decreased!");
-            PlayerData.BulletSpeedDecreaseLevel++;
-            PlayerData.Coins -= PlayerData.BulletSpeedDecreaseCost;
-            coinsValue.text = "Coins " + PlayerData.Coins;
-        }
+    if (PlayerData.Coins >= PlayerData.BulletSpeedDecreaseCost)
+    {
+        Debug.Log("Bullet speed has being decreased!");
+        PlayerData.BulletSpeedDecreaseLevel++;
+        PlayerData.Coins -= PlayerData.BulletSpeedDecreaseCost;
+        coinsValue.text = "Coins " + PlayerData.Coins;
+
         if (PlayerData.BulletSpeedDecreaseLevel >= 1)
         {
             Game.Inst.WantsToBeInWaitState = true;
@@ -208,12 +210,15 @@ public class GameSet : Set
         }
         else if (PlayerData.BulletSpeedDecreaseLevel == 0)
         {
-            BulletUpgradeIcon.SetActive(false);
+            bulletDecreasedValue.text = "Bullet Speed Reduction: " + PlayerData.BulletSpeedDecreaseLevel;
+            //BulletUpgradeIcon.SetActive(false);
         }
-        else
-        {
-            Debug.Log("You don't have enough coins to decrease bullet speed!");
-        }
+    }
+
+    else
+    {
+        Debug.Log("You don't have enough coins to decrease bullet speed!");
+    }
     }
 
     //Armor buff item
@@ -235,7 +240,8 @@ public class GameSet : Set
             }
             else if (PlayerData.ArmorUpgradeLevel == 0)
             {
-                ArmorUpgradeIcon.SetActive(false);
+                armorBuffValue.text = "Armor Buff: " + PlayerData.ArmorUpgradeLevel;
+            //ArmorUpgradeIcon.SetActive(false);
             }
         }
         else
