@@ -21,10 +21,6 @@ public class LoseSet : Set {
        // CloseSet();
         //SetManager.OpenSet<MainMenuSet>();
         //reactivateGameSet = true;
-       SceneManager.LoadScene("Boot");
-      
-        CloseSet();
-        
-       
+        SceneManager.LoadScene("Boot");
     }
 }

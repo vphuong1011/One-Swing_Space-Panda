@@ -37,7 +37,7 @@ public class GameSet : Set
     void Awake()
     {
         PlayerData.Coins = PlayerData.defaultCoins;
-        PlayerData.ArmorUpgradeLevel = PlayerData.defaultAmor;
+        PlayerData.ArmorUpgradeLevel = PlayerData.defaultArmor;
         Debug.Log("You have: " + PlayerData.Coins + "Coins. You also have: " + PlayerData.ArmorUpgradeLevel + " Armor");
         loadLevelNow = false;
         foreach (GameObject _obj in Counters)
