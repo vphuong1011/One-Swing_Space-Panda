@@ -187,7 +187,7 @@ public class GameSet : Set
     IEnumerator LoseSequence()
     {
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
        // Game.Inst.WantsToBeInWaitState = true;
         CloseSet();
         SetManager.OpenSet<LoseSet>();

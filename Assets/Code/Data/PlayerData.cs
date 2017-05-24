@@ -8,7 +8,7 @@ public class PlayerData
     public static int defaultCoins = 0;
 
     public static int ArmorUpgradeLevel = 0;
-    public static int defaultAmor = 0;
+    public static int defaultArmor = 0;
     public static int ArmorUpgradeCost = 1;
 
     public static int BulletSpeedDecreaseLevel = 0;
