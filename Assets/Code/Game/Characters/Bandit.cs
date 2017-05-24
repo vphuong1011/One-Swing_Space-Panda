@@ -36,7 +36,11 @@ public class Bandit : MonoBehaviour
 
     public BulletNew bulletInstance;
 
-    public Player1 playerScript;
+    public AudioClip gunshot;
+    public AudioSource audio;
+
+
+
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
 
@@ -66,11 +70,15 @@ public class Bandit : MonoBehaviour
         }
     }
     
+    void Awake()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
 
     void Start()
     {
-
+       
         anim = GetComponent<Animator>();
         attackDelay = Random.Range(minTime, maxTime); //random attack delay
        // menusetScript = GameObject.Find("MainMenuSet(Clone)").GetComponent<MainMenuSet>();
@@ -95,7 +103,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
-
+                audio.Play();
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
@@ -125,14 +133,14 @@ public class Bandit : MonoBehaviour
         if(bulletGO && GunTip)
         {
             bulletGO.transform.position = GunTip.position;
+            
+            // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
 
-           // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
-
-         //   if (bullet)
-         //   {
-          //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
-          //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
-         //   }
+            //   if (bullet)
+            //   {
+            //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
+            //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
+            //   }
 
         }
 		Debug.Log("shooting");
