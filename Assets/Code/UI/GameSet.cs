@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class GameSet : Set
 {
+    public AudioSource buyArmorSound;
+    public AudioSource buyBulletSound;
+    public AudioSource buyCoinSound;
+    public AudioSource clickSound;
+
+
+
     public GameObject[] ammountCoins;
     public GameObject[] Counters = null;
     
@@ -179,6 +186,7 @@ public class GameSet : Set
         if (PlayerData.Coins >= PlayerData.CoinBoostCost)
         {
             Debug.Log("Boosting coin drops!");
+            buyCoinSound.Play();
             PlayerData.CoinBoostLevel++;
             PlayerData.Coins -= PlayerData.CoinBoostCost;
             coinsValue.text = "Coins " + PlayerData.Coins;
@@ -209,6 +217,7 @@ public class GameSet : Set
     if (PlayerData.Coins >= PlayerData.BulletSpeedDecreaseCost)
     {
         Debug.Log("Bullet speed has being decreased!");
+        buyBulletSound.Play();
         PlayerData.BulletSpeedDecreaseLevel++;
         PlayerData.Coins -= PlayerData.BulletSpeedDecreaseCost;
         coinsValue.text = "Coins " + PlayerData.Coins;
@@ -240,6 +249,7 @@ public class GameSet : Set
         if (PlayerData.Coins >= PlayerData.ArmorUpgradeCost)
         {
             Debug.Log("Armor has being added!");
+            buyArmorSound.Play();
             PlayerData.ArmorUpgradeLevel++;
             PlayerData.Coins -= PlayerData.ArmorUpgradeCost;
             coinsValue.text = "Coins " + PlayerData.Coins;
@@ -281,6 +291,7 @@ public class GameSet : Set
     // Pause Menu
     public void OnPauseGameClicked()
     {
+        clickSound.Play();
         Game.Inst.WantsToBeInWaitState = true;
         //Levels.CloseLevel();
         PauseGame();
@@ -310,6 +321,7 @@ public class GameSet : Set
     //Continue button for Shop
     public void OnContinueClicked()
     {
+        clickSound.Play();
         newDay = newDay + 1;
         dayValue.text = "Day " + newDay;
         Levels.CloseLevel();
@@ -321,6 +333,7 @@ public class GameSet : Set
 
     public void OnSettingsClicked()
     {
+        clickSound.Play();
         Game.Inst.WantsToBeInWaitState = true;
         // Levels.CloseLevel();
 

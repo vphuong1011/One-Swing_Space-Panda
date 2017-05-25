@@ -35,22 +35,17 @@ public class Bandit : MonoBehaviour
     private float attackDelay;
 
     public BulletNew bulletInstance;
+
+
     public Player1 playerScript;
 
-    //audio 
-    public AudioClip cockingSound;
-    public AudioClip gunShot;
-    public AudioClip getHit;
 
-    public AudioSource audio;
-   
-
-
-
+    public AudioSource cockingSound;
+    public AudioSource gunShot;
+    public AudioSource getHit;
 
     // The player's current state
     EnemyState CurrentState = EnemyState.Bandit_IDLE;
-
 
     // Update is called once per frame
     void Update()
@@ -76,12 +71,6 @@ public class Bandit : MonoBehaviour
             banditShootFunction();
         }
     }
-    
-    void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
-
 
     void Start()
     {
@@ -99,12 +88,11 @@ public class Bandit : MonoBehaviour
         {
             case EnemyState.Bandit_IDLE:
                 attackTimer += Time.deltaTime;
-
+                cockingSound.Play();
                 if (attackTimer > attackDelay)
                 {
                     CurrentState = EnemyState.Bandit_ATTACKING;  //change to bandit attacking
-                    attackTimer = 0;
-                    
+                    attackTimer = 0;               
                 }
 
                 //Debug.Log("EnemyState.Bandit_IDLE");
@@ -112,8 +100,7 @@ public class Bandit : MonoBehaviour
 
             case EnemyState.Bandit_ATTACKING:
                 anim.SetTrigger("banditShoot"); // change bandit animation
-                audio.clip = gunShot;
-                audio.Play();
+                
                 //Debug.Log("EnemyState.Bandit_ATTACKING");
 
                 // Reset the attack delay
@@ -130,42 +117,25 @@ public class Bandit : MonoBehaviour
 
     public void OnObjectHit()
     {
-
-        audio.clip = cockingSound;
-        audio.Play();
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
-
         CurrentState = EnemyState.Bandit_IDLE;
-       // bulletInstance.hitProps = false;
+        cockingSound.Play();
+        if (bulletInstance != null)
+        bulletInstance.hitProps = false;
     }
 
     public void ShootAnimEvent()   // spawn the bullet
     {
-
         GameObject bulletGO = ResourceManager.Create("Projectiles/Bullet");
         if(bulletGO && GunTip)
         {
             bulletGO.transform.position = GunTip.position;
-
-           
-
-            
-
-            // BulletNew bullet = bulletGO.gameObject.GetComponent<BulletNew>();
-
-            //   if (bullet)
-            //   {
-            //      Vector3 direction = Levels.CurrentLevel.PlayerGameObject.transform.position - bulletGO.transform.position;
-            //      bullet.forwardDirection = new Vector3(direction.x, direction.y, 0).normalized;
-            //   }
-
+            gunShot.Play();
         }
 		Debug.Log("shooting");
 
         // Allow the player to swing
         Game.Inst.CanSwing = true;
-
-
     }
 
 
@@ -175,11 +145,11 @@ public class Bandit : MonoBehaviour
 	}
 
     private void OnTriggerEnter(Collider other) //Killing the bandit 
-    {
-        audio.clip = getHit;
-        audio.Play();
+    {  
         gameObject.SendMessage("KillRagdoll");
+        this.gameObject.GetComponent<BoxCollider>().enabled = false;
         Debug.Log("KILLED");
+        getHit.Play();
         GameObject blood = ResourceManager.Create("Prefabs/Blood");
         blood.transform.position = gameObject.transform.position;
         blood.transform.rotation = gameObject.transform.rotation;
