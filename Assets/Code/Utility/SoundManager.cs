@@ -30,7 +30,7 @@ public class SoundManager : MonoBehaviour {
     void Update()
     {
 
-            clip[0] = SFXAudioSource.GetComponent<AudioClip>();
+           // clip[0] = SFXAudioSource.GetComponent<AudioClip>();
             PlaySFX();
             //Debug.Log("AUDIO HAHA");
 

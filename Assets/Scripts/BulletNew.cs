@@ -25,15 +25,15 @@ public class BulletNew : MonoBehaviour {
     [SerializeField] public List<float> levelBulletSpeedsMax = new List<float>();
     [SerializeField] float AbsoluteMinSpeed = 10;
 
-    int BulletDecreaseAmount = 3;
+   
 
     bool bulletHit = false;
 
     public Levels levelInstance;
-    bool spawnBullet = false;
+    
 
     public AudioSource playerGetShot;
-    // public levelNumber levelsScript;
+    
 
     // Use this for initialization
     void Start ()
@@ -143,7 +143,7 @@ public class BulletNew : MonoBehaviour {
             Destroy(blood, 1);
             bulletHit = true;
 
-            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 1)
+            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 2)
                 Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
 
         }
