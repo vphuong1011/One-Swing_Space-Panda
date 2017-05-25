@@ -7,6 +7,7 @@ public class BulletNew : MonoBehaviour {
 	public float speed = 10f;
     public Vector3 shotDir;
     public int boughtItem = 0;
+    public float deflectSpeed;
 
     public bool hitPlayer = false;
     public bool hitProps = false;
@@ -59,12 +60,6 @@ public class BulletNew : MonoBehaviour {
             propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
         }
 
-        if (propsMNG.currentTarget == null)
-        {
-            return;
-        }
-
-
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
 
@@ -88,10 +83,11 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
-            speed = 40;
             deflected = true;
+            speed = 40;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
+            
             // cut the bullet into 2 pieces!?
         }
 
@@ -118,22 +114,29 @@ public class BulletNew : MonoBehaviour {
             playerScript = GameObject.Find("Player(Clone)").GetComponent<Player1>();
 
             // If player only have 1 HP, ragdol drops -> Dead
-            if (playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 1 && bulletHit == false)
+            if (bulletHit == false)
             {
-                hitPlayer = true;
-                foreach (GameObject obj in playerScript.bodyPartsTriggers)
-                    obj.SetActive(false);
+                if (playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 1)
+                {
+                    hitPlayer = true;
+                    foreach (GameObject obj in playerScript.bodyPartsTriggers)
+                        obj.SetActive(false);
 
-                GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
-                Destroy(gameObject, 5);
+                    GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
+                    Destroy(gameObject, 5);
+
+                    playerScript.newPlayerHP--;
+                    Debug.Log("Hit");
+                }
+                else
+                {
+                    // Player has been  hit but he has armor1
+                    //playerScript.newPlayerHP--;
+                    if (PlayerData.ArmorUpgradeLevel > 0)
+                        PlayerData.ArmorUpgradeLevel--; //Use armor
+
+                }
                 playerGetShot.Play();
-                Debug.Log("Hit");
-            }
-            else
-            {
-                // Player has been  hit but he has armor
-                playerScript.newPlayerHP--;
-                //PlayerData.ArmorUpgradeLevel--;
             }
 
             GameObject blood = ResourceManager.Create("Prefabs/Blood");
@@ -143,7 +146,7 @@ public class BulletNew : MonoBehaviour {
             Destroy(blood, 1);
             bulletHit = true;
 
-            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 2)
+            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 1)
                 Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
 
         }
@@ -165,6 +168,9 @@ public class BulletNew : MonoBehaviour {
         if (currentLevel >= levelBulletSpeedsMin.Count)
             currentLevel = levelBulletSpeedsMin.Count;
 
+
+        if (currentLevel >= levelBulletSpeedsMin.Count)
+            currentLevel = levelBulletSpeedsMin.Count - 1;
         float currentBulletSpeedMin = levelBulletSpeedsMin[currentLevel];
         float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
         newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);

@@ -17,7 +17,6 @@ public class Bandit : MonoBehaviour
 {
 
     public MainMenuSet menusetScript;
-    public static bool mainMenuChecked = false;
 
     public float range = 50.0f;
     public float maxTime = 15;
@@ -50,26 +49,12 @@ public class Bandit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject menuGO = GameObject.Find("MainMenuSet(Clone)");
+        if (menuGO)
+            return;
 
-        bulletInstance = GetComponent<BulletNew>();
+         banditShootFunction();
 
-        if (mainMenuChecked == false)
-        {
-            GameObject menuGO = GameObject.Find("MainMenuSet(Clone)");
-            if (menuGO)
-            {
-                MainMenuSet menuNew = menuGO.GetComponent<MainMenuSet>();
-                if (menuNew && menuNew.gameRunNow == true)
-                {
-                    //if (menusetScript.gameRunNow == true)
-                    mainMenuChecked = true;  
-                }
-            }
-        }
-        else
-        {
-            banditShootFunction();
-        }
     }
 
     void Start()
@@ -105,11 +90,8 @@ public class Bandit : MonoBehaviour
 
                 // Reset the attack delay
 
-                CurrentState = EnemyState.Bandit_WAITING; //change bandit state to idle
+                CurrentState = EnemyState.Bandit_IDLE; //change bandit state to idle
                 attackDelay = Random.Range(minTime, maxTime);          // attack Delay
-
-                break;
-            case EnemyState.Bandit_WAITING:
 
                 break;
         }

@@ -54,7 +54,6 @@ public class GameSet : Set
     void Awake()
     {
         PlayerData.Coins = PlayerData.defaultCoins;
-        PlayerData.ArmorUpgradeLevel = PlayerData.defaultArmor;
         Debug.Log("You have: " + PlayerData.Coins + "Coins. You also have: " + PlayerData.ArmorUpgradeLevel + " Armor");
         loadLevelNow = false;
         /*foreach (GameObject _obj in Counters)
@@ -68,6 +67,17 @@ public class GameSet : Set
     void Start()
     {
         //newScore = 0;
+
+        if(armorBuffValue)
+            armorBuffValue.text = "Armor Buff: " + PlayerData.ArmorUpgradeLevel.ToString();
+
+        if (coinBoostValue)
+            coinBoostValue.text = PlayerData.CoinBoostLevel.ToString();
+
+        if (bulletDecreasedValue)
+            bulletDecreasedValue.text = PlayerData.BulletSpeedDecreaseLevel.ToString();
+
+
     }
 
     // Update is called once per frame
@@ -90,15 +100,11 @@ public class GameSet : Set
 
         ammountCoins = GameObject.FindGameObjectsWithTag("coin");
 
-        GameObject bulletGO = GameObject.Find("Bullet(Clone)"); //Detects the hitPLayer boolean within the bullet. If true then show LoseSet.
-        if (bulletGO)
+        Player1 Player = Levels.CurrentLevel.PlayerGameObject.GetComponent<Player1>();
+        if (Player && (Player.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 0))
         {
-            BulletNew bulletNew = bulletGO.GetComponent<BulletNew>();
-            if (bulletNew && bulletNew.hitPlayer)
-            {
-                StartCoroutine(LoseSequence());
-                Debug.Log("KillPlayer Activated");
-            }
+            StartCoroutine(LoseSequence());
+            Debug.Log("KillPlayer Activated");
         }
 
         /*if (Levels.CurrentLevel && Levels.CurrentLevel.PlayerGameObject)
@@ -112,8 +118,8 @@ public class GameSet : Set
             }
         }
         */
-           
-            GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
+
+        GameObject coinSpawnerGO = GameObject.Find("CoinSpawner");
         if (coinSpawnerGO)
         {
             CoinSpawner coinSpawner = coinSpawnerGO.GetComponent<CoinSpawner>();
