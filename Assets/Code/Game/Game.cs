@@ -108,7 +108,11 @@ public class Game : MonoBehaviour {
 
         // Reload the game
         if (Input.GetKeyDown(KeyCode.R))
+        {
             SceneManager.LoadScene("Boot");
+            Levels.CurrentLevelNumber = 1;
+        }
+        
     }
 
     void randomizeLevels()
