@@ -38,11 +38,10 @@ public class Level : MonoBehaviour {
 
     // The number of different objects we can spawn
     const int BUCKET = 1;
-    const int POT = 2;
-    const int HOUSE = 3;
-    const int LAMP = 4;
-    const int BARREL = 5;
-    const int MAX_OBJECTS = 6;
+    const int HOUSE = 2;
+    const int LAMP = 3;
+    const int BARREL = 4;
+    const int MAX_OBJECTS = 5;
 
     const int SNOW = 1;
     const int RAIN = 2;
@@ -190,16 +189,6 @@ public class Level : MonoBehaviour {
                     {
                         SpawnBucketAtRandom(spawnIndex);
                         bucketSpawned = true;
-                    }
-                    else
-                        spawnIndex--;
-
-                    break;
-                case POT:
-                    if (potSpawned == false)
-                    {
-                        SpawnPotAtRandom(spawnIndex);
-                        potSpawned = true;
                     }
                     else
                         spawnIndex--;
