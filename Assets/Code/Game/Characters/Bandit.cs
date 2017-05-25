@@ -90,11 +90,8 @@ public class Bandit : MonoBehaviour
 
                 // Reset the attack delay
 
-                CurrentState = EnemyState.Bandit_WAITING; //change bandit state to idle
+                CurrentState = EnemyState.Bandit_IDLE; //change bandit state to idle
                 attackDelay = Random.Range(minTime, maxTime);          // attack Delay
-
-                break;
-            case EnemyState.Bandit_WAITING:
 
                 break;
         }

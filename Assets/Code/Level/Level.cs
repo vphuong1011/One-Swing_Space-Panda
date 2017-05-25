@@ -68,7 +68,7 @@ public class Level : MonoBehaviour {
     public void SpawnPropsManager()
     {
         // Create manager using the ResourceManager
-        PlayerGameObject = ResourceManager.Create("Prefabs/PropsRandomManager");
+        GameObject propObject = ResourceManager.Create("Prefabs/PropsRandomManager");
 
         // Add to spawned characters list so we can clean up later
         SpawnedCharacters.Add(CurrentPropManager);

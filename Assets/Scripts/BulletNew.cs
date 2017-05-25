@@ -112,22 +112,29 @@ public class BulletNew : MonoBehaviour {
             playerScript = GameObject.Find("Player(Clone)").GetComponent<Player1>();
 
             // If player only have 1 HP, ragdol drops -> Dead
-            if (playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 1 && bulletHit == false)
+            if (bulletHit == false)
             {
-                hitPlayer = true;
-                foreach (GameObject obj in playerScript.bodyPartsTriggers)
-                    obj.SetActive(false);
+                if (playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel <= 1)
+                {
+                    hitPlayer = true;
+                    foreach (GameObject obj in playerScript.bodyPartsTriggers)
+                        obj.SetActive(false);
 
-                GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
-                Destroy(gameObject, 5);
+                    GameObject.Find("Player(Clone)").SendMessage("KillRagdoll");
+                    Destroy(gameObject, 5);
+
+                    playerScript.newPlayerHP--;
+                    Debug.Log("Hit");
+                }
+                else
+                {
+                    // Player has been  hit but he has armor1
+                    //playerScript.newPlayerHP--;
+                    if (PlayerData.ArmorUpgradeLevel > 0)
+                        PlayerData.ArmorUpgradeLevel--; //Use armor
+
+                }
                 playerGetShot.Play();
-                Debug.Log("Hit");
-            }
-            else
-            {
-                // Player has been  hit but he has armor
-                playerScript.newPlayerHP--;
-                //PlayerData.ArmorUpgradeLevel--;
             }
 
             GameObject blood = ResourceManager.Create("Prefabs/Blood");
