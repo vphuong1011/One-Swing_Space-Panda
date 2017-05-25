@@ -35,11 +35,9 @@ public class Bandit : MonoBehaviour
     private float attackDelay;
 
     public BulletNew bulletInstance;
-
-
     public Player1 playerScript;
 
-
+    //audio 
     public AudioClip cockingSound;
     public AudioClip gunShot;
     public AudioClip getHit;
@@ -138,7 +136,7 @@ public class Bandit : MonoBehaviour
         // What to do when a barrel is hit: Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
 
         CurrentState = EnemyState.Bandit_IDLE;
-        bulletInstance.hitProps = false;
+       // bulletInstance.hitProps = false;
     }
 
     public void ShootAnimEvent()   // spawn the bullet
@@ -149,7 +147,7 @@ public class Bandit : MonoBehaviour
         {
             bulletGO.transform.position = GunTip.position;
 
-            //gunShot.Play();
+           
 
             
 
