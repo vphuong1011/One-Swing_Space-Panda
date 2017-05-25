@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MainMenuSet : Set {
 
+    public GameObject intro = null;
     public GameObject menu = null;
     //booleans
+   // public bool introLoaded = false;
     public bool reloadedGame = false;
     public  bool gameRunNow = false;
 
@@ -14,7 +16,16 @@ public class MainMenuSet : Set {
 	// Use this for initialization
 	void Start ()
     {
-            gameRunNow = false;
+        GameObject helpGO = GameObject.Find("HelpSet(Clone)");
+        if (helpGO)
+        {
+            HelpSet helpNew = helpGO.GetComponent<HelpSet>();
+            if (helpNew && helpNew.introLoaded == true)
+            {
+                intro.SetActive(false);
+            }
+        }
+        gameRunNow = false;
             //Added this to show game screen in the main menu.
             Game.Inst.WantsToBeInLoadingState = true;
             //SetManager.OpenSet<GameSet>();   
@@ -23,7 +34,7 @@ public class MainMenuSet : Set {
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
 
     public void OnPlayClicked()
