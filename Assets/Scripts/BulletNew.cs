@@ -59,12 +59,6 @@ public class BulletNew : MonoBehaviour {
             propsMNG.currentTarget = propsMNG.targetPositions[indexPROPS];
         }
 
-        if (propsMNG.currentTarget == null)
-        {
-            return;
-        }
-
-
         //   float height = Random.Range(1.0f, 3.0f);
         shotDir = (playerScript.currentTarget.transform.position - gameObject.transform.position).normalized;
 
@@ -165,6 +159,9 @@ public class BulletNew : MonoBehaviour {
         if (currentLevel >= levelBulletSpeedsMin.Count)
             currentLevel = levelBulletSpeedsMin.Count;
 
+
+        if (currentLevel >= levelBulletSpeedsMin.Count)
+            currentLevel = levelBulletSpeedsMin.Count - 1;
         float currentBulletSpeedMin = levelBulletSpeedsMin[currentLevel];
         float currentBulletSpeedMax = levelBulletSpeedsMax[currentLevel];
         newSpeed = Random.Range(currentBulletSpeedMin, currentBulletSpeedMax);
