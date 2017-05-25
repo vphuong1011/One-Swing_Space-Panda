@@ -87,6 +87,7 @@ public class GameSet : Set
                 }
             }
         }*/
+
         ammountCoins = GameObject.FindGameObjectsWithTag("coin");
 
         GameObject bulletGO = GameObject.Find("Bullet(Clone)"); //Detects the hitPLayer boolean within the bullet. If true then show LoseSet.
