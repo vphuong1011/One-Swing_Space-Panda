@@ -25,8 +25,7 @@ public class Player1 : MonoBehaviour {
     public DestroyWhenTouch propsScript;
 
     public AudioSource swingSound;
-
-    
+ 
     // Use this for initialization
     void Start () {
 
@@ -67,10 +66,10 @@ public class Player1 : MonoBehaviour {
         {
             if (Game.Inst.CanSwing == true)
             {
+                swingSound.Play();
                 Game.Inst.CanSwing = false;
                 GetComponent<Animator>().speed = currrentAttackSpeed;
                 GetComponent<Animator>().SetBool("MouseClicked", true);
-                swingSound.Play();
             }
         }
 

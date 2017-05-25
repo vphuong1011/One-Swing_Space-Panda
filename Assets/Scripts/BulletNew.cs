@@ -33,6 +33,7 @@ public class BulletNew : MonoBehaviour {
     bool spawnBullet = false;
 
     public AudioSource playerGetShot;
+    public AudioSource swingSound;
     // public levelNumber levelsScript;
 
     // Use this for initialization
@@ -88,6 +89,7 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
+            swingSound.Play();
             speed = 40;
             deflected = true;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
@@ -97,6 +99,7 @@ public class BulletNew : MonoBehaviour {
 
         if (other.gameObject.name == "Props Hit Trigger")
         {
+            swingSound.Play();
             speed = 40;
             deflected = true;
             hitProps = true;
