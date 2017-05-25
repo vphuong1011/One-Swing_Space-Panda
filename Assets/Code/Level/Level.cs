@@ -136,18 +136,6 @@ public class Level : MonoBehaviour {
         CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
     }
 
-    public void SpawnPotAtRandom(int spawnIndex)
-    {
-        // Spawn in the pot using the ResourceManager
-        CurrentProp = ResourceManager.Create("UI/cut_models/Simple Prefab/SimplePot");
-
-        // Add to spawned characters list so we can clean up later
-        SpawnedCharacters.Add(CurrentProp);
-
-        // Set the pot to the spawn transform index position
-        CurrentProp.transform.position = ObjectSpawnPoint[spawnIndex].position;
-    }
-
     public void SpawnSpiritHouseAtRandom(int spawnIndex)
     {
         // Spawn in the spirit house using the ResourceManager
@@ -175,7 +163,6 @@ public class Level : MonoBehaviour {
     public void AddPropsIntoLevel()
     {
         bool bucketSpawned = false;
-        bool potSpawned = false;
         bool houseSpawned = false;
         bool lampSpawned = false;
         bool barrelSpawned = false;
