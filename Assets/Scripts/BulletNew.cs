@@ -7,6 +7,7 @@ public class BulletNew : MonoBehaviour {
 	public float speed = 10f;
     public Vector3 shotDir;
     public int boughtItem = 0;
+    public float deflectSpeed;
 
     public bool hitPlayer = false;
     public bool hitProps = false;
@@ -82,10 +83,11 @@ public class BulletNew : MonoBehaviour {
 	{
         if(other.gameObject.name == "Enemy Hit Trigger")
         {
-            speed = 40;
             deflected = true;
+            speed = 40;
             shotDir = (enemyScript.currentTarget.transform.position - gameObject.transform.position).normalized;
             Debug.Log("DeflectToEnemy");
+            
             // cut the bullet into 2 pieces!?
         }
 
@@ -137,7 +139,7 @@ public class BulletNew : MonoBehaviour {
             Destroy(blood, 1);
             bulletHit = true;
 
-            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 2)
+            if(playerScript.newPlayerHP + PlayerData.ArmorUpgradeLevel >= 1)
                 Levels.CurrentLevel.CurrentEnemy.GetComponent<Bandit>().OnObjectHit();
 
         }
